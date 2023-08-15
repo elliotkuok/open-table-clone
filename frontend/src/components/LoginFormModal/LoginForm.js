@@ -35,7 +35,6 @@ function LoginForm({onClose}) {
         <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
         </ul>
-        <label className="form-label">
           <input
             className="form-input"
             type="text"
@@ -44,9 +43,6 @@ function LoginForm({onClose}) {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <br/>
-        <label className="form-label">
           <input
             className="form-input"
             type="password"
@@ -55,8 +51,7 @@ function LoginForm({onClose}) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <br/>
+
         <button type="submit">Log In</button>
       </form>
     </div>
