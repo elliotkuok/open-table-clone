@@ -7,3 +7,17 @@
 #nav-logo {
     width: 150px;
 }
+
+.navigation-bar button{
+    background-color: #247f9e;
+    border: 0.0625rem solid #247f9e;
+    color: white;
+    font-size: 14px;
+    margin: 0 8px;
+    border-radius: .1875rem;
+    cursor: pointer;
+    line-height: 2rem;
+    padding: 0 16px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+}
