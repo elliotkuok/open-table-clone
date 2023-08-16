@@ -39,6 +39,10 @@ function LoginForm({onClose}) {
   }, [emailIsValid, continueButtonDisabled]);
 
   useEffect(() => {
+    setContinueButtonDisabled(false);
+  }, [password]);
+
+  useEffect(() => {
     if (continueButtonDisabled) {
       setEmailInputClass("form-input form-input-disabled");
       setPasswordInputClass("form-input form-input-disabled");
