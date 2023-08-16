@@ -124,6 +124,11 @@ function LoginForm({onClose}) {
 
   return (
     <div className="login-form">
+      {showPasswordInput && (
+      <i className="back-icon" onClick={handleBack}>
+        &lt; {/* Use HTML entity for "<" */}
+      </i>
+    )}
       <h1>{modalTitle}</h1>
       <p>{modalSubtitle}</p>
       <form onSubmit={handleSubmit}>
@@ -143,9 +148,6 @@ function LoginForm({onClose}) {
             required
             />
           <button type="submit">Log In</button>
-            <button type="button" onClick={handleBack}>
-              Back
-            </button>
         </div>
       ) : (
         // Render email input and continue button
