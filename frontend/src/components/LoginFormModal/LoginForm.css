@@ -1,15 +1,15 @@
 .login-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    /* align-items: center; */
+    text-align: left;
     padding: 64px 48px;
+    width: 330px;
   }
   
   .form-input {
-    width: 85%;
-    padding: 8px;
-    margin-top: 4px;
+    width: 100%;
+    padding: 12px 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -18,7 +18,7 @@
   }
   
 .login-form button {
-    width: 85%; /* Take up the full width of the parent (login-form) */
+    width: 100%; /* Take up the full width of the parent (login-form) */
     padding: 10px;
     background-color: #da3743;
     color: #fff;
@@ -35,4 +35,8 @@
 .login-form p {
     margin-top: 4px;
     margin-bottom: 32px;
+}
+
+.login-form form {
+    width: 100%;
 }
