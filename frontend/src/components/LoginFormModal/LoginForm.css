@@ -60,4 +60,9 @@
     color: #da3743;
     font-weight: 400;
     font-family: 'Cabin', sans-serif;
+    text-decoration: none;
+}
+
+.login-form .demo-user:hover {
+    text-decoration: underline; /* Apply underline on hover */
 }

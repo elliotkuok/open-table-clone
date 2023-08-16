@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginForm({onClose}) {
@@ -89,6 +90,20 @@ function LoginForm({onClose}) {
       });
   };
 
+  const handleDemoLogin = async () => {
+    const demoUserCredentials = {
+      email: 'demo@user.io', // Replace with your demo user email
+      password: 'password', // Replace with your demo user password
+    };
+
+    try {
+      await dispatch(sessionActions.login(demoUserCredentials));
+      onClose(); // Close the modal after successful demo login
+    } catch (error) {
+      console.error('Error logging in with demo account:', error);
+    }
+  };
+
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -136,7 +151,9 @@ function LoginForm({onClose}) {
           {actionButtonLabel}
         </button>
       </form>
-        <p className="demo-user">Use demo user instead</p>
+      <Link to="#" className="demo-user" onClick={handleDemoLogin}>
+        Use demo user instead
+      </Link>
     </div>
   );
 }
