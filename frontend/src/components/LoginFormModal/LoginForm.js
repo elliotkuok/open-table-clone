@@ -145,9 +145,11 @@ function LoginForm({onClose}) {
             value={password}
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
-            required
             />
-          <button type="submit">Log In</button>
+          <button type="submit"
+          disabled={continueButtonDisabled}
+          className={continueButtonDisabled ? "form-button-disabled" : ""}
+          >Log In</button>
         </div>
       ) : (
         // Render email input and continue button
