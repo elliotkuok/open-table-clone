@@ -9,7 +9,10 @@ function LoginForm({onClose}) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(false);
+  const [emailInputClass, setEmailInputClass] = useState("form-input");
   const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
+
 
   useEffect(() => {
     const isEmailValidInDatabase = async () => {
@@ -28,14 +31,29 @@ function LoginForm({onClose}) {
     }
   }, [email]);
 
+  useEffect(() => {
+    if (emailIsValid && continueButtonDisabled) {
+      setContinueButtonDisabled(false); // Remove the disabled state
+    }
+  }, [emailIsValid, continueButtonDisabled]);
+
+  useEffect(() => {
+    if (continueButtonDisabled) {
+      setEmailInputClass("form-input form-input-disabled");
+    } else {
+      setEmailInputClass("form-input");
+    }
+  }, [continueButtonDisabled]);
+
   const handleContinue = (e) => {
     if (!showPasswordInput) {
       e.preventDefault(); // Prevent default only when form should not be submitted
       if (emailIsValid) {
         setShowPasswordInput(true);
         setErrors([]); // Clear errors when a valid email is entered
+        setContinueButtonDisabled(false);
       } else {
-        setErrors(["Email is not valid"]);
+        setContinueButtonDisabled(true); 
       }
     }
   };
@@ -82,7 +100,7 @@ function LoginForm({onClose}) {
         </ul>
           {!showPasswordInput && (
             <input
-              className="form-input"
+              className={emailInputClass}
               type="text"
               value={email}
               placeholder="Email"
@@ -101,7 +119,12 @@ function LoginForm({onClose}) {
             />
           )}
 
-        <button type="submit" onClick={handleContinue}>
+        <button
+          type="submit"
+          onClick={handleContinue}
+          disabled={continueButtonDisabled} // Add the disabled attribute
+          className={continueButtonDisabled ? "form-button-disabled" : ""}
+        >
           {actionButtonLabel}
         </button>
       </form>

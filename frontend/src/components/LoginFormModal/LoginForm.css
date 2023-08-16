@@ -40,3 +40,12 @@
 .login-form form {
     width: 100%;
 }
+
+.login-form .form-button-disabled {
+    background-color: #ccc; /* Gray background */
+    cursor: not-allowed;   /* Change cursor on hover */
+}
+
+.form-input-disabled {
+    border: 1px solid red; /* Change border color to red */
+}
