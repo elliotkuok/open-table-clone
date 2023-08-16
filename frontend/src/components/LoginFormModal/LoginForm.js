@@ -12,6 +12,7 @@ function LoginForm({onClose}) {
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   const getInputClass = () => {
     return continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
@@ -58,7 +59,8 @@ function LoginForm({onClose}) {
   const handleContinue = (e) => {
     if (!showPasswordInput) {
       e.preventDefault(); // Prevent default only when form should not be submitted
-      if (emailIsValid) {
+      if (isEmailValid(email)) {
+        setSubmittedEmail(email);
         setShowPasswordInput(true);
         setContinueButtonDisabled(false);
       } else {
@@ -104,6 +106,11 @@ function LoginForm({onClose}) {
     }
   };
 
+  const handleBack = () => {
+    setShowPasswordInput(false);
+    setContinueButtonDisabled(false);
+  };
+
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -122,34 +129,44 @@ function LoginForm({onClose}) {
         <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
         </ul>
-          {!showPasswordInput && (
-            <input
-              className={getInputClass()}
-              type="text"
-              value={email}
-              placeholder="Email"
-              onChange={handleEmailChange}
-              required
-            />
-          )}
-          {showPasswordInput && emailIsValid && (
-            <input
+          
+      {showPasswordInput ? (
+        // Render password input and back button
+        <div>
+          <input
             className={getInputClass()}
-              type="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
             />
-          )}
-        <button
-          type="submit"
-          onClick={handleContinue}
-          disabled={continueButtonDisabled}
-          className={continueButtonDisabled ? "form-button-disabled" : ""}
-        >
-          {actionButtonLabel}
-        </button>
+          <button type="submit">Log In</button>
+            <button type="button" onClick={handleBack}>
+              Back
+            </button>
+        </div>
+      ) : (
+        // Render email input and continue button
+        <div>
+          <input
+            className={getInputClass()}
+            type="text"
+            value={submittedEmail || email} // Use submitted email if available
+            placeholder="Email"
+            onChange={handleEmailChange}
+            required
+            />
+          <button
+              type="button"
+              onClick={handleContinue}
+              disabled={continueButtonDisabled}
+              className={continueButtonDisabled ? "form-button-disabled" : ""}
+            >
+              Continue
+            </button>
+        </div>
+      )}
       </form>
       <Link to="#" className="demo-user" onClick={handleDemoLogin}>
         Use demo user instead
