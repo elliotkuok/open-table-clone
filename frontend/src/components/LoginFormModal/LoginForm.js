@@ -8,10 +8,14 @@ function LoginForm({onClose}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [errors, setErrors] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
+  // const [createAccountButtonDisabled, setCreateAccountButtonDisabled] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
 
   const getInputClass = () => {
@@ -94,8 +98,8 @@ function LoginForm({onClose}) {
 
   const handleDemoLogin = async () => {
     const demoUserCredentials = {
-      email: 'demo@user.io', // Replace with your demo user email
-      password: 'password', // Replace with your demo user password
+      email: 'demo@user.io', 
+      password: 'password', 
     };
 
     try {
@@ -111,6 +115,31 @@ function LoginForm({onClose}) {
     setContinueButtonDisabled(false);
     setEmail(submittedEmail);
   };
+
+  // const handleCreateAccount = async () => {
+  //   setErrors([]);
+  
+  //   if (!isEmailValid(email)) {
+  //     setCreateAccountButtonDisabled(true);
+  //     return;
+  //   }
+  
+  //   const newUser = {
+  //     email,
+  //     password,
+  //     firstName,
+  //     lastName,
+  //     phoneNumber,
+  //   };
+  
+  //   try {
+  //     await dispatch(sessionActions.createUser(newUser));
+  //     onClose(); // Close the modal after successful account creation
+  //   } catch (error) {
+  //     console.error('Error creating account:', error);
+  //     setCreateAccountButtonDisabled(true);
+  //   }
+  // };
 
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -155,7 +184,7 @@ function LoginForm({onClose}) {
           <input
             className={getInputClass()}
             type="text"
-            value={email} // Use submitted email if available
+            value={email}
             placeholder="Email"
             onChange={handleEmailChange}
             required
@@ -170,6 +199,54 @@ function LoginForm({onClose}) {
             </button>
         </div>
       )}
+
+      {/* Render additional inputs for creating an account */}
+      {/* {emailIsValid && !showPasswordInput && (
+        <div>
+          <input
+            className={getInputClass()}
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          /> */}
+          {/* Add more input fields for first name, last name, and phone number */}
+          {/* <input
+            className={getInputClass()}
+            type="text"
+            value={firstName}
+            placeholder="First Name"
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            className={getInputClass()}
+            type="text"
+            value={lastName}
+            placeholder="Last Name"
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            className={getInputClass()}
+            type="text"
+            value={phoneNumber}
+            placeholder="Phone Number"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            onClick={handleCreateAccount}
+            disabled={createAccountButtonDisabled}
+            className={createAccountButtonDisabled ? "form-button-disabled" : ""}
+          >
+            Create Account
+          </button>
+        </div>
+      )} */}
+      
       </form>
       <Link to="#" className="demo-user" onClick={handleDemoLogin}>
         Use demo user instead
