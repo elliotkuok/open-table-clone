@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <Navigation /> {/* Render the NavigationBar component */}
-      <h1>ReadyTable</h1>
     </>
   );
 }

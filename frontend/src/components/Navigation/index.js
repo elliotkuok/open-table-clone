@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
 import LoginFormModal from "../LoginFormModal";
+import logo from './assets/readytable-logo.png'
 import "./NavigationBar.css"; // Import your CSS file for styling
 
 function NavigationBar() {
@@ -8,8 +9,7 @@ function NavigationBar() {
     <nav className="navigation-bar">
       <div className="logo-button">
         <Link to="/">
-          {/* Your logo here */}
-          <img src="/path/to/your/logo.png" alt="Logo" />
+          <img src={logo} alt="Logo" id="nav-logo"/>
         </Link>
       </div>
       <div className="right-side">
