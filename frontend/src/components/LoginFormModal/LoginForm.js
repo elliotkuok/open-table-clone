@@ -45,6 +45,15 @@ function LoginForm({onClose}) {
     }
   }, [continueButtonDisabled]);
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    const isValid = isEmailValid(e.target.value);
+    setEmailIsValid(isValid);
+    // if (!showPasswordInput) {
+    //   setContinueButtonDisabled(!isValid);
+    // }
+  };
+
   const handleContinue = (e) => {
     if (!showPasswordInput) {
       e.preventDefault(); // Prevent default only when form should not be submitted
@@ -85,6 +94,11 @@ function LoginForm({onClose}) {
         });
   };
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const modalTitle = showPasswordInput ? "Verify it's you" : "Enter your email";
   const modalSubtitle = showPasswordInput ? "Enter your password to continue." : 
   "Enter the email associated with your OpenTable account, or new email.";
@@ -104,7 +118,7 @@ function LoginForm({onClose}) {
               type="text"
               value={email}
               placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               required
             />
           )}
