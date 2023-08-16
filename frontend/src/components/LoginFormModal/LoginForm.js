@@ -8,10 +8,14 @@ function LoginForm({onClose}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [errors, setErrors] = useState([]);
-  const [emailIsValid, setEmailIsValid] = useState(false);
+  const [emailInDatabase, setEmailInDatabase] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
+  const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
 
   const getInputClass = () => {
@@ -24,27 +28,27 @@ function LoginForm({onClose}) {
         try {
           const response = await fetch(`/api/users/check_email?email=${email}`);
           const data = await response.json();
-          setEmailIsValid(data.isValid);
+          setEmailInDatabase(data.isValid);
         } catch (error) {
           console.error("Error checking email validity:", error);
         }
       })();
     }
 
-    if (emailIsValid && !showPasswordInput) {
+    if (emailInDatabase && !showPasswordInput) {
       setContinueButtonDisabled(false);
     }
 
     if (password) {
       setContinueButtonDisabled(false);
     }
-  }, [email, emailIsValid, password, showPasswordInput]);
+  }, [email, emailInDatabase, password, showPasswordInput]);
 
   useEffect(() => {
-    if (emailIsValid && continueButtonDisabled && !showPasswordInput) {
+    if (emailInDatabase && continueButtonDisabled && !showPasswordInput) {
       setContinueButtonDisabled(false);
     }
-  }, [emailIsValid, continueButtonDisabled]);
+  }, [emailInDatabase, continueButtonDisabled]);
 
   useEffect(() => {
     setContinueButtonDisabled(false);
@@ -53,7 +57,7 @@ function LoginForm({onClose}) {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     const isValid = isEmailValid(e.target.value);
-    setEmailIsValid(isValid);
+    setEmailInDatabase(isValid);
   };
 
   const handleContinue = (e) => {
@@ -61,8 +65,19 @@ function LoginForm({onClose}) {
       e.preventDefault(); // Prevent default only when form should not be submitted
       if (isEmailValid(email)) {
         setSubmittedEmail(email);
-        setShowPasswordInput(true);
         setContinueButtonDisabled(false);
+        setShowPasswordInput(true);
+        if (emailInDatabase) {
+        } else {
+          // Render the form with additional inputs for new user
+          // You can set any default values for the inputs here
+          setPassword("");
+          setFirstName("");
+          setLastName("");
+          setPhoneNumber("");
+          setShowPasswordInput(true);
+          setShowAdditionalInputs(true);
+        }
       } else {
         setContinueButtonDisabled(true); 
       }
@@ -75,6 +90,37 @@ function LoginForm({onClose}) {
 
     if (!showPasswordInput) {
       return;
+    }
+
+    if (emailInDatabase) {
+      // Log in with the provided email and password
+      dispatch(sessionActions.login({ email, password }))
+        .then(() => {
+          onClose();
+        })
+        .catch(async (res) => {
+          // Handle login errors
+          // ...
+        });
+    } else {
+      // Create a new user with the provided information
+      const newUser = {
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber
+      };
+
+      // Dispatch an action to create a new user in the database
+      dispatch(sessionActions.signup(newUser))
+        .then(() => {
+          onClose();
+        })
+        .catch(async (res) => {
+          // Handle user creation errors
+          // ...
+        });
     }
 
     return dispatch(sessionActions.login({ email, password }))
@@ -120,7 +166,6 @@ function LoginForm({onClose}) {
   const modalTitle = showPasswordInput ? "Verify it's you" : "Enter your email";
   const modalSubtitle = showPasswordInput ? "Enter your password to continue." : 
   "Enter the email associated with your OpenTable account, or enter a new email.";
-  const actionButtonLabel = showPasswordInput ? "Log In" : "Continue";
 
   return (
     <div className="login-form">
@@ -170,6 +215,32 @@ function LoginForm({onClose}) {
             >
               Continue
             </button>
+            {showAdditionalInputs && (
+              // Additional inputs for creating an account
+              <div>
+                <input
+                  className={getInputClass()}
+                  type="text"
+                  value={firstName}
+                  placeholder="First Name"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <input
+                  className={getInputClass()}
+                  type="text"
+                  value={lastName}
+                  placeholder="Last Name"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <input
+                  className={getInputClass()}
+                  type="tel"
+                  value={phoneNumber}
+                  placeholder="Phone Number"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </div>
+            )}
         </div>
       )}
 
