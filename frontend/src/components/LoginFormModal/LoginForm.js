@@ -109,6 +109,7 @@ function LoginForm({onClose}) {
   const handleBack = () => {
     setShowPasswordInput(false);
     setContinueButtonDisabled(false);
+    setEmail(submittedEmail);
   };
 
   const isEmailValid = (email) => {
@@ -152,7 +153,7 @@ function LoginForm({onClose}) {
           <input
             className={getInputClass()}
             type="text"
-            value={submittedEmail || email} // Use submitted email if available
+            value={email} // Use submitted email if available
             placeholder="Email"
             onChange={handleEmailChange}
             required
