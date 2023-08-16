@@ -10,6 +10,17 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def check_email
+    email = params[:email]
+    user = User.find_by(email: email)
+
+    if user
+      render json: { isValid: true }
+    else
+      render json: { isValid: false }
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
