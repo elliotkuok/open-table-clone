@@ -29,7 +29,6 @@ function LoginForm({onClose}) {
   }, [email]);
 
   const handleContinue = (e) => {
-    console.log("HandleContinue function executed");
     if (!showPasswordInput) {
       e.preventDefault(); // Prevent default only when form should not be submitted
       if (emailIsValid) {
@@ -43,17 +42,17 @@ function LoginForm({onClose}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("HandleSubmit function executed");
     setErrors([]);
 
     if (!showPasswordInput) {
-      // Handle the case when the form is in email entry mode
-      // You might want to add any necessary logic for this case
       return;
     }
     
     return dispatch(sessionActions.login({ email, password }))
-        .then(() => onClose())
+        // .then(() => onClose())
+        .then(() => {
+          onClose(); // Close the modal on successful login
+        })
         .catch(async (res) => {
             let data;
             try {
