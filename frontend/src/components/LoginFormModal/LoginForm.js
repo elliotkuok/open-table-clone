@@ -10,6 +10,7 @@ function LoginForm({onClose}) {
   const [errors, setErrors] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [emailInputClass, setEmailInputClass] = useState("form-input");
+  const [passwordInputClass, setPasswordInputClass] = useState("form-input");
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
 
@@ -32,7 +33,7 @@ function LoginForm({onClose}) {
   }, [email]);
 
   useEffect(() => {
-    if (emailIsValid && continueButtonDisabled) {
+    if (emailIsValid && continueButtonDisabled && !showPasswordInput) {
       setContinueButtonDisabled(false); // Remove the disabled state
     }
   }, [emailIsValid, continueButtonDisabled]);
@@ -40,8 +41,10 @@ function LoginForm({onClose}) {
   useEffect(() => {
     if (continueButtonDisabled) {
       setEmailInputClass("form-input form-input-disabled");
+      setPasswordInputClass("form-input form-input-disabled");
     } else {
       setEmailInputClass("form-input");
+      setPasswordInputClass("form-input");
     }
   }, [continueButtonDisabled]);
 
@@ -49,9 +52,6 @@ function LoginForm({onClose}) {
     setEmail(e.target.value);
     const isValid = isEmailValid(e.target.value);
     setEmailIsValid(isValid);
-    // if (!showPasswordInput) {
-    //   setContinueButtonDisabled(!isValid);
-    // }
   };
 
   const handleContinue = (e) => {
@@ -74,24 +74,23 @@ function LoginForm({onClose}) {
     if (!showPasswordInput) {
       return;
     }
-    
+
     return dispatch(sessionActions.login({ email, password }))
-        // .then(() => onClose())
-        .then(() => {
-          onClose(); // Close the modal on successful login
-        })
-        .catch(async (res) => {
-            let data;
-            try {
-            // .clone() essentially allows you to read the response body twice
-                data = await res.clone().json();
-            } catch {
-                data = await res.text(); // Will hit this case if, e.g., server is down
-            }
-            if (data?.errors) setErrors(data.errors);
-            else if (data) setErrors([data]);
-            else setErrors([res.statusText]);
-        });
+      .then(() => {
+        onClose();
+      })
+      .catch(async (res) => {
+        let data;
+        try {
+          data = await res.clone().json();
+        } catch {
+          data = await res.text();
+        }
+        // if (data?.errors) setErrors(data.errors);
+        // else if (data) setErrors([data]);
+        // else setErrors([res.statusText]);
+        setContinueButtonDisabled(true); 
+      });
   };
 
   const isEmailValid = (email) => {
@@ -124,7 +123,7 @@ function LoginForm({onClose}) {
           )}
           {showPasswordInput && emailIsValid && (
             <input
-              className="form-input"
+              className={passwordInputClass}
               type="password"
               value={password}
               placeholder="Password"
