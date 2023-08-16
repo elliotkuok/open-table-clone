@@ -19,22 +19,25 @@
   
 .login-form button {
     width: 100%; /* Take up the full width of the parent (login-form) */
-    padding: 10px;
+    padding: 15px;
     background-color: #da3743;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 16px;
+    font-weight: 700;
+    font-family: 'Cabin', sans-serif;
+    font-size: 16px;
 }
 
 .login-form h1 {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .login-form p {
     margin-top: 4px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .login-form form {
@@ -48,4 +51,13 @@
 
 .form-input-disabled {
     border: 1px solid red; /* Change border color to red */
+}
+
+.login-form .demo-user {
+    margin-top: 25px;
+    margin-bottom: 6px;
+    text-align: center;
+    color: #da3743;
+    font-weight: 400;
+    font-family: 'Cabin', sans-serif;
 }

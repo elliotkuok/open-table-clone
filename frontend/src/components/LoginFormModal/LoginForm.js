@@ -96,7 +96,7 @@ function LoginForm({onClose}) {
 
   const modalTitle = showPasswordInput ? "Verify it's you" : "Enter your email";
   const modalSubtitle = showPasswordInput ? "Enter your password to continue." : 
-  "Enter the email associated with your OpenTable account, or new email.";
+  "Enter the email associated with your OpenTable account, or enter a new email.";
   const actionButtonLabel = showPasswordInput ? "Log In" : "Continue";
 
   return (
@@ -127,7 +127,6 @@ function LoginForm({onClose}) {
               required
             />
           )}
-
         <button
           type="submit"
           onClick={handleContinue}
@@ -137,6 +136,7 @@ function LoginForm({onClose}) {
           {actionButtonLabel}
         </button>
       </form>
+        <p className="demo-user">Use demo user instead</p>
     </div>
   );
 }
