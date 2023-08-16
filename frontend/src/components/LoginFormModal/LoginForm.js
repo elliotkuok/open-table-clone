@@ -9,48 +9,44 @@ function LoginForm({onClose}) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(false);
-  const [emailInputClass, setEmailInputClass] = useState("form-input");
-  const [passwordInputClass, setPasswordInputClass] = useState("form-input");
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
 
+  const getInputClass = () => {
+    return continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
+  };
 
   useEffect(() => {
-    const isEmailValidInDatabase = async () => {
-      try {
-        const response = await fetch(`/api/users/check_email?email=${email}`);
-        const data = await response.json();
-  
-        setEmailIsValid(data.isValid);
-      } catch (error) {
-        console.error("Error checking email validity:", error);
-      }
-    };
-
     if (email) {
-      isEmailValidInDatabase();
+      (async () => {
+        try {
+          const response = await fetch(`/api/users/check_email?email=${email}`);
+          const data = await response.json();
+          setEmailIsValid(data.isValid);
+        } catch (error) {
+          console.error("Error checking email validity:", error);
+        }
+      })();
     }
-  }, [email]);
+
+    if (emailIsValid && !showPasswordInput) {
+      setContinueButtonDisabled(false);
+    }
+
+    if (password) {
+      setContinueButtonDisabled(false);
+    }
+  }, [email, emailIsValid, password, showPasswordInput]);
 
   useEffect(() => {
     if (emailIsValid && continueButtonDisabled && !showPasswordInput) {
-      setContinueButtonDisabled(false); // Remove the disabled state
+      setContinueButtonDisabled(false);
     }
   }, [emailIsValid, continueButtonDisabled]);
 
   useEffect(() => {
     setContinueButtonDisabled(false);
   }, [password]);
-
-  useEffect(() => {
-    if (continueButtonDisabled) {
-      setEmailInputClass("form-input form-input-disabled");
-      setPasswordInputClass("form-input form-input-disabled");
-    } else {
-      setEmailInputClass("form-input");
-      setPasswordInputClass("form-input");
-    }
-  }, [continueButtonDisabled]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -63,7 +59,6 @@ function LoginForm({onClose}) {
       e.preventDefault(); // Prevent default only when form should not be submitted
       if (emailIsValid) {
         setShowPasswordInput(true);
-        setErrors([]); // Clear errors when a valid email is entered
         setContinueButtonDisabled(false);
       } else {
         setContinueButtonDisabled(true); 
@@ -90,9 +85,6 @@ function LoginForm({onClose}) {
         } catch {
           data = await res.text();
         }
-        // if (data?.errors) setErrors(data.errors);
-        // else if (data) setErrors([data]);
-        // else setErrors([res.statusText]);
         setContinueButtonDisabled(true); 
       });
   };
@@ -117,7 +109,7 @@ function LoginForm({onClose}) {
         </ul>
           {!showPasswordInput && (
             <input
-              className={emailInputClass}
+              className={getInputClass()}
               type="text"
               value={email}
               placeholder="Email"
@@ -127,7 +119,7 @@ function LoginForm({onClose}) {
           )}
           {showPasswordInput && emailIsValid && (
             <input
-              className={passwordInputClass}
+            className={getInputClass()}
               type="password"
               value={password}
               placeholder="Password"
@@ -139,7 +131,7 @@ function LoginForm({onClose}) {
         <button
           type="submit"
           onClick={handleContinue}
-          disabled={continueButtonDisabled} // Add the disabled attribute
+          disabled={continueButtonDisabled}
           className={continueButtonDisabled ? "form-button-disabled" : ""}
         >
           {actionButtonLabel}
