@@ -6,6 +6,7 @@ import "./LoginForm.css";
 import { EmailInput } from './EmailInput';
 import { PasswordInput } from './PasswordInput';
 import { SignUpForm } from './SignUpForm';
+import { receiveCreateUserErrors } from '../../store/errorsReducer';
 
 function LoginForm({onClose}) {
   const dispatch = useDispatch();
@@ -15,19 +16,12 @@ function LoginForm({onClose}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [errors, setErrors] = useState([]);
   const [emailInDatabase, setEmailInDatabase] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
   const errors = useSelector(state => state.errors.createUser)
-
-  // if (sessionUser) return <Redirect to="/" />;
-
-  const getInputClass = () => {
-    return continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
-  };
 
   useEffect(() => {
     if (email) {
@@ -60,6 +54,12 @@ function LoginForm({onClose}) {
   useEffect(() => {
     setContinueButtonDisabled(false);
   }, [password]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(receiveCreateUserErrors([])); 
+    };
+  }, [onClose]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -155,9 +155,11 @@ function LoginForm({onClose}) {
     setShowAdditionalInputs(false);
     setContinueButtonDisabled(false);
     setEmail(submittedEmail);
+    dispatch(receiveCreateUserErrors([]));
   };
   
   const handleClose = () => {
+    dispatch(receiveCreateUserErrors([]));
     onClose();
   };
 
