@@ -15,12 +15,13 @@ function LoginForm({onClose}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [emailInDatabase, setEmailInDatabase] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const errors = useSelector(state => state.errors.createUser)
 
   // if (sessionUser) return <Redirect to="/" />;
 
@@ -92,7 +93,7 @@ function LoginForm({onClose}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
+    // setErrors([]);
 
     if (!showPasswordInput) {
       return;
