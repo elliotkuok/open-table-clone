@@ -78,6 +78,15 @@
     cursor: pointer;
 }
 
+.x-icon {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Cabin', sans-serif;
+}
+
 .email-default {
     color: #ccc;
 }
