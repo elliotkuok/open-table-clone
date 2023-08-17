@@ -4,7 +4,7 @@ export function PasswordInput({ password, setPassword, continueButtonDisabled })
     return (
       <div>
         <h1>Verify it's you</h1>
-        <p>Enter your password</p>
+        <p>An account was found matching the email you provided. Please input your password to continue</p>
         <input
           className={inputClass}
           type="password"

@@ -183,13 +183,16 @@ function LoginForm({onClose}) {
       {showPasswordInput ? (
         showAdditionalInputs ? (
           <SignUpForm
+            email={email}
+            password={password}
+            setPassword={setPassword}
             firstName={firstName}
             setFirstName={setFirstName}
             lastName={lastName}
             setLastName={setLastName}
             phoneNumber={phoneNumber}
             setPhoneNumber={setPhoneNumber}
-            getInputClass={getInputClass}
+            continueButtonDisabled={continueButtonDisabled}
           />
         ) : (
           <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />

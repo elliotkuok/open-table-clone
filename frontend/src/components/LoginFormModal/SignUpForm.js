@@ -1,10 +1,23 @@
-export function SignUpForm({ firstName, setFirstName, lastName, setLastName, phoneNumber, setPhoneNumber, continueButtonDisabled }) {
+export function SignUpForm({ email, password, setPassword, firstName, setFirstName, lastName, setLastName, phoneNumber, setPhoneNumber, continueButtonDisabled }) {
     const inputClass = continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
 
     return (
       <div>
         <h1>Sign up for an account</h1>
         <p>No account with your email was found. Please fill out this form to create a new account</p>
+        <input
+            className="form-input email-default"
+            type="text"
+            defaultValue={email}
+            readOnly
+        />
+        <input
+          className={inputClass}
+          type="text"
+          value={password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <input
           className={inputClass}
           type="text"
