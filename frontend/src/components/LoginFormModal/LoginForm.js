@@ -179,27 +179,27 @@ function LoginForm({onClose}) {
       </i>
     )}
 
-<form onSubmit={handleSubmit}>
-      {showPasswordInput ? (
-        showAdditionalInputs ? (
-          <SignUpForm
-            email={email}
-            password={password}
-            setPassword={setPassword}
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            phoneNumber={phoneNumber}
-            setPhoneNumber={setPhoneNumber}
-            continueButtonDisabled={continueButtonDisabled}
-          />
-        ) : (
-          <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
-        )
-      ) : (
-        <EmailInput email={email} handleEmailChange={handleEmailChange} continueButtonDisabled={continueButtonDisabled} handleContinue={handleContinue} />
-      )}
+    <form onSubmit={handleSubmit}>
+          {showPasswordInput ? (
+            showAdditionalInputs ? (
+              <SignUpForm
+                email={email}
+                password={password}
+                setPassword={setPassword}
+                firstName={firstName}
+                setFirstName={setFirstName}
+                lastName={lastName}
+                setLastName={setLastName}
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+                continueButtonDisabled={continueButtonDisabled}
+              />
+            ) : (
+              <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
+            )
+          ) : (
+            <EmailInput email={email} handleEmailChange={handleEmailChange} continueButtonDisabled={continueButtonDisabled} handleContinue={handleContinue} />
+          )}
     </form>
       <Link to="#" className="demo-user" onClick={handleDemoLogin}>
         Use demo user instead

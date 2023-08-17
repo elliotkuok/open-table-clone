@@ -32,7 +32,7 @@ export const signup = (user) => async (dispatch) => {
         password,
         firstName,
         lastName,
-        phoneNumber,
+        phoneNumber
       })
     });
     const data = await response.json();
