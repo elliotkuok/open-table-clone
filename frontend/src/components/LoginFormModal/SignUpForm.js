@@ -13,7 +13,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
         />
         <input
           className={inputClass}
-          type="text"
+          type="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
