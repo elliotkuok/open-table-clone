@@ -53,7 +53,7 @@ function ProfileButton({ user }) {
   return (
     <div className="dropdown-container" ref={dropdownRef}>
       <button id="profile-button" onClick={toggleDropdown}>
-        <span style={{ marginTop: '3px' }}>
+        <span style={{ marginTop: '4px', marginLeft: '2px'}}>
           {firstInitial}{lastInitial}
         </span>
       </button>
