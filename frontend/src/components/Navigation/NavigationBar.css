@@ -54,8 +54,9 @@
     width: 180px;
 }
 
-.dropdown-menu h1 {
+.dropdown-menu h4 {
     margin-bottom: 20px;
+    /* font-size: 16px; */
 }
 
 .dropdown-link {
@@ -71,4 +72,9 @@
 
 .dropdown-link:hover {
     background-color: #f5f5f5;
+}
+
+#signout-link {
+    color: #da3743;
+    cursor: pointer;
 }

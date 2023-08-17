@@ -45,11 +45,11 @@ function ProfileButton({ user }) {
       </button>
       {showDropdown && (
         <div className="dropdown-menu">
-            <h1>Hello, {firstName}!</h1>
+            <h4>Hello, {firstName}!</h4>
             <Link to={`/user/${user.id}`} className="dropdown-link">
                 My Profile
             </Link>
-            <a className="dropdown-link" style={{color: '#da3743' }} onClick={handleLogout}>
+            <a className="dropdown-link" id="signout-link" onClick={handleLogout}>
                 Sign out
             </a>
         </div>
