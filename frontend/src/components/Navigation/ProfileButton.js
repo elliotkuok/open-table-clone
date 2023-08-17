@@ -50,7 +50,7 @@ function ProfileButton({ user }) {
                 My Profile
             </Link>
             <a className="dropdown-link" style={{color: '#da3743' }} onClick={handleLogout}>
-                Logout
+                Sign out
             </a>
         </div>
       )}
