@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { Link } from "react-router-dom";
@@ -7,10 +7,25 @@ function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [showDropdown, setShowDropdown] = useState(false); 
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
 
   useEffect(() => {
     fetchUserData();
+  }, []);
+
+  useEffect(() => {
+      const handleOutsideClick = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+              setShowDropdown(false);
+          }
+      };
+
+      document.addEventListener('click', handleOutsideClick);
+
+      return () => {
+          document.removeEventListener('click', handleOutsideClick);
+      };
   }, []);
 
   const fetchUserData = async () => {
@@ -36,12 +51,11 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" ref={dropdownRef}>
       <button id="profile-button" onClick={toggleDropdown}>
         <span style={{ marginTop: '3px' }}>
           {firstInitial}{lastInitial}
         </span>
-        <i className="fa fa-caret-down"></i>
       </button>
       {showDropdown && (
         <div className="dropdown-menu">
