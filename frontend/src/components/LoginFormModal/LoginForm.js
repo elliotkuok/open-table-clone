@@ -91,26 +91,18 @@ function LoginForm({onClose}) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrors([]);
-
-    if (!showPasswordInput) {
-      return;
-    }
-
-    if (emailInDatabase) {
-      // Log in with the provided email and password
-      dispatch(sessionActions.login({ email, password }))
-        .then(() => {
-          onClose();
-        })
-        .catch(async (res) => {
-          // Handle login errors
-          // ...
-        });
+  
+    if (showPasswordInput && emailInDatabase) {
+      try {
+        await dispatch(sessionActions.login({ email, password }));
+        onClose();
+      } catch (error) {
+        // Handle login errors
+        console.error('Error logging in:', error);
+      }
     } else {
-      // Create a new user with the provided information
       const newUser = {
         email,
         password,
@@ -118,21 +110,20 @@ function LoginForm({onClose}) {
         lastName,
         phoneNumber
       };
-
-      // Dispatch an action to create a new user in the database
-      dispatch(sessionActions.signup(newUser))
-        .then(() => {
-          onClose();
-        })
-        .catch(async (res) => {
-          // Handle user creation errors
-          // ...
-        });
+  
+      try {
+        await dispatch(sessionActions.signup(newUser));
+        // You can add a login action here for the new user if needed
+        // onClose();
+      } catch (error) {
+        // Handle signup errors
+        console.error('Error signing up:', error);
+      }
     }
 
-    return dispatch(sessionActions.login({ email, password }))
+      return dispatch(sessionActions.login({ email, password }))
       .then(() => {
-        onClose();
+        // onClose();
       })
       .catch(async (res) => {
         let data;

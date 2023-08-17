@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { receiveCreateUserErrors } from './errorsReducer';
 
 const SET_CURRENT_USER = 'session/SET_CURRENT_USER';
 const REMOVE_CURRENT_USER = 'session/REMOVE_CURRENT_USER';
@@ -25,7 +26,7 @@ const storeCurrentUser = user => {
 
 export const signup = (user) => async (dispatch) => {
     const { email, password, firstName, lastName, phoneNumber } = user;
-    const response = await csrfFetch("/api/users", {
+    try {const response = await csrfFetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -34,11 +35,19 @@ export const signup = (user) => async (dispatch) => {
         lastName,
         phoneNumber
       })
-    });
-    const data = await response.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
-    return response;
+    })
+    if (response.ok) {
+      const data = await response.json();
+      storeCurrentUser(data.user);
+      dispatch(setCurrentUser(data.user));
+      return data;
+    } else {
+      throw response
+    }
+    } catch (response) {
+      let data = await response.json();
+      dispatch(receiveCreateUserErrors(data.errors))
+    }
   };
 
 export const login = ({email, password}) => async (dispatch) => {

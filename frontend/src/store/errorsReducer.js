@@ -13,7 +13,7 @@ const defaultState = {
 const errorsReducer = (state = defaultState, action) => {
   switch(action.type) {
     case RECEIVE_CREATE_USER_ERRORS:
-      return { ...state, createUser: action.payload.errors }
+      return { ...state, createUser: action.payload }
     default:
       return state
   }
