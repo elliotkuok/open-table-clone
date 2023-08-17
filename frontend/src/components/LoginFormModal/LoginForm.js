@@ -3,6 +3,9 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./LoginForm.css";
+import { EmailInput } from './EmailInput';
+import { PasswordInput } from './PasswordInput';
+import { SignUpForm } from './SignUpForm';
 
 function LoginForm({onClose}) {
   const dispatch = useDispatch();
@@ -154,6 +157,7 @@ function LoginForm({onClose}) {
 
   const handleBack = () => {
     setShowPasswordInput(false);
+    setShowAdditionalInputs(false);
     setContinueButtonDisabled(false);
     setEmail(submittedEmail);
   };
@@ -174,77 +178,26 @@ function LoginForm({onClose}) {
         &lt; {/* Use HTML entity for "<" */}
       </i>
     )}
-      <h1>{modalTitle}</h1>
-      <p>{modalSubtitle}</p>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map(error => <li key={error}>{error}</li>)}
-        </ul>
-          
-      {showPasswordInput ? (
-        // Render password input and back button
-        <div>
-          <input
-            className={getInputClass()}
-            type="password"
-            value={password}
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            />
-          <button type="submit"
-          disabled={continueButtonDisabled}
-          className={continueButtonDisabled ? "form-button-disabled" : ""}
-          >Log In</button>
-        </div>
-      ) : (
-        // Render email input and continue button
-        <div>
-          <input
-            className={getInputClass()}
-            type="text"
-            value={email}
-            placeholder="Email"
-            onChange={handleEmailChange}
-            required
-            />
-          <button
-              type="button"
-              onClick={handleContinue}
-              disabled={continueButtonDisabled}
-              className={continueButtonDisabled ? "form-button-disabled" : ""}
-            >
-              Continue
-            </button>
-            {showAdditionalInputs && (
-              // Additional inputs for creating an account
-              <div>
-                <input
-                  className={getInputClass()}
-                  type="text"
-                  value={firstName}
-                  placeholder="First Name"
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                <input
-                  className={getInputClass()}
-                  type="text"
-                  value={lastName}
-                  placeholder="Last Name"
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <input
-                  className={getInputClass()}
-                  type="tel"
-                  value={phoneNumber}
-                  placeholder="Phone Number"
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-              </div>
-            )}
-        </div>
-      )}
 
-      </form>
+<form onSubmit={handleSubmit}>
+      {showPasswordInput ? (
+        showAdditionalInputs ? (
+          <SignUpForm
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            getInputClass={getInputClass}
+          />
+        ) : (
+          <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
+        )
+      ) : (
+        <EmailInput email={email} handleEmailChange={handleEmailChange} continueButtonDisabled={continueButtonDisabled} handleContinue={handleContinue} />
+      )}
+    </form>
       <Link to="#" className="demo-user" onClick={handleDemoLogin}>
         Use demo user instead
       </Link>
