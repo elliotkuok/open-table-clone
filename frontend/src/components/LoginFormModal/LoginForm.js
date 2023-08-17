@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import "./LoginForm.css";
 import { EmailInput } from './EmailInput';
 import { PasswordInput } from './PasswordInput';
@@ -9,6 +9,7 @@ import { SignUpForm } from './SignUpForm';
 
 function LoginForm({onClose}) {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -20,6 +21,8 @@ function LoginForm({onClose}) {
   const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
+
+  // if (sessionUser) return <Redirect to="/" />;
 
   const getInputClass = () => {
     return continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
@@ -167,11 +170,9 @@ function LoginForm({onClose}) {
     return emailRegex.test(email);
   };
 
-  const modalTitle = showPasswordInput ? "Verify it's you" : "Enter your email";
-  const modalSubtitle = showPasswordInput ? "Enter your password to continue." : 
-  "Enter the email associated with your OpenTable account, or enter a new email.";
-
   return (
+    <>
+    {sessionUser && <Redirect to="/" />}
     <div className="login-form">
       {showPasswordInput && (
       <i className="back-icon" onClick={handleBack}>
@@ -180,31 +181,35 @@ function LoginForm({onClose}) {
     )}
 
     <form onSubmit={handleSubmit}>
-          {showPasswordInput ? (
-            showAdditionalInputs ? (
-              <SignUpForm
-                email={email}
-                password={password}
-                setPassword={setPassword}
-                firstName={firstName}
-                setFirstName={setFirstName}
-                lastName={lastName}
-                setLastName={setLastName}
-                phoneNumber={phoneNumber}
-                setPhoneNumber={setPhoneNumber}
-                continueButtonDisabled={continueButtonDisabled}
-              />
-            ) : (
-              <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
-            )
-          ) : (
-            <EmailInput email={email} handleEmailChange={handleEmailChange} continueButtonDisabled={continueButtonDisabled} handleContinue={handleContinue} />
-          )}
+      <ul>
+          {errors.map(error => <li key={error}>{error}</li>)}
+      </ul>
+      {showPasswordInput ? (
+        showAdditionalInputs ? (
+          <SignUpForm
+            email={email}
+            password={password}
+            setPassword={setPassword}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            continueButtonDisabled={continueButtonDisabled}
+          />
+        ) : (
+          <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
+        )
+      ) : (
+        <EmailInput email={email} handleEmailChange={handleEmailChange} continueButtonDisabled={continueButtonDisabled} handleContinue={handleContinue} />
+      )}
     </form>
       <Link to="#" className="demo-user" onClick={handleDemoLogin}>
         Use demo user instead
       </Link>
     </div>
+    </>
   );
 }
 
