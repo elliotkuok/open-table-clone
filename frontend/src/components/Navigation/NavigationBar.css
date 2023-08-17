@@ -21,3 +21,17 @@
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 300;
 }
+
+#profile-button {
+    width: 30px;
+    height: 30px;
+    background: #d82c82;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    border: none;
+}
