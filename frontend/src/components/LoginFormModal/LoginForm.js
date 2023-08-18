@@ -40,22 +40,6 @@ function LoginForm({onClose}) {
       setContinueButtonDisabled(false);
     }
 
-    if (password) {
-      setContinueButtonDisabled(false);
-      dispatch(receiveCreateUserErrors({ ...errors, password: undefined }));
-    }
-    if (firstName) {
-      setContinueButtonDisabled(false);
-      dispatch(receiveCreateUserErrors({ ...errors, first_name: undefined }));
-    }
-    if (lastName) {
-      setContinueButtonDisabled(false);
-      dispatch(receiveCreateUserErrors({ ...errors, last_name: undefined }));
-    }
-    if (phoneNumber) {
-      setContinueButtonDisabled(false);
-      dispatch(receiveCreateUserErrors({ ...errors, phone_number: undefined }));
-    }
   }, [email, emailInDatabase, password, showPasswordInput, firstName, lastName, phoneNumber]);
 
   useEffect(() => {
@@ -65,14 +49,39 @@ function LoginForm({onClose}) {
   }, [emailInDatabase, continueButtonDisabled]);
 
   useEffect(() => {
-    setContinueButtonDisabled(false);
-  }, [password]);
+    setContinueButtonDisabled(areErrorsPresent());
+  }, [errors]);
+  
 
   useEffect(() => {
     return () => {
       dispatch(receiveCreateUserErrors([])); 
     };
   }, [onClose]);
+
+  const areErrorsPresent = () => {
+    return Object.values(errors).some(error => error !== undefined);
+  };
+
+  const clearError = (field) => {
+    dispatch(receiveCreateUserErrors({ ...errors, [field]: undefined }));
+  };
+
+  useEffect(() => {
+      if (errors.password) clearError('password');
+  }, [password]);
+
+  useEffect(() => {
+      if (errors.first_name) clearError('first_name');
+  }, [firstName]);
+
+  useEffect(() => {
+      if (errors.last_name) clearError('last_name');
+  }, [lastName]);
+
+  useEffect(() => {
+      if (errors.phone_number) clearError('phone_number');
+  }, [phoneNumber]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
