@@ -1,4 +1,4 @@
-export function SignUpForm({ email, password, setPassword, firstName, setFirstName, lastName, setLastName, phoneNumber, setPhoneNumber, continueButtonDisabled }) {
+export function SignUpForm({ email, password, setPassword, firstName, setFirstName, lastName, setLastName, phoneNumber, setPhoneNumber, continueButtonDisabled, errors }) {
     const inputClass = continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
 
     return (
@@ -17,14 +17,17 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-        />
+          />
+          {console.log("signup", errors.password)}
+        {errors.password && <p className="error-message">Password {errors.password}</p>}
         <input
           className={inputClass}
           type="text"
           value={firstName}
           placeholder="First Name"
           onChange={(e) => setFirstName(e.target.value)}
-        />
+          />
+        {errors.first_name && <p className="error-message">First name {errors.first_name}</p>}
         <input
           className={inputClass}
           type="text"
@@ -32,6 +35,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           placeholder="Last Name"
           onChange={(e) => setLastName(e.target.value)}
         />
+        {errors.last_name && <p className="error-message">Last name {errors.last_name}</p>}
         <input
           className={inputClass}
           type="tel"
@@ -39,6 +43,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           placeholder="Phone Number"
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
+        {errors.phone_number && <p className="error-message">Phone number {errors.phone_number}</p>}
         <button type="submit" disabled={continueButtonDisabled} className={continueButtonDisabled ? "form-button-disabled" : ""}>
           Sign Up
         </button>

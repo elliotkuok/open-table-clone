@@ -196,9 +196,6 @@ function LoginForm({onClose}) {
 
 
     <form onSubmit={handleSubmit}>
-      {/* <ul>
-          {errors.map(error => <li key={error}>{error}</li>)}
-      </ul> */}
       {showPasswordInput ? (
         showAdditionalInputs ? (
           <SignUpForm
@@ -212,6 +209,7 @@ function LoginForm({onClose}) {
             phoneNumber={phoneNumber}
             setPhoneNumber={setPhoneNumber}
             continueButtonDisabled={continueButtonDisabled}
+            errors={errors}
           />
         ) : (
           <PasswordInput password={password} setPassword={setPassword} continueButtonDisabled={continueButtonDisabled} />
