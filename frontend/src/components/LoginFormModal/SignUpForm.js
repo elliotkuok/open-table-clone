@@ -18,7 +18,6 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           />
-          {console.log("signup", errors.password)}
         {errors.password && <p className="error-message">Password {errors.password}</p>}
         <input
           className={inputClass}
