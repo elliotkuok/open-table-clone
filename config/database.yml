@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: readytable_production
-  username: readytable
-  password: <%= ENV["READYTABLE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
