@@ -196,9 +196,9 @@ function LoginForm({onClose}) {
 
 
     <form onSubmit={handleSubmit}>
-      <ul>
+      {/* <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
+      </ul> */}
       {showPasswordInput ? (
         showAdditionalInputs ? (
           <SignUpForm
