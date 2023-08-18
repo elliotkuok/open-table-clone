@@ -42,8 +42,21 @@ function LoginForm({onClose}) {
 
     if (password) {
       setContinueButtonDisabled(false);
+      dispatch(receiveCreateUserErrors({ ...errors, password: undefined }));
     }
-  }, [email, emailInDatabase, password, showPasswordInput]);
+    if (firstName) {
+      setContinueButtonDisabled(false);
+      dispatch(receiveCreateUserErrors({ ...errors, first_name: undefined }));
+    }
+    if (lastName) {
+      setContinueButtonDisabled(false);
+      dispatch(receiveCreateUserErrors({ ...errors, last_name: undefined }));
+    }
+    if (phoneNumber) {
+      setContinueButtonDisabled(false);
+      dispatch(receiveCreateUserErrors({ ...errors, phone_number: undefined }));
+    }
+  }, [email, emailInDatabase, password, showPasswordInput, firstName, lastName, phoneNumber]);
 
   useEffect(() => {
     if (emailInDatabase && continueButtonDisabled && !showPasswordInput) {
