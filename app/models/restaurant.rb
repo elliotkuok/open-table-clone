@@ -3,4 +3,6 @@ class Restaurant < ApplicationRecord
     validates :description, length: { maximum: 500 }
     has_many :reservations
     has_many :reviews
+
+    has_one_attached :photo
 end
