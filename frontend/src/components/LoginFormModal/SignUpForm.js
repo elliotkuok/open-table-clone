@@ -1,5 +1,4 @@
 export function SignUpForm({ email, password, setPassword, firstName, setFirstName, lastName, setLastName, phoneNumber, setPhoneNumber, continueButtonDisabled, errors }) {
-    const inputClass = continueButtonDisabled ? "form-input form-input-disabled" : "form-input";
 
     return (
       <div>
@@ -12,7 +11,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
             readOnly
         />
         <input
-          className={inputClass}
+          className={errors.password ? 'form-input form-input-disabled' : 'form-input'}
           type="password"
           value={password}
           placeholder="Password"
@@ -20,7 +19,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           />
         {errors.password && <p className="error-message">Password {errors.password}</p>}
         <input
-          className={inputClass}
+          className={errors.first_name ? 'form-input form-input-disabled' : 'form-input'}
           type="text"
           value={firstName}
           placeholder="First Name"
@@ -28,7 +27,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
           />
         {errors.first_name && <p className="error-message">First name {errors.first_name}</p>}
         <input
-          className={inputClass}
+          className={errors.last_name ? 'form-input form-input-disabled' : 'form-input'}
           type="text"
           value={lastName}
           placeholder="Last Name"
@@ -36,7 +35,7 @@ export function SignUpForm({ email, password, setPassword, firstName, setFirstNa
         />
         {errors.last_name && <p className="error-message">Last name {errors.last_name}</p>}
         <input
-          className={inputClass}
+          className={errors.phone_number ? 'form-input form-input-disabled' : 'form-input'}
           type="tel"
           value={phoneNumber}
           placeholder="Phone Number"
