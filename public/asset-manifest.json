@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.3d6f7b6f.css",
-    "main.js": "/static/js/main.d0dc358b.js",
+    "main.js": "/static/js/main.83d5c6f6.js",
     "static/media/readytable-logo.png": "/static/media/readytable-logo.5ee540d0fa19dd8fd7a2.png",
     "index.html": "/index.html",
     "main.3d6f7b6f.css.map": "/static/css/main.3d6f7b6f.css.map",
-    "main.d0dc358b.js.map": "/static/js/main.d0dc358b.js.map"
+    "main.83d5c6f6.js.map": "/static/js/main.83d5c6f6.js.map"
   },
   "entrypoints": [
     "static/css/main.3d6f7b6f.css",
-    "static/js/main.d0dc358b.js"
+    "static/js/main.83d5c6f6.js"
   ]
 }
