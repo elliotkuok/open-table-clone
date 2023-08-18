@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
 // }
 
 const configureStore = (preloadedState) => {
-    return createStore(rootReducer, preloadedState, thunk);
+    return createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 };
 
 export default configureStore;

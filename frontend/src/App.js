@@ -1,7 +1,6 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import LoginFormModal from './components/LoginFormModal';
 
 function App() {
   return (
