@@ -9,11 +9,13 @@
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
+    Restaurant.destroy_all
     User.destroy_all
 
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
     ApplicationRecord.connection.reset_pk_sequence!('users')
+    ApplicationRecord.connection.reset_pk_sequence!('restaurants')
 
     puts "Creating users..."
     # Create a demo user
@@ -25,17 +27,24 @@ ApplicationRecord.transaction do
         phone_number: '5103626446'
     )
 
-    # Create additional users
+    # Create restaurants
     10.times do 
-        User.create!({
-        email: Faker::Internet.unique.email,
-        password: Faker::Internet.password(min_length: 6),
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        phone_number: Faker::PhoneNumber.phone_number
+        Restaurant.create!({
+        name: Faker::Restaurant.unique.name,
+        address: Faker::Address.street_address,
+        description: Faker::Restaurant.description,
+        phone: Faker::PhoneNumber.phone_number,
+        cuisine: Faker::Restaurant.type,
+        price: ['$','$$','$$$','$$$$'].sample,
+        rating: Faker::Number.decimal(l_digits: 1, r_digits: 1, min_value: 0, max_value: 5),
+        neighborhood: Faker::Address.community,
+        hours: ["10:30 AM - 11:00 PM", "6:30 AM - 3:00 PM", "5:00 PM - 01:00 AM", "8:30 AM - 11:00 PM"].sample,
+        dining_style: ['Casual', 'Fine Dining', 'Quick Bites', 'Barbecue', 'Bistro', 'Brasserie', 'Buffet', 'Cafe', 'Diner', 'Family Style', 'Fast Food', 'Gastropub', 'Pizzeria', 'Pub', 'Steakhouse', 'Sushi', 'Tapas/Small Plates', 'Vegetarian/Vegan'].sample,
+        dress_code: ["Casual", "Business Casual", "Smart Casual", "Dressy", "None"].sample,
+        parking_details: ["Street Parking", "Public Parking Lot", "Valet Parking", "Garage Parking", "Parking Garage Nearby", "Private Lot", "On-site Parking", "Paid Parking", "Complimentary Valet", "Self-Parking", "Nearby Parking", "Covered Parking", "Free Parking", "Metered Parking", "Hotel Parking", "Secure Parking", "Ample Parking", "Parking Available", "Designated Parking Area"].sample,
+        website: Faker::Internet.url,
         }) 
     end
 
     puts "Done!"
 end
-  
