@@ -32,11 +32,11 @@ ApplicationRecord.transaction do
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
         address: Faker::Address.unique.street_address,
-        description: Faker::Restaurant.unique.description,
+        description: Faker::Restaurant.unique.description[0, 500],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
         price: ['$','$$','$$$','$$$$'].sample,
-        rating: Faker::Number.decimal(l_digits: 1, r_digits: 1, min_value: 0, max_value: 5),
+        rating: (rand * 5).round(1),
         # neighborhood: Faker::Address.community,
         neighborhood: ["Mission District", "Nob Hill", "Chinatown", "North Beach", "SOMA", "Haight-Ashbury", "Tenderloin", "Russian Hill", "Marina District", "Sunset"].sample,
         hours: ["10:30 AM - 11:00 PM", "6:30 AM - 3:00 PM", "5:00 PM - 01:00 AM", "8:30 AM - 11:00 PM"].sample,
