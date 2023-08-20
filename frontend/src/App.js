@@ -6,20 +6,22 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 function App() {
   return (
     <Router>
-      <Navigation /> {/* Render the NavigationBar component */}
-      <Switch>
-        {/* Define your regular routes */}
-        {/* <Route exact path="/" component={Home} /> */}
-        {/* ... other routes ... */}
-        
-        {/* Wildcard route for handling invalid routes */}
-        <Route path="/restaurants/:id">
-          <RestaurantPage />
-        </Route>
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
+      <div id='page-container'>
+        <Navigation /> {/* Render the NavigationBar component */}
+        <Switch>
+          {/* Define your regular routes */}
+          {/* <Route exact path="/" component={Home} /> */}
+          {/* ... other routes ... */}
+          
+          {/* Wildcard route for handling invalid routes */}
+          <Route path="/restaurants/:id">
+            <RestaurantPage />
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </div>
   </Router>
   );
 }

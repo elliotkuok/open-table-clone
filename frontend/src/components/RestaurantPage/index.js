@@ -1,5 +1,6 @@
 import React from 'react';
 import restaurantImage from './assets/restaurant.jpeg';
+import './RestaurantPage.css';
 
 const RestaurantPage = () => {
     return (
