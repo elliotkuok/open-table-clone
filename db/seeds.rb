@@ -31,18 +31,19 @@ ApplicationRecord.transaction do
     10.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
-        address: Faker::Address.street_address,
-        description: Faker::Restaurant.description,
-        phone: Faker::PhoneNumber.phone_number,
+        address: Faker::Address.unique.street_address,
+        description: Faker::Restaurant.unique.description,
+        phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
         price: ['$','$$','$$$','$$$$'].sample,
         rating: Faker::Number.decimal(l_digits: 1, r_digits: 1, min_value: 0, max_value: 5),
-        neighborhood: Faker::Address.community,
+        # neighborhood: Faker::Address.community,
+        neighborhood: ["Mission District", "Nob Hill", "Chinatown", "North Beach", "SOMA", "Haight-Ashbury", "Tenderloin", "Russian Hill", "Marina District", "Sunset"].sample,
         hours: ["10:30 AM - 11:00 PM", "6:30 AM - 3:00 PM", "5:00 PM - 01:00 AM", "8:30 AM - 11:00 PM"].sample,
         dining_style: ['Casual', 'Fine Dining', 'Quick Bites', 'Barbecue', 'Bistro', 'Brasserie', 'Buffet', 'Cafe', 'Diner', 'Family Style', 'Fast Food', 'Gastropub', 'Pizzeria', 'Pub', 'Steakhouse', 'Sushi', 'Tapas/Small Plates', 'Vegetarian/Vegan'].sample,
         dress_code: ["Casual", "Business Casual", "Smart Casual", "Dressy", "None"].sample,
         parking_details: ["Street Parking", "Public Parking Lot", "Valet Parking", "Garage Parking", "Parking Garage Nearby", "Private Lot", "On-site Parking", "Paid Parking", "Complimentary Valet", "Self-Parking", "Nearby Parking", "Covered Parking", "Free Parking", "Metered Parking", "Hotel Parking", "Secure Parking", "Ample Parking", "Parking Available", "Designated Parking Area"].sample,
-        website: Faker::Internet.url,
+        website: Faker::Internet.url
         }) 
     end
 
