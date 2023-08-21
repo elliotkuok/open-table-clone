@@ -82,7 +82,7 @@
     margin-right: 10px;
 }
 
-.review-info {
+.overview-info-component {
     display: flex;
 }
 
@@ -103,7 +103,6 @@
 
 .map-container {
     width: 320px;
-    height: 260px;
     box-shadow: 0 2px 4px #2d333f33;
     border-radius: 4px;
     background-color: white;
@@ -123,6 +122,7 @@
 .address {
     margin-top: 5px;
     margin-left: 25px;
+    margin-bottom: 10px;
     width: 100%;
     display: flex;
     justify-content: flex-start;

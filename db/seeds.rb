@@ -31,7 +31,7 @@ ApplicationRecord.transaction do
     10.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
-        address: Faker::Address.unique.street_address,
+        address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",
         description: Faker::Restaurant.unique.description[0, 1000],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
