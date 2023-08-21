@@ -39,6 +39,7 @@
 .restaurant-tabs {
     padding-bottom: 13px;
     border-bottom: 1px solid lightgrey;
+    font-weight: 400;
 }
 
 .restaurant-tabs a {
@@ -67,11 +68,21 @@
 }
 
 .overview-info {
+    font-family: 'Cabin', sans-serif;
+    font-size: 14px;
     display: flex;
+}
+
+.overview-info svg {
+    transform: translateY(-2px); /*Moves speech bubble position up 3px*/
 }
 
 .overview-info > div {
     margin-right: 10px;
+}
+
+.review-info {
+    display: flex;
 }
 
 .restaurant-description {
