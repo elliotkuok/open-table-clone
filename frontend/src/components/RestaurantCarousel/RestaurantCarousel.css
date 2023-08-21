@@ -1,6 +1,13 @@
 .carousel-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.carousel-header {
+    width: 100%;
+    max-width: 1280px;
+    margin-top: 50px;
+    font-size: 1.5rem;
 }
 
 .restaurant-carousel {
@@ -18,4 +25,3 @@
     flex: 0 0 auto;
     scroll-snap-align: start;
 }
-  

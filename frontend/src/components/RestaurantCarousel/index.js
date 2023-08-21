@@ -13,12 +13,15 @@ const RestaurantCarousel = () => {
       dispatch(fetchRestaurants())
     },[dispatch])
 
-    const chineseRestaurants = Object.values(restaurants).filter(restaurant => restaurant.cuisine === "African");
+    const thaiRestaurants = Object.values(restaurants).filter(restaurant => restaurant.cuisine === "Thai");
 
     return (
         <div className="carousel-container">
+            <div className="carousel-header">
+                <h3>Thai Restaurants</h3>
+            </div>
             <div className="restaurant-carousel">
-                {chineseRestaurants.map(restaurant => (
+                {thaiRestaurants.map(restaurant => (
                     <div key={restaurant.id} className="carousel-item restaurant-index">
                         <RestaurantTile restaurant={restaurant} />
                     </div>
