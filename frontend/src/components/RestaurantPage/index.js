@@ -38,7 +38,7 @@ const RestaurantPage = () => {
                             <h1>{restaurant.name}</h1>
                             <div className='overview-info'>
                                 <div>{restaurant.rating}</div>
-                                <div className='review-info'>
+                                <div className='overview-info-component'>
                                     <div>
                                         <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const RestaurantPage = () => {
                                     </div>
                                     <div>Reviews</div>
                                 </div>
-                                <div className='review-info'>
+                                <div className='overview-info-component'>
                                     <div>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ const RestaurantPage = () => {
                                     </div>
                                     <div>{restaurant.price}</div>
                                 </div>
-                                <div className='review-info'>
+                                <div className='overview-info-component'>
                                     <div>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
