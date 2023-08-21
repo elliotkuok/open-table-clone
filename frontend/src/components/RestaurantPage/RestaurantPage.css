@@ -116,8 +116,7 @@
     margin-top: 16px;
     width: 290px;
     height: 200px;
-    border: 1px solid;
-    background-color: white;
+    background-color: #e8e8e8;
     align-items: center;
 }
 
@@ -140,5 +139,29 @@
 
 .address a:hover {
     text-decoration: underline;
+}
+
+/* Additional information section */
+.additional-info-item {
+    display: flex;
+    margin: 12px 0;
+}
+
+.additional-info h4 {
+    font-weight: 400;
+}
+
+.additional-info h5 {
+    font-weight: 400;
+    margin: 0;
+}
+
+.additional-info p {
+    font-size: 14px;
+    margin: 6px 0;
+}
+
+.info-details {
+    margin-left: 5px;
 }
   
