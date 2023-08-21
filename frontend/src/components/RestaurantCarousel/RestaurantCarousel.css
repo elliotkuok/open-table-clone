@@ -6,7 +6,7 @@
 }
 .carousel-header {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1216px;
     margin-top: 50px;
     font-size: 1.5rem;
 }
@@ -14,9 +14,9 @@
 .restaurant-carousel {
     display: flex;
     overflow-x: scroll;
-    /* scroll-snap-type: x mandatory; */
+    scroll-snap-type: x mandatory;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1216px;
     gap: 20px;
     padding: 20px 0;
     white-space: nowrap;
@@ -24,5 +24,36 @@
   
 .carousel-item {
     flex: 0 0 auto;
-    /* scroll-snap-align: start; */
+    scroll-snap-align: start;
+}
+
+/* Carousel navigation */
+.carousel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: translateY(250%);
+    width: 42px;
+    height: 42px;
+    background-color: #fff;
+    color: black;
+    font-size: 18px;
+    border: 0.0625rem solid #d8d9db;
+    box-shadow: 0 0.125rem 0.5rem #9996;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.carousel-button:hover {
+    border: 2px solid #DA3843;
+}
+
+.left-button {
+    left: 140px;
+}
+
+.right-button {
+    right: 140px;
 }
