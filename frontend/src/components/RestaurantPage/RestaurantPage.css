@@ -52,6 +52,7 @@
 }
 
 .restaurant-tabs a:active {
+    color: #da3743;
     text-decoration: underline;
     text-underline-offset: 16px;
 }
@@ -74,7 +75,7 @@
 }
 
 .overview-info svg {
-    transform: translateY(-2px); /*Moves speech bubble position up 3px*/
+    transform: translateY(-3px); /*Moves speech bubble position up 3px*/
 }
 
 .overview-info > div {

@@ -32,6 +32,16 @@ export const fetchRestaurant = id => async (dispatch) => {
     }
 }
 
+// SELECTORS
+export const selectAllRestaurants = state => state.restaurants
+
+export const selectRestaurant = function(id) {
+    return function(state) {
+      return Object.values(state.restaurants).find(r => r.id.toString() === id)
+    }
+  }
+
+
 // REDUCER
 const restaurantsReducer = (state = {}, action) => {
     console.log("Reducer: Action type:", action.type);
@@ -40,7 +50,7 @@ const restaurantsReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_RESTAURANT:
-            nextState[action.restaurant.id] = action.restaurant;
+            nextState[action.payload.restaurant.id] = action.payload.restaurant;
             return nextState;
         case RECEIVE_RESTAURANTS:
             return Object.assign(nextState, action.payload);    
