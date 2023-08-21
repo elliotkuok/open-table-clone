@@ -13,13 +13,17 @@ const RestaurantCarousel = () => {
       dispatch(fetchRestaurants())
     },[dispatch])
 
+    const chineseRestaurants = Object.values(restaurants).filter(restaurant => restaurant.cuisine === "African");
+
     return (
-        <div className="restaurant-carousel">
-            {Object.values(restaurants).map(restaurant => (
-                <div key={restaurant.id} className="carousel-item restaurant-index">
-                <RestaurantTile restaurant={restaurant} />
-                </div>
-            ))}
+        <div className="carousel-container">
+            <div className="restaurant-carousel">
+                {chineseRestaurants.map(restaurant => (
+                    <div key={restaurant.id} className="carousel-item restaurant-index">
+                        <RestaurantTile restaurant={restaurant} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

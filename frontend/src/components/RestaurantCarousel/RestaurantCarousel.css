@@ -1,8 +1,14 @@
+.carousel-container {
+    display: flex;
+    justify-content: center;
+}
+
 .restaurant-carousel {
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     width: 100%;
+    max-width: 1280px;
     gap: 20px;
     padding: 20px 0;
     white-space: nowrap;

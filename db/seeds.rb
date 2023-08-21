@@ -28,7 +28,7 @@ ApplicationRecord.transaction do
     )
 
     # Create restaurants
-    10.times do 
+    1000.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
         # address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",
@@ -43,8 +43,8 @@ ApplicationRecord.transaction do
             '620 Gough St., San Francisco, 94102, USA',
             '22 Franklin St., San Francisco, 94102, USA',
             '1085 Mission St., San Francisco, 94103, USA'
-        ].uniq.sample,
-        description: Faker::Restaurant.unique.description[0, 1000],
+        ].sample,
+        description: Faker::Restaurant.description[0, 1000],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
         price: ['$30 and under','$31 to $50','$50 and over'].sample,
