@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import React from 'react';
 import RestaurantTile from '../RestaurantIndex/RestaurantTile';
 import './RestaurantCarousel.css';
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const RestaurantCarousel = () => {
     const restaurants = useSelector(selectAllRestaurants)
@@ -40,9 +41,9 @@ const RestaurantCarousel = () => {
             <div className="restaurant-carousel">
                 <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>
                 {thaiRestaurants.map(restaurant => (
-                    <div key={restaurant.id} className="carousel-item restaurant-index">
+                    <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id} className="carousel-item restaurant-index">
                         <RestaurantTile restaurant={restaurant} />
-                    </div>
+                    </Link>
                 ))}
                 <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button>
             </div>

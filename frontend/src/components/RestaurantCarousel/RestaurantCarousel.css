@@ -25,6 +25,8 @@
 .carousel-item {
     flex: 0 0 auto;
     scroll-snap-align: start;
+    text-decoration: none;
+    color: black;
 }
 
 /* Carousel navigation */
