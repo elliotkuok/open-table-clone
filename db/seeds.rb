@@ -32,7 +32,7 @@ ApplicationRecord.transaction do
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
         address: Faker::Address.unique.street_address,
-        description: Faker::Restaurant.unique.description[0, 500],
+        description: Faker::Restaurant.unique.description[0, 1000],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
         price: ['$30 and under','$31 to $50','$50 and over'].sample,
