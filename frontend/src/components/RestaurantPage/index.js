@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import restaurantImage from './assets/restaurant.jpeg';
 import './RestaurantPage.css';
+import './StarRating.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurant, selectAllRestaurants, selectRestaurant } from '../../store/restaurants';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
@@ -37,7 +38,12 @@ const RestaurantPage = () => {
                         <div className='overview'>
                             <h1>{restaurant.name}</h1>
                             <div className='overview-info'>
-                                <div className='info-details'>{restaurant.rating}</div>
+                                <div className='overview-info-component'>
+                                    <div>
+                                        <i data-star={restaurant.rating}></i>
+                                    </div>
+                                    <div className='info-details'>{restaurant.rating}</div>
+                                </div>
                                 <div className='overview-info-component'>
                                     <div>
                                         <svg
