@@ -35,7 +35,7 @@ ApplicationRecord.transaction do
         description: Faker::Restaurant.unique.description[0, 500],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
-        price: ['$','$$','$$$','$$$$'].sample,
+        price: ['$30 and under','$31 to $50','$50 and over'].sample,
         rating: (rand * 5).round(1),
         # neighborhood: Faker::Address.community,
         neighborhood: ["Mission District", "Nob Hill", "Chinatown", "North Beach", "SOMA", "Haight-Ashbury", "Tenderloin", "Russian Hill", "Marina District", "Sunset"].sample,
