@@ -12,10 +12,79 @@
     object-position: center bottom;
 } */
 
+/* Restaurant Banner */
 .restaurant-banner {
     width: 100%;
     height: 460px; /* Set your desired max height */
     background-size: cover;
     background-position: center 45%; /* Show the bottom part of the image */
+}
+
+/* Restaurant Information */
+.restaurant-container{
+    width: 992px;
+    display: flex;
+    margin: -50px auto;
+    justify-content: space-between;
+}
+
+.restaurant-info {
+    width: 620px;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: white;
+    padding: 16px;
+}
+
+.restaurant-tabs {
+    padding-bottom: 13px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.restaurant-tabs a {
+    color: #6f737b;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+    margin-right: 32px;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+}
+
+.restaurant-tabs a:active {
+    text-decoration: underline;
+    text-underline-offset: 16px;
+}
+
+.restaurant-tabs a:hover {
+    color: #931b23;
+    text-underline-offset: 16px;
+}
+
+.restaurant-info h1 {
+    font-size: 3rem;
+    padding-bottom: 32px;
+    border-bottom: 1px solid lightgray;
+}
+
+.overview-info {
+    display: flex;
+}
+
+.overview-info > div {
+    margin-right: 10px;
+}
+
+.restaurant-description {
+    line-height: 24px;
+}
+
+
+
+.reservation-container {
+    width: 320px;
+    height: 320px;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: white;
 }
   

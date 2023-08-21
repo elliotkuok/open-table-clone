@@ -13,6 +13,7 @@ p {
     max-width: 1600px;
     display: block;
     margin: 0 auto;
+    background-color: white;
 }
 
 body {
