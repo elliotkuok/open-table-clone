@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import RestaurantPage from './components/RestaurantPage';
 import RestaurantIndex from './components/RestaurantIndex';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import SearchSplash from './components/SearchSplash';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           
           {/* Wildcard route for handling invalid routes */}
           <Route exact path="/">
+            <SearchSplash />
             <RestaurantIndex />
           </Route>
           <Route path="/restaurants/:id">
