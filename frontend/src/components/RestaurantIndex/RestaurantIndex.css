@@ -1,3 +1,45 @@
-.restaurant-tile {
-    border: solid black;
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.restaurant-index {
+    border: 1px solid #d8d9db;
+    display: flex;
+    flex-direction: column;
+    width: 234px;
+    border-radius: 0.5rem;
+}
+
+
+.tile-img-container img {
+    width: 234px;
+    height: auto;
+}
+
+.restaurant-index p {
+    font-size: 14px;
+}
+
+.tile-info {
+    padding: 8px;
+}
+
+.tile-info h5 {
+    margin-bottom: 8px;
+}
+
+.tile-info > p {
+    padding-top: 8px;
+}
+
+#review-count {
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.tile-img-container {
+    height: 130px;
+    overflow: hidden;
 }
