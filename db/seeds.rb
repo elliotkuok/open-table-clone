@@ -31,7 +31,19 @@ ApplicationRecord.transaction do
     10.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
-        address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",
+        # address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",
+        address: [
+            '22 Hawthorne St, San Francisco, CA 94105',
+            '1529 Fillmore St, San Francisco, CA 94115',
+            '5700 Geary Blvd, San Francisco, CA 94121',
+            '525 Cortland Ave, San Francisco, CA 94110',
+            '517 Hayes St, San Francisco, CA 94102',
+            '132 The Embarcadero, San Francisco, CA 94105',
+            '665 Townsend St, San Francisco, CA 94103',
+            '620 Gough St., San Francisco, 94102, USA',
+            '22 Franklin St., San Francisco, 94102, USA',
+            '1085 Mission St., San Francisco, 94103, USA'
+        ].uniq.sample,
         description: Faker::Restaurant.unique.description[0, 1000],
         phone: Faker::PhoneNumber.unique.phone_number,
         cuisine: Faker::Restaurant.type,
