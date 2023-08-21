@@ -1,0 +1,15 @@
+.restaurant-carousel {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    gap: 20px;
+    padding: 20px 0;
+    white-space: nowrap;
+}
+  
+.carousel-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+  
