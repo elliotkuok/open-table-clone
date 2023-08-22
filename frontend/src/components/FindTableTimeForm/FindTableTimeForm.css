@@ -50,3 +50,12 @@ option {
     width: 50%;
     border: none;
 }
+
+#find-time-bttn {
+    background-color: #da3743;
+    color: #fff;
+    border: none;
+    height: 3rem;
+    width: 100%;
+    margin-top: 16px;
+}
