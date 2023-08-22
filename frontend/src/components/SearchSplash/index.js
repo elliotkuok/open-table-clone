@@ -12,7 +12,7 @@ const SearchSplash = () => {
     // },[dispatch])
     
     return (
-        <div class="search-banner-container">
+        <div className="search-banner-container">
             <h1>Find your table for any occasion</h1>
             <div className="search-inputs">
                 <div className="search-dropdowns">

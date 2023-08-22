@@ -44,8 +44,6 @@ export const selectRestaurant = function(id) {
 
 // REDUCER
 const restaurantsReducer = (state = {}, action) => {
-    console.log("Reducer: Action type:", action.type);
-    console.log("Reducer: Action payload:", action.payload);
     const nextState = {...state};
 
     switch (action.type) {

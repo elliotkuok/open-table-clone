@@ -13,7 +13,7 @@ const RestaurantIndex = () => {
     },[dispatch])
     
     return (
-        <div class="restaurant-list-container">
+        <div className="restaurant-list-container">
             <h3>Available Restaurants</h3>
             <ul className="restaurant-list">
                 {Object.values(restaurants).map(restaurant => (
