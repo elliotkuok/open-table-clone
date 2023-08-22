@@ -16,11 +16,11 @@ const SearchSplash = () => {
             <h1>Find your table for any occasion</h1>
             <div className="search-inputs">
                 <div className="search-dropdowns">
-                    <input></input>
-                    <input></input>
-                    <input></input>
+                    <input id="date-input"></input>
+                    <input id="time-input"></input>
+                    <input id="size-input"></input>
                 </div>
-                <input className="keyword-search"></input>
+                <input id="keyword-search"></input>
                 <button>Let's go</button>
             </div>
         </div>
