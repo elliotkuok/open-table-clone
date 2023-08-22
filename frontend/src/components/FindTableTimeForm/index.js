@@ -20,17 +20,21 @@ const FindTableTime = () => {
 
       const datePickerRef = useRef(null);
 
-    useEffect(() => {
-        dispatch(fetchRestaurant(id));
-    
+      useEffect(() => {
         if (!datePickerRef.current) {
-            // Initialize the date picker only if it hasn't been initialized before
             datePickerRef.current = datePicker('.date-picker', {
-                // Add any options you want here
+                dateSelected: selectedDate,
+                formatter: (input, date, instance) => {
+                    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                    input.value = new Intl.DateTimeFormat('en-US', options).format(date);
+                },
+                onSelect: (instance, date) => {
+                    setSelectedDate(date);
+                },
             });
         }
-    }, [dispatch, id]);
-      
+    }, []);
+    
     if (!restaurant) {
         return;
     }
@@ -86,17 +90,6 @@ const FindTableTime = () => {
     
     const timeSlots = generateTimeSlots();
 
-    // Function to format the date as per your requirement
-    const formatDate = (date) => {
-        const options = { month: 'short', day: 'numeric', year: 'numeric' };
-        return new Intl.DateTimeFormat('en-US', options).format(date);
-    };
-
-    // Function to handle the date selection
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.valueAsDate);
-    };
-
     return (
         <form>
             <div className="table-time-container">
@@ -110,7 +103,7 @@ const FindTableTime = () => {
                 <div id="date-time-container">
                     <div id="date-input">
                         <h5>Date</h5>
-                        <input type="text" className="date-picker" value={formatDate(selectedDate)}/>
+                        <input type="text" className="date-picker" />
                     </div>
                     <div id="time-input">
                         <h5>Time</h5>
