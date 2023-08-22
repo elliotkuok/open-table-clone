@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import './FindTableTimeForm.css';
 import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
 import React, { useState, useEffect, useRef } from 'react';
+import datePicker from 'js-datepicker';
+import 'js-datepicker/dist/datepicker.min.css';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -12,12 +14,23 @@ const FindTableTime = () => {
     const [openingTime, closingTime] = restaurant.hours.split(' - ');
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const hiddenDateInputRef = useRef(null);
-
     useEffect(() => {
         dispatch(fetchRestaurant(id));
       }, [dispatch, id]);
 
+      const datePickerRef = useRef(null);
+
+    useEffect(() => {
+        dispatch(fetchRestaurant(id));
+    
+        if (!datePickerRef.current) {
+            // Initialize the date picker only if it hasn't been initialized before
+            datePickerRef.current = datePicker('.date-picker', {
+                // Add any options you want here
+            });
+        }
+    }, [dispatch, id]);
+      
     if (!restaurant) {
         return;
     }
@@ -48,7 +61,6 @@ const FindTableTime = () => {
 
         const lastResMinutes = convertToMinutes(closingTime) - 90;
         const lastResHour = lastResMinutes < 0 ? convertTo12HourFormat(lastResMinutes + 24 * 60) : convertTo12HourFormat(lastResMinutes);
-        console.log("lastResHour", lastResHour)
 
         const timeSlots = [];
         const timePeriods = ['AM', 'PM'];
@@ -85,29 +97,20 @@ const FindTableTime = () => {
         setSelectedDate(e.target.valueAsDate);
     };
 
-    function getTodaysDate() {
-        const date = new Date(); // Get the current date
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      }
-
     return (
         <form>
             <div className="table-time-container">
                 <h4>Make a reservation</h4>
                 <h5>Party Size</h5>
-                <select>
+                <select defaultValue={2}>
                     {partySizeOptions.map(option => (
-                        <option key={option} value={option} defaultValue={option === 2}>{option} {option !== 1 ? 'people' : 'person'}</option>
+                        <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
                     ))}
                 </select>
                 <div id="date-time-container">
                     <div id="date-input">
                         <h5>Date</h5>
-                        {/* <input type="date" value={getTodaysDate()}/> */}
-                        <select></select>
+                        <input type="text" className="date-picker" value={formatDate(selectedDate)}/>
                     </div>
                     <div id="time-input">
                         <h5>Time</h5>
