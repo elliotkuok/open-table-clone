@@ -112,7 +112,7 @@ const RestaurantPage = () => {
                             </div>
                         </div>
                         <div id='reviews'>
-                            <h2>Reviews</h2>
+                            <h2>What 31 people are saying</h2>
                         </div>
                     </div>
                     <div className='restaurant-sidebar'>
