@@ -6,9 +6,9 @@ const Footer = () => {
     <footer>
       <div className="footer-content">
         <div className="footer-col">
-            <h5>DISCOVER</h5>
-            <p>Dining Rewards</p>
-            <p>Private Dining</p>
+            <h5>LIBRARIES</h5>
+            <a href="https://www.npmjs.com/package/js-datepicker">Datepicker.js</a>
+            <a href="https://codepen.io/4m6/pen/wvqEzEr">Star Ratings</a>
             <p>Reserve for Others</p>
             <p>Restaurants Near Me</p>
             <p>Delivery Near Me</p>

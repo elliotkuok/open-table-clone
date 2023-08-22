@@ -16,6 +16,8 @@ footer {
 
 .footer-col {
     margin: 0 35px;
+    display: flex;
+    flex-direction: column;
 }
 
 footer h5 {
@@ -24,10 +26,15 @@ footer h5 {
     color: white;
 }
 
-footer p {
+footer p, footer a {
     font-size: 14px;
     margin-bottom: 4px;
     color: #d8d9db;
+    text-decoration: none;
+}
+
+footer p {
+    color: red;
 }
 
 #copyright {
