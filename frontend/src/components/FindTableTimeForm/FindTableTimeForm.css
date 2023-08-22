@@ -1,0 +1,18 @@
+.reservation-container {
+    box-shadow: 0 2px 4px #2d333f33;
+    border-radius: 4px;
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 16px;
+}
+
+.table-time-container h4 {
+    margin-top: 4px;
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 0.0625rem solid #d8d9db;
+}
+
+.table-time-container h5 {
+    font-weight: 400;
+}

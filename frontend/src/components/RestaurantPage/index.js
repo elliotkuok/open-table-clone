@@ -5,6 +5,7 @@ import './StarRating.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurant, selectAllRestaurants, selectRestaurant } from '../../store/restaurants';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
+import FindTableTime from '../FindTableTimeForm';
 
 const RestaurantPage = () => {
     const {id} = useParams();
@@ -91,7 +92,9 @@ const RestaurantPage = () => {
                         </div>
                     </div>
                     <div className='restaurant-sidebar'>
-                        <div className='reservation-container'></div>
+                        <div className='reservation-container'>
+                            <FindTableTime />
+                        </div>
                         <div className='map-container'>
                             <div id='map'></div>
                             <div className='address'>

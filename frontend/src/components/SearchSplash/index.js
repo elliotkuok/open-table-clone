@@ -27,4 +27,4 @@ const SearchSplash = () => {
     )
 }
 
-export default SearchSplash
+export default SearchSplash;
