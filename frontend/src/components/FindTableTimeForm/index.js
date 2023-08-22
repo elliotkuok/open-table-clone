@@ -2,12 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import './FindTableTimeForm.css';
 import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
-import { useEffect } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
 const FindTableTime = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
+
+    const [openingTime, closingTime] = restaurant.hours.split(' - ');
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const hiddenDateInputRef = useRef(null);
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
@@ -21,7 +26,6 @@ const FindTableTime = () => {
     for (let i = 1; i <= 20; i++) {
         partySizeOptions.push(i);
     }
-    const [openingTime, closingTime] = restaurant.hours.split(' - ');
 
     // Generate time slots in 30-minute increments
     const generateTimeSlots = () => {
@@ -70,6 +74,25 @@ const FindTableTime = () => {
     
     const timeSlots = generateTimeSlots();
 
+    // Function to format the date as per your requirement
+    const formatDate = (date) => {
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        return new Intl.DateTimeFormat('en-US', options).format(date);
+    };
+
+    // Function to handle the date selection
+    const handleDateChange = (e) => {
+        setSelectedDate(e.target.valueAsDate);
+    };
+
+    function getTodaysDate() {
+        const date = new Date(); // Get the current date
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
     return (
         <form>
             <div class="table-time-container">
@@ -77,12 +100,13 @@ const FindTableTime = () => {
                 <h5>Party Size</h5>
                 <select>
                     {partySizeOptions.map(option => (
-                        <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
+                        <option key={option} value={option} selected={option === 2}>{option} {option !== 1 ? 'people' : 'person'}</option>
                     ))}
                 </select>
                 <div id="date-time-container">
                     <div id="date-input">
                         <h5>Date</h5>
+                        {/* <input type="date" value={getTodaysDate()}/> */}
                         <select></select>
                     </div>
                     <div id="time-input">
