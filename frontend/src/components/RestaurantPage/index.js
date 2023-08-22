@@ -3,7 +3,7 @@ import restaurantImage from './assets/restaurant.jpeg';
 import './RestaurantPage.css';
 import './StarRating.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRestaurant, selectAllRestaurants, selectRestaurant } from '../../store/restaurants';
+import { fetchRestaurant, selectRestaurant } from '../../store/restaurants';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import FindTableTime from '../FindTableTimeForm';
 
