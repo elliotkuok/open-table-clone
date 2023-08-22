@@ -145,13 +145,18 @@ const FindTableTime = () => {
                     const selectedTime = document.querySelector("#time-input select").value;
                     setSuggestedTimes(getSuggestedTimes(selectedTime));
                 }}>Find a time</button>
-                {
-                    suggestedTimes.map((time, index) => (
-                        <button key={index} className="suggested-time-button">
-                            {time}
-                        </button>
-                    ))
-                }
+                <div className="times-container">
+                    {suggestedTimes.length > 0 && <h5>Select a time</h5>}
+                    <div>
+                        {
+                            suggestedTimes.map((time, index) => (
+                                <button key={index} className="suggested-time-bttn">
+                                    {time}
+                                </button>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </form>
     )

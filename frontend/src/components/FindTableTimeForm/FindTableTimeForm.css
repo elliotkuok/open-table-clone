@@ -4,6 +4,7 @@
     background-color: white;
     margin-bottom: 20px;
     padding: 16px;
+    max-width: 288px;
 }
 
 .table-time-container h4 {
@@ -15,8 +16,9 @@
 }
 
 .table-time-container h5 {
-    font-weight: 400;
+    font-weight: 500;
     margin: 0;
+    font-size: 14px;
 }
 
 .table-time-container select, .date-picker {
@@ -62,4 +64,30 @@ option {
     font-size: 16px;
     font-weight: 500;
     font-family: 'Cabin', sans-serif;
+}
+
+.suggested-time-bttn {
+    background: #da3743;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Cabin', sans-serif;
+    line-height: 32px;
+    margin-bottom: 4px;
+    border: none;
+    min-width: 5.125rem;
+    margin-right: 8px; 
+    margin-bottom: 24px;
+    margin-top: 8px;
+}
+
+.times-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.times-container h5 {
+    margin: 14px 0;
 }
