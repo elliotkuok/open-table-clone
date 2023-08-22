@@ -5,6 +5,7 @@ import RestaurantIndex from './components/RestaurantIndex';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchSplash from './components/SearchSplash';
 import RestaurantCarousel from './components/RestaurantCarousel';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Redirect to="/" />
           </Route>
         </Switch>
+        <Footer />
       </div>
   </Router>
   );
