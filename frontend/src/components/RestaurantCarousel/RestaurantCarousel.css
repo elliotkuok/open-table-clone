@@ -47,7 +47,6 @@
     border: 0.0625rem solid #d8d9db;
     box-shadow: 0 0.125rem 0.5rem #9996;
     cursor: pointer;
-    z-index: 1;
     border-radius: 50%;
 }
 
