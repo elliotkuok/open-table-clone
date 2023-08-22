@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
-import './FindTableTimeForm.css';
 import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
 import React, { useState, useEffect, useRef } from 'react';
 import datePicker from 'js-datepicker';
 import 'js-datepicker/dist/datepicker.min.css';
+import './TableCalendar.css';
+import './FindTableTimeForm.css';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -31,6 +32,8 @@ const FindTableTime = () => {
                 onSelect: (instance, date) => {
                     setSelectedDate(date);
                 },
+                showAllDates: true,
+                minDate: new Date()
             });
         }
     }, []);

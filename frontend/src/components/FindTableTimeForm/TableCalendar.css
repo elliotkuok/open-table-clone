@@ -1,0 +1,12 @@
+.qs-datepicker.qs-controls  {
+    background: white !important;
+}
+
+.qs-num {
+    border: 0.0625rem solid #d8d9db;
+    border-radius: none;
+}
+
+.qs-squares .qs-square {
+    border-radius: none;
+}
