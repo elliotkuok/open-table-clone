@@ -25,7 +25,16 @@ const FindTableTime = () => {
                     <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
                 ))}
             </select>
-            <h5>Date</h5>
+            <div id="date-time-container">
+                <div id="date-input">
+                    <h5>Date</h5>
+                    <select></select>
+                </div>
+                <div id="time-input">
+                    <h5>Time</h5>
+                    <select></select>
+                </div>
+            </div>    
         </div>
     )
 }

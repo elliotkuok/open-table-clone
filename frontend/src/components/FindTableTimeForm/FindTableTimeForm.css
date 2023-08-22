@@ -8,6 +8,7 @@
 
 .table-time-container h4 {
     margin-top: 4px;
+    margin-bottom: 16px;
     text-align: center;
     padding-bottom: 16px;
     border-bottom: 0.0625rem solid #d8d9db;
@@ -15,4 +16,37 @@
 
 .table-time-container h5 {
     font-weight: 400;
+    margin: 0;
+}
+
+.table-time-container select {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #d8d9db;
+    cursor: pointer;
+    height: 3rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+option {
+    color: #2d333f;
+}
+
+#date-time-container {
+    display: flex;
+    margin-top: 8px;
+}
+
+#date-time-container #time-input {
+    margin-left: 15px;
+    width: 50%;
+    border: none;
+}
+
+#date-time-container #date-input {
+    margin-right: 15px;
+    width: 50%;
+    border: none;
 }
