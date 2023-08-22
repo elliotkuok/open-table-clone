@@ -24,7 +24,7 @@
 .restaurant-container{
     width: 992px;
     display: flex;
-    margin: -50px auto;
+    margin: -50px auto 50px auto;
     justify-content: space-between;
 }
 
@@ -46,6 +46,7 @@
     color: #6f737b;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;
+    font-weight: 400;
     margin-right: 32px;
     border-bottom: 2px solid transparent;
     text-decoration: none;
@@ -66,12 +67,14 @@
     font-size: 3rem;
     padding-bottom: 32px;
     border-bottom: 1px solid lightgray;
+    margin-bottom: 16px;
 }
 
 .overview-info {
     font-family: 'Cabin', sans-serif;
     font-size: 14px;
     display: flex;
+    margin-bottom: 32px;
 }
 
 .overview-info svg {
@@ -103,7 +106,6 @@
 
 .map-container {
     width: 320px;
-    height: 260px;
     box-shadow: 0 2px 4px #2d333f33;
     border-radius: 4px;
     background-color: white;
@@ -123,6 +125,7 @@
 .address {
     margin-top: 5px;
     margin-left: 25px;
+    margin-bottom: 10px;
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -142,9 +145,8 @@
 }
 
 /* Additional information section */
-.additional-info-item {
-    display: flex;
-    margin: 12px 0;
+.additional-info {
+margin-top: 18px;
 }
 
 .additional-info h4 {
@@ -159,6 +161,11 @@
 .additional-info p {
     font-size: 14px;
     margin: 6px 0;
+}
+
+.additional-info-item {
+    display: flex;
+    margin: 12px 0;
 }
 
 .info-details {

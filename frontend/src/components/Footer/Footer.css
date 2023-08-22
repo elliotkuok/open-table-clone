@@ -1,0 +1,38 @@
+footer {
+    background-color: #2d333f;
+    border-top: 0.0625rem solid #0000001f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+}
+
+.footer-content {
+    color: white;
+    display: flex;
+    margin-top: 20px;
+}
+
+.footer-col {
+    margin: 0 35px;
+}
+
+footer h5 {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+footer p {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #d8d9db;
+}
+
+#copyright {
+    color: #d8d9db;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    margin: 50px 0 16px 0;
+}
