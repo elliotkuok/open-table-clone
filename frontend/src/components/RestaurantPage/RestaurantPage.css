@@ -93,6 +93,29 @@
     line-height: 24px;
 }
 
+#menu {
+    line-height: 24px;
+}
+
+#menu h2, #reviews h2 {
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    padding: 16px 0;
+}
+
+#website-menu {
+    display: flex;
+}
+
+#website-menu a {
+    margin: 0 4px 16px 0;
+    margin-left: 4px;
+    color: #da3743;
+    font-family: 'Cabin', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+}
+
 .map-container {
     width: 320px;
     box-shadow: 0 2px 4px #2d333f33;
