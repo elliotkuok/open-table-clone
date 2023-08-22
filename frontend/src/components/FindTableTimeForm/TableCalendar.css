@@ -1,12 +1,62 @@
-.qs-datepicker.qs-controls  {
-    background: white !important;
+.qs-datepicker-container{
+    width: 253px;
+    padding: 16px;
+    border: 0.0625rem solid #d8d9db;
+    box-shadow: 0 2px 4px #2d333f33;
+}
+
+.qs-controls {
+    background: white;
+}
+
+.qs-arrow {
+    border: 1px solid;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    border: 0.0625rem solid #d8d9db;
+}
+
+.qs-arrow:hover {
+    border: 2px solid #da3743;
+    background-color: white;
+}
+
+.qs-month-year {
+    font-family: 'Cabin', sans-serif;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: auto;
+}
+
+.qs-month-year:not(.qs-disabled-year-overlay):hover {
+    border-bottom: none;
+    cursor: auto;
 }
 
 .qs-num {
     border: 0.0625rem solid #d8d9db;
-    border-radius: none;
 }
 
-.qs-squares .qs-square {
-    border-radius: none;
+.qs-square {
+    padding: 18px 0;
+    border-radius: 0;
+}
+
+.qs-day {
+    font-weight: 300;
+    font-size: 14px;
+    color: #2d333f;
+}
+
+.qs-squares {
+    font-family: 'Cabin', sans-serif;
+    color: #2d333f;
+}
+
+.qs-current {
+    font-weight: 400;
+    text-decoration: none;
+    background-color: white;
+    box-shadow: inset 0 0 0 2px #da3743;
 }
