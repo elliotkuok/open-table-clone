@@ -6,12 +6,19 @@
     flex-direction: column;
     align-items: center;
     padding: 0 32px;
+    /* position: relative; */
 }
 .carousel-header {
     width: 100%;
     max-width: 1216px;
     margin-top: 50px;
     font-size: 1.5rem;
+}
+
+.restaurant-carousel-container { /* Container for carousel and buttons */
+    position: relative; /* Establishes a point of reference for absolutely positioned children */
+    width: 100%;
+    max-width: 1216px; /* or whatever width you want */
 }
 
 .restaurant-carousel {
@@ -23,6 +30,7 @@
     gap: 20px;
     padding: 20px 0;
     white-space: nowrap;
+    position: relative;
 }
   
 .carousel-item {
@@ -48,6 +56,8 @@
     box-shadow: 0 0.125rem 0.5rem #9996;
     cursor: pointer;
     border-radius: 50%;
+    top: 50%; /* Position in the middle vertically */
+    transform: translateY(-50%); /* Adjust for centering */
 }
 
 .carousel-button:hover {
@@ -55,9 +65,9 @@
 }
 
 .left-button {
-    left: 140px;
+    left: -20px;
 }
 
 .right-button {
-    right: 140px;
+    right: -20px;
 }

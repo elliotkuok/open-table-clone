@@ -38,16 +38,19 @@ const CuisineCarousel = ({ cuisine }) => {
             <div className="carousel-header">
                 <h3>{cuisine} Restaurants</h3>
             </div>
-            <div className="restaurant-carousel">
+            <div className="restaurant-carousel-container"> {/* Added this wrapper */}
+                <div className="restaurant-carousel">
+                    {cuisineRestaurants.map(restaurant => (
+                        <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id} className="carousel-item restaurant-index">
+                            <RestaurantTile restaurant={restaurant} />
+                        </Link>
+                    ))}
+                </div>
                 <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>
-                {cuisineRestaurants.map(restaurant => (
-                    <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id} className="carousel-item restaurant-index">
-                        <RestaurantTile restaurant={restaurant} />
-                    </Link>
-                ))}
                 <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button>
             </div>
         </div>
+
     );
 };
 
