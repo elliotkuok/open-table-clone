@@ -14,6 +14,7 @@ const FindTableTime = () => {
 
     const [openingTime, closingTime] = restaurant.hours.split(' - ');
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [suggestedTimes, setSuggestedTimes] = useState([]);
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
@@ -47,24 +48,25 @@ const FindTableTime = () => {
         partySizeOptions.push(i);
     }
 
-    // Generate time slots in 30-minute increments
-    const generateTimeSlots = () => {
-        const convertToMinutes = (time) => {
-            const [hoursMinutes, period] = time.split(' ');
-            let [hours, minutes] = hoursMinutes.split(':');
-            hours = parseInt(hours);
-            if (period === 'PM' && hours < 12) hours += 12;
-            if (period === 'AM' && hours === 12) hours = 0;
-            return hours * 60 + parseInt(minutes);
-        };
+    const convertToMinutes = (time) => {
+        const [hoursMinutes, period] = time.split(' ');
+        let [hours, minutes] = hoursMinutes.split(':');
+        hours = parseInt(hours);
+        if (period === 'PM' && hours < 12) hours += 12;
+        if (period === 'AM' && hours === 12) hours = 0;
+        return hours * 60 + parseInt(minutes);
+    };
 
-        const convertTo12HourFormat = (minutes) => {
-            const hours = Math.floor(minutes / 60) % 24;
-            const mins = minutes % 60;
-            const period = hours < 12 ? 'AM' : 'PM';
-            const displayHour = hours === 0 ? 12 : (hours > 12 ? hours - 12 : hours);
-            return `${displayHour}:${mins.toString().padStart(2, '0')} ${period}`;
-        };
+    const convertTo12HourFormat = (minutes) => {
+        const hours = Math.floor(minutes / 60) % 24;
+        const mins = minutes % 60;
+        const period = hours < 12 ? 'AM' : 'PM';
+        const displayHour = hours === 0 ? 12 : (hours > 12 ? hours - 12 : hours);
+        return `${displayHour}:${mins.toString().padStart(2, '0')} ${period}`;
+    };
+
+    // Generate time slots for time input drop down in 30-minute increments
+    const generateTimeSlots = () => {
 
         const lastResMinutes = convertToMinutes(closingTime) - 90;
         const lastResHour = lastResMinutes < 0 ? convertTo12HourFormat(lastResMinutes + 24 * 60) : convertTo12HourFormat(lastResMinutes);
@@ -93,6 +95,25 @@ const FindTableTime = () => {
     
     const timeSlots = generateTimeSlots();
 
+    const getSuggestedTimes = (selectedTime) => {
+        const times = [];
+    
+        const selectedMinutes = convertToMinutes(selectedTime);
+        const openingMinutes = convertToMinutes(openingTime);
+        const closingMinutes = convertToMinutes(closingTime) - 90;
+    
+        const intervals = [-30, -15, 0, 15, 30];
+    
+        intervals.forEach(interval => {
+            const newTime = selectedMinutes + interval;
+            if (newTime >= openingMinutes && newTime <= closingMinutes) {
+                times.push(convertTo12HourFormat(newTime));
+            }
+        });
+    
+        return times;
+    };    
+
     return (
         <form>
             <div className="table-time-container">
@@ -119,7 +140,18 @@ const FindTableTime = () => {
                         </select>
                     </div>
                 </div>
-                <button id="find-time-bttn">Find a time</button>
+                <button id="find-time-bttn" onClick={e => {
+                    e.preventDefault();
+                    const selectedTime = document.querySelector("#time-input select").value;
+                    setSuggestedTimes(getSuggestedTimes(selectedTime));
+                }}>Find a time</button>
+                {
+                    suggestedTimes.map((time, index) => (
+                        <button key={index} className="suggested-time-button">
+                            {time}
+                        </button>
+                    ))
+                }
             </div>
         </form>
     )
