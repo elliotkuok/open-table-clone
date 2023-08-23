@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf";
 import { receiveCreateUserErrors } from './errorsReducer';
+import { storeUser } from "./reservations";
 
 const SET_CURRENT_USER = 'session/SET_CURRENT_USER';
 const REMOVE_CURRENT_USER = 'session/REMOVE_CURRENT_USER';
@@ -58,6 +59,7 @@ export const login = ({email, password}) => async (dispatch) => {
     const data = await res.json();
     storeCurrentUser(data.user);
     dispatch(setCurrentUser(data.user));
+    dispatch(storeUser(data.user)); // Store user info in reservations slice
     return res;
 };
 
@@ -76,6 +78,7 @@ export const restoreSession = () => async dispatch => {
     const data = await res.json();
     storeCurrentUser(data.user);
     dispatch(setCurrentUser(data.user));
+    dispatch(storeUser(data.user)); // Store user info in reservations slice
     return res;
 };
 

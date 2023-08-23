@@ -3,15 +3,23 @@ import './ReservationPage.css';
 import { fetchReservation, selectReservation } from "../../store/reservations";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect } from "react";
+import { fetchUser } from "../../store/reservations";
 
 const ReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const reservation = useSelector(selectReservation(id));
+    const currentUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(fetchReservation(id));
       }, [dispatch, id]);
+
+    useEffect(() => {
+    if (reservation) {
+        dispatch(fetchUser(reservation.userId));
+    }
+    }, [dispatch, reservation]);
 
     if (!reservation) {
         return;
@@ -36,7 +44,7 @@ const ReservationPage = () => {
 
             </div>
             <div className="diner-details">
-                <h3>{reservation.userId}</h3>
+                <h3>{currentUser.firstName}</h3>
 
             </div>
             

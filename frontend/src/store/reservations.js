@@ -7,6 +7,7 @@ export const REMOVE_RESERVATION = "REMOVE_RESERVATION";
 export const CREATE_RESERVATION = "CREATE_RESERVATION";
 export const UPDATE_RESERVATION = "UPDATE_RESERVATION";
 export const DELETE_RESERVATION = "DELETE_RESERVATION";
+export const STORE_USER = "STORE_USER";
 
 
 // ACTION CREATORS
@@ -33,6 +34,11 @@ export const updateReservation = reservation => ({
 export const deleteReservation = id => ({
     type: DELETE_RESERVATION,
     payload: id
+});
+
+export const storeUser = user => ({
+    type: STORE_USER,
+    payload: user
 });
 
 
@@ -90,6 +96,14 @@ export const destroyReservation = id => async dispatch => {
 }
 
 
+export const fetchUser = userId => async dispatch => {
+    const res = await csrfFetch(`/api/users/${userId}`); // Adjust the API route
+    if (res.ok) {
+      const user = await res.json();
+      dispatch(storeUser(user));
+    }
+};
+
 // SELECTORS
 export const selectAllReservations = state => state.reservations
 
@@ -105,6 +119,9 @@ const reservationsReducer = (state = {}, action) => {
     const nextState = {...state};
 
     switch (action.type) {
+        case STORE_USER:
+            nextState[action.payload.id] = action.payload;
+            return nextState;
         case RECEIVE_RESERVATION:
             nextState[action.payload.reservation.id] = action.payload.reservation;
             return nextState;
