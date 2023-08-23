@@ -8,6 +8,7 @@ export const CREATE_RESERVATION = "CREATE_RESERVATION";
 export const UPDATE_RESERVATION = "UPDATE_RESERVATION";
 export const DELETE_RESERVATION = "DELETE_RESERVATION";
 export const STORE_USER = "STORE_USER";
+export const SET_SELECTED_TIME = 'SET_SELECTED_TIME';
 
 
 // ACTION CREATORS
@@ -40,6 +41,13 @@ export const storeUser = user => ({
     type: STORE_USER,
     payload: user
 });
+
+export const setSelectedTime = (time) => {
+    return {
+        type: SET_SELECTED_TIME,
+        payload: time,
+    };
+};
 
 
 // THUNK ACTION CREATORS
@@ -95,7 +103,6 @@ export const destroyReservation = id => async dispatch => {
     }
 }
 
-
 export const fetchUser = userId => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`); // Adjust the API route
     if (res.ok) {
@@ -115,10 +122,20 @@ export const selectReservation = function(id) {
 
 
 // REDUCER
-const reservationsReducer = (state = {}, action) => {
+const initialState = {
+    // ... other properties
+    selectedTime: null, // or an initial value
+};
+
+const reservationsReducer = (state = initialState, action) => {
     const nextState = {...state};
 
     switch (action.type) {
+        case SET_SELECTED_TIME:
+            return {
+                ...state,
+                selectedTime: action.payload, // Update selected time in state
+            };
         case STORE_USER:
             nextState[action.payload.id] = action.payload;
             return nextState;

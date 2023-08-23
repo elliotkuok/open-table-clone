@@ -6,6 +6,7 @@ import datePicker from 'js-datepicker';
 import 'js-datepicker/dist/datepicker.min.css';
 import './TableCalendar.css';
 import './FindTableTimeForm.css';
+import { setSelectedTime } from '../../store/reservations';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -118,10 +119,12 @@ const FindTableTime = () => {
     
     const handleTimeSelect = (time) => {
         console.log("button clicked");
-        history.push({
-            pathname: '/reservation-form',
-            state: { selectedTime: time, restaurant: restaurant }
-        });
+        const selectedTime = document.querySelector("#time-input select").value;
+        setSuggestedTimes(getSuggestedTimes(selectedTime));
+        const dynamicURL = `/restaurants/${restaurant.id}/create`;
+        history.push(dynamicURL);
+        dispatch(setSelectedTime(time));
+        console.log(setSelectedTime(time))
     }
 
     return (

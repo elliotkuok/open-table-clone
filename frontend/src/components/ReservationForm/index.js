@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReservation, selectReservation } from '../../store/reservations';
@@ -6,6 +6,8 @@ import { fetchReservation, selectReservation } from '../../store/reservations';
 import './ReservationForm.css';
 
 const ReservationForm = () => {
+    const selectedTime = useSelector(state => state.reservations.selectedTime);
+    console.log("selected time:", selectedTime)
 
     return (
         <div className='reservation-page-container'>
@@ -46,7 +48,7 @@ const ReservationForm = () => {
                                     <path d="M13,11 L14.5,11 C14.7761424,11 15,11.2238576 15,11.5 L15,12.5 C15,12.7761424 14.7761424,13 14.5,13 L12.5,13 L11.5,13 C11.2238576,13 11,12.7761424 11,12.5 L11,7.5 C11,7.22385763 11.2238576,7 11.5,7 L12.5,7 C12.7761424,7 13,7.22385763 13,7.5 L13,11 Z M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z M12,19 C15.8659932,19 19,15.8659932 19,12 C19,8.13400675 15.8659932,5 12,5 C8.13400675,5 5,8.13400675 5,12 C5,15.8659932 8.13400675,19 12,19 Z" fill="#2D333F"></path>
                                     </svg>
                                 </div>
-                                <p>Time</p>
+                                <p>{selectedTime}</p>
                             </div>
                             <div id='res-size'>
                                 <div>
