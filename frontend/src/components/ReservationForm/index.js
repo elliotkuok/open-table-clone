@@ -5,7 +5,7 @@ import { fetchReservation, selectReservation } from '../../store/reservations';
 
 import './ReservationForm.css';
 
-const ReservationPage = () => {
+const ReservationForm = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const reservation = useSelector(selectReservation(id));
@@ -119,4 +119,4 @@ const ReservationPage = () => {
     )
 }
 
-export default ReservationPage;
+export default ReservationForm;

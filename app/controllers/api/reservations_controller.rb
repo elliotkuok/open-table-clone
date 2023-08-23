@@ -41,6 +41,15 @@ class Api::ReservationsController < ApplicationController
     render :index
   end
 
+  def create_form
+    @reservation = Reservation.new(reservation_params)
+    if @reservation.save
+      render :show
+    else
+      render json: { errors: @reservation.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
   def reservation_params
     params.require(:reservation).permit(:restaurant_id, :user_id, :review_id, :date, :time, :party_size, :occasion, :special_request)
