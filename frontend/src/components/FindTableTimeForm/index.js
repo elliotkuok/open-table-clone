@@ -118,13 +118,12 @@ const FindTableTime = () => {
     };
     
     const handleTimeSelect = (time) => {
-        console.log("button clicked");
         const selectedTime = document.querySelector("#time-input select").value;
-        setSuggestedTimes(getSuggestedTimes(selectedTime));
+        const newSuggestedTimes = getSuggestedTimes(selectedTime);
+        setSuggestedTimes(newSuggestedTimes);
+        dispatch(setSelectedTime(time));
         const dynamicURL = `/restaurants/${restaurant.id}/create`;
         history.push(dynamicURL);
-        dispatch(setSelectedTime(time));
-        console.log(setSelectedTime(time))
     }
 
     return (
@@ -157,6 +156,7 @@ const FindTableTime = () => {
                     e.preventDefault();
                     const selectedTime = document.querySelector("#time-input select").value;
                     setSuggestedTimes(getSuggestedTimes(selectedTime));
+                    console.log("find time clicked")
                 }}>Find a time</button>
                 <div className="times-container">
                     {suggestedTimes.length > 0 && <h5>Select a time</h5>}
