@@ -15,11 +15,11 @@ function App() {
       <div id='page-container'>
         <Navigation />
         <Switch>
+          <Route path="/restaurants/:id/create">
+            <ReservationForm />
+          </Route>
           <Route path="/restaurants/:id">
             <RestaurantPage />
-          </Route>
-          <Route path="/reservations/create">
-            <ReservationForm />
           </Route>
           <Route path="/reservations/:id">
             <ReservationPage />

@@ -4,6 +4,7 @@ import csrfFetch from "./csrf";
 export const RECEIVE_RESTAURANT = "RECEIVE_RESTAURANT";
 export const RECEIVE_RESTAURANTS = "RECEIVE_RESTAURANTS";
 
+
 // ACTION CREATORS
 export const receiveRestaurant = restaurant => ({
     type: RECEIVE_RESTAURANT,
@@ -14,6 +15,7 @@ export const receiveRestaurant = restaurant => ({
     type: RECEIVE_RESTAURANTS,
     payload: restaurants
 })
+
 
 // THUNK ACTION CREATORS
 export const fetchRestaurants = () => async (dispatch) => {
@@ -32,6 +34,7 @@ export const fetchRestaurant = id => async (dispatch) => {
     }
 }
 
+
 // SELECTORS
 export const selectAllRestaurants = state => state.restaurants
 
@@ -39,7 +42,7 @@ export const selectRestaurant = function(id) {
     return function(state) {
       return Object.values(state.restaurants).find(r => r.id.toString() === id)
     }
-  }
+}
 
 
 // REDUCER
