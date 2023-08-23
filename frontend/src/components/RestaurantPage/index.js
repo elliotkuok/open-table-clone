@@ -19,6 +19,7 @@ const RestaurantPage = () => {
     if (!restaurant) {
         return;
     }
+    
     return (
         <div className="page-container">
             <div className="content">

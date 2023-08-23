@@ -26,4 +26,4 @@ const RestaurantIndex = () => {
     )
 }
 
-export default RestaurantIndex
+export default RestaurantIndex;
