@@ -9,7 +9,7 @@ export const UPDATE_RESERVATION = "UPDATE_RESERVATION";
 export const DELETE_RESERVATION = "DELETE_RESERVATION";
 export const STORE_USER = "STORE_USER";
 export const SET_SELECTED_TIME = 'SET_SELECTED_TIME';
-
+export const SET_SELECTED_DATE = 'reservations/SET_SELECTED_DATE';
 
 // ACTION CREATORS
 export const receiveReservations = reservations => ({
@@ -48,6 +48,11 @@ export const setSelectedTime = (time) => {
         payload: time,
     };
 };
+
+export const setSelectedDate = (date) => ({
+    type: SET_SELECTED_DATE,
+    payload: date,
+});
 
 
 // THUNK ACTION CREATORS
@@ -123,8 +128,8 @@ export const selectReservation = function(id) {
 
 // REDUCER
 const initialState = {
-    // ... other properties
     selectedTime: null, // or an initial value
+    selectedDate: null, 
 };
 
 const reservationsReducer = (state = initialState, action) => {
@@ -135,6 +140,11 @@ const reservationsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedTime: action.payload, // Update selected time in state
+            };
+        case SET_SELECTED_DATE:
+            return {
+                ...state,
+                selectedDate: action.payload,
             };
         case STORE_USER:
             nextState[action.payload.id] = action.payload;

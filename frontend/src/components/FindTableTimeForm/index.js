@@ -6,7 +6,7 @@ import datePicker from 'js-datepicker';
 import 'js-datepicker/dist/datepicker.min.css';
 import './TableCalendar.css';
 import './FindTableTimeForm.css';
-import { setSelectedTime } from '../../store/reservations';
+import { setSelectedTime, setSelectedDate } from '../../store/reservations';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -14,7 +14,7 @@ const FindTableTime = () => {
     const restaurant = useSelector(selectRestaurant(id));
 
     const [openingTime, closingTime] = restaurant.hours.split(' - ');
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
     let history = useHistory();
@@ -34,7 +34,7 @@ const FindTableTime = () => {
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
-                    setSelectedDate(date);
+                    setChosenDate(date);
                 },
                 showAllDates: true,
                 minDate: new Date()
@@ -122,8 +122,13 @@ const FindTableTime = () => {
         const newSuggestedTimes = getSuggestedTimes(selectedTime);
         setSuggestedTimes(newSuggestedTimes);
         dispatch(setSelectedTime(time));
-        const dynamicURL = `/restaurants/${restaurant.id}/create`;
-        history.push(dynamicURL);
+        const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
+        console.log(formattedDate)
+        console.log(formattedDate)
+        setTimeout(() => {
+            dispatch(setSelectedDate(formattedDate));
+        }, 5000);
+        history.push(`/restaurants/${restaurant.id}/create`);
     }
 
     return (
