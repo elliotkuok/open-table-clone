@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import RestaurantPage from './components/RestaurantPage';
+import ReservationPage from './components/ReservationPage';
 import RestaurantIndex from './components/RestaurantIndex';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchSplash from './components/SearchSplash';
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/restaurants/:id">
             <RestaurantPage />
+          </Route>
+          <Route path="/reservations/:id">
+            <ReservationPage />
           </Route>
           <Route path="*">
             <Redirect to="/" />
