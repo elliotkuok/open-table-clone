@@ -6,17 +6,6 @@ import { fetchReservation, selectReservation } from '../../store/reservations';
 import './ReservationForm.css';
 
 const ReservationForm = () => {
-    const {id} = useParams();
-    const dispatch = useDispatch();
-    const reservation = useSelector(selectReservation(id));
-
-    useEffect(() => {
-        dispatch(fetchReservation(id));
-      }, [dispatch, id]);
-
-    if (!reservation) {
-        return;
-    }
 
     return (
         <div className='reservation-page-container'>
@@ -24,7 +13,7 @@ const ReservationForm = () => {
                 <h4>Your're almost done!</h4>
                 <div className='res-details-container'>
                     <div className='res-img-container'>
-                    <img
+                        <img
                         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
                         alt="Placeholder"
                         style={{ width: '4rem', height: '4rem', borderRadius: '4px' }}

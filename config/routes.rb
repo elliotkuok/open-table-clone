@@ -19,11 +19,6 @@ Rails.application.routes.draw do
 
     resources :restaurants, only:[:show, :index]
     resources :reservations, only:[:create, :show, :update, :destroy, :index]
-    resources :reservations, only: [:create, :show, :update, :destroy, :index] do
-      collection do
-        post 'create_for_form', to: 'reservations#create_for_form'
-      end
-    end
   end
 
   get '*path', to: "static_pages#frontend_index"
