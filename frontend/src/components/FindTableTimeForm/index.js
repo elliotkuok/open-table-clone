@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
 import React, { useState, useEffect, useRef } from 'react';
 import datePicker from 'js-datepicker';
@@ -15,6 +15,8 @@ const FindTableTime = () => {
     const [openingTime, closingTime] = restaurant.hours.split(' - ');
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
+
+    let history = useHistory();
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
@@ -112,7 +114,15 @@ const FindTableTime = () => {
         });
     
         return times;
-    };    
+    };
+    
+    const handleTimeSelect = (time) => {
+        console.log("button clicked");
+        history.push({
+            pathname: '/reservation-form',
+            state: { selectedTime: time, restaurant: restaurant }
+        });
+    }
 
     return (
         <form>
@@ -150,7 +160,7 @@ const FindTableTime = () => {
                     <div>
                         {
                             suggestedTimes.map((time, index) => (
-                                <button key={index} className="suggested-time-bttn">
+                                <button key={index} className="suggested-time-bttn" onClick={() => handleTimeSelect(time)}>
                                     {time}
                                 </button>
                             ))
