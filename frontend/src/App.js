@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import RestaurantPage from './components/RestaurantPage';
-import ReservationPage from './components/ReservationPage';
+import ReservationPage from './components/ReservationForm';
 import RestaurantIndex from './components/RestaurantIndex';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchSplash from './components/SearchSplash';

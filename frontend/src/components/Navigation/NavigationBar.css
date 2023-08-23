@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 10px 20px;
     background-color: white;
+    border-bottom: .0625rem solid #f1f2f4;
 }
 
 #nav-logo {
