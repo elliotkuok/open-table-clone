@@ -1,4 +1,5 @@
 class Api::ReservationsController < ApplicationController
+  before_action :current_user, only: [:create, :update, :destroy, :index]
   def create
     @reservation = Reservation.new(reservation_params)
     if @reservation.save

@@ -27,6 +27,7 @@ ApplicationRecord.transaction do
         phone_number: '5103626446'
     )
 
+    puts "Creating restaurants..."
     # Create restaurants
     1000.times do 
         Restaurant.create!({
@@ -58,6 +59,16 @@ ApplicationRecord.transaction do
         website: Faker::Internet.url
         }) 
     end
+
+    puts "Creating reservations..."
+    # Create a demo user
+    Reservation.create!(
+        restaurant_id: 1, 
+        user_id: 1,
+        date: 'Aug 22, 2024',
+        time: '8:00 PM',
+        party_size: 2
+    )
 
     puts "Done!"
 end

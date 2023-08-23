@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy]
 
     resources :restaurants, only:[:show, :index]
+    resources :reservations, only:[:create, :show, :update, :destroy, :index]
   end
 
   get '*path', to: "static_pages#frontend_index"
