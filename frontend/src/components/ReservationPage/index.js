@@ -2,24 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import './ReservationPage.css';
 import { fetchReservation, selectReservation } from "../../store/reservations";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
-import { useEffect } from "react";
-import { fetchUser } from "../../store/reservations";
+import { useEffect, useState } from "react";
 
 const ReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
-    const reservation = useSelector(selectReservation(id));
     const currentUser = useSelector(state => state.session.user);
+    const reservation = useSelector(state => state.reservations.reservations[id]);
+
 
     useEffect(() => {
-        dispatch(fetchReservation(id));
-      }, [dispatch, id]);
-
-    useEffect(() => {
-    if (reservation) {
-        dispatch(fetchUser(reservation.userId));
-    }
-    }, [dispatch, reservation]);
+        if (!reservation) {
+            dispatch(fetchReservation(id));
+        }
+    }, [id, dispatch, reservation]);
 
     if (!reservation) {
         return;
@@ -37,7 +33,10 @@ const ReservationPage = () => {
                         />
                     </div>
                     <div>
-                        <h1>Reservation Page</h1>
+                        <h1>Reservation Details</h1>
+                        <p>Date: {reservation.date}</p>
+                        <p>Time: {reservation.time}</p>
+                        <p>Party Size: {reservation.partySize}</p>
                     </div>
 
                 </div>

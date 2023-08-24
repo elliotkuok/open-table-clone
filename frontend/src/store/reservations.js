@@ -115,8 +115,8 @@ export const destroyReservation = id => async dispatch => {
     }
 }
 
-export const fetchUser = userId => async dispatch => {
-    const res = await csrfFetch(`/api/users/${userId}`); // Adjust the API route
+export const fetchUser = id => async dispatch => {
+    const res = await csrfFetch(`/api/users/${id}`);
     if (res.ok) {
       const user = await res.json();
       dispatch(storeUser(user));

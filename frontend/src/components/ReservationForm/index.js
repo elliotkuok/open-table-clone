@@ -1,14 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchReservation, selectReservation } from '../../store/reservations';
-
 import './ReservationForm.css';
 
 const ReservationForm = () => {
     const selectedTime = useSelector(state => state.reservations.selectedTime);
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
+    const history = useHistory();
+
+    const completeReservation = async () => {
+        const date = selectedDate;
+        const time = selectedTime;
+        const partySize = document.querySelector("#party-size").value;
+
+        const reservationData = {
+            date,
+            time,
+            partySize,
+            
+        };
+
+        const response = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationData)
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        history.push(`/reservations/${data.id}`);
+    } else {
+        console.error("Error creating reservation:", data);
+    }
+}
 
     return (
         <div className='reservation-page-container'>
@@ -85,7 +113,7 @@ const ReservationForm = () => {
                             <textarea placeholder={"occasion"}></textarea>
                             <textarea placeholder={"request"}></textarea>
                         </div>
-                        <button id='make-res-bttn'>Complete reservation</button>
+                        <button id='make-res-bttn' onClick={completeReservation}>Complete reservation</button>
                     </form>
                     <div id='terms'>
                         <p>
