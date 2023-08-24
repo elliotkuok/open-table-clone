@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import './ModifyReservationPage.css';
+import "../SearchSplash/SearchSplash.css";
 import { fetchReservation, selectReservation } from "../../store/reservations";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { selectRestaurant } from "../../store/restaurants";
+import FindTableTime from "../FindTableTimeForm";
 
 
 const ModifyReservationPage = () => {
@@ -74,6 +76,17 @@ const ModifyReservationPage = () => {
                     </div>
 
                 </div>
+                <h4>Modify your reservation</h4>
+                <div className="search-inputs">
+                    <div className="search-dropdowns">
+                        <input id="date-input" placeholder="date"></input>
+                        <input id="time-input" placeholder="time"></input>
+                        <input id="size-input" placeholder="size"></input>
+                    </div>
+                    <input id="keyword-search" placeholder="search"></input>
+                    <button>Find a new table</button>
+                </div>
+                {/* <FindTableTime /> */}
             </div>
         </div>
     )

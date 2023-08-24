@@ -1,3 +1,7 @@
 .reservation-list-container {
     display: flex;
 }
+
+.reservation-page-container .search-inputs {
+    border: 1px solid black;
+}
