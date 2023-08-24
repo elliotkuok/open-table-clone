@@ -6,7 +6,7 @@ import datePicker from 'js-datepicker';
 import 'js-datepicker/dist/datepicker.min.css';
 import './TableCalendar.css';
 import './FindTableTimeForm.css';
-import { setSelectedTime, setSelectedDate } from '../../store/reservations';
+import { setSelectedTime, setSelectedDate, setSelectedSize } from '../../store/reservations';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -119,15 +119,13 @@ const FindTableTime = () => {
     
     const handleTimeSelect = (time) => {
         const selectedTime = document.querySelector("#time-input select").value;
+        const selectedSize = document.querySelector("#party-size").value;
         const newSuggestedTimes = getSuggestedTimes(selectedTime);
         setSuggestedTimes(newSuggestedTimes);
         dispatch(setSelectedTime(time));
         const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
-        console.log(formattedDate)
-        console.log(formattedDate)
-        setTimeout(() => {
-            dispatch(setSelectedDate(formattedDate));
-        }, 5000);
+        dispatch(setSelectedDate(formattedDate));
+        dispatch(setSelectedSize(selectedSize));
         history.push(`/restaurants/${restaurant.id}/create`);
     }
 
@@ -136,7 +134,7 @@ const FindTableTime = () => {
             <div className="table-time-container">
                 <h4>Make a reservation</h4>
                 <h5>Party Size</h5>
-                <select defaultValue={2}>
+                <select defaultValue={2} id="party-size">
                     {partySizeOptions.map(option => (
                         <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
                     ))}
@@ -161,7 +159,6 @@ const FindTableTime = () => {
                     e.preventDefault();
                     const selectedTime = document.querySelector("#time-input select").value;
                     setSuggestedTimes(getSuggestedTimes(selectedTime));
-                    console.log("find time clicked")
                 }}>Find a time</button>
                 <div className="times-container">
                     {suggestedTimes.length > 0 && <h5>Select a time</h5>}

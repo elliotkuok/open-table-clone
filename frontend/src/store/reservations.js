@@ -10,6 +10,7 @@ export const DELETE_RESERVATION = "DELETE_RESERVATION";
 export const STORE_USER = "STORE_USER";
 export const SET_SELECTED_TIME = 'SET_SELECTED_TIME';
 export const SET_SELECTED_DATE = 'reservations/SET_SELECTED_DATE';
+export const SET_SELECTED_SIZE = 'reservations/SET_SELECTED_SIZE';
 
 // ACTION CREATORS
 export const receiveReservations = reservations => ({
@@ -53,6 +54,12 @@ export const setSelectedDate = (date) => ({
     type: SET_SELECTED_DATE,
     payload: date,
 });
+
+export const setSelectedSize = (size) => ({
+    type: SET_SELECTED_SIZE,
+    payload: size,
+});
+
 
 
 // THUNK ACTION CREATORS
@@ -130,12 +137,18 @@ export const selectReservation = function(id) {
 const initialState = {
     selectedTime: null, // or an initial value
     selectedDate: null, 
+    selectedSize: null, 
 };
 
 const reservationsReducer = (state = initialState, action) => {
     const nextState = {...state};
 
     switch (action.type) {
+        case SET_SELECTED_SIZE:
+            return {
+                ...state,
+                selectedSize: action.payload, // Update selected time in state
+            };
         case SET_SELECTED_TIME:
             return {
                 ...state,
