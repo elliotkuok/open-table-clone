@@ -10,6 +10,7 @@ const ReservationForm = () => {
     const history = useHistory();
     const { id } = useParams(); 
     const restaurant = useSelector(state => state.restaurants[id]);
+    const user = useSelector(state => state.session.user);
 
     const completeReservation = async () => {
         const date = selectedDate;
@@ -105,7 +106,7 @@ const ReservationForm = () => {
                     <div className='diner-name'>
                         <h4>Diner details</h4>
                     </div>
-                    <h4>User Fullname (<span id='highlight'>Not User?</span>)</h4>
+                    <h4>{user.firstName} {user.lastName} (<span id='highlight'>Not {user.firstName}?</span>)</h4>
                     <form>
                         <div className='input-row'>
                             <input placeholder={"number"}></input>
