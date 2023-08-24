@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import './ReservationPage.css';
 import { fetchReservation, selectReservation } from "../../store/reservations";
-import { useParams } from 'react-router-dom/cjs/react-router-dom';
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect, useState } from "react";
 
 const ReservationPage = () => {
@@ -29,14 +29,21 @@ const ReservationPage = () => {
                         <img
                         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
                         alt="Placeholder"
-                        style={{ width: '4rem', height: '4rem', borderRadius: '4px' }}
+                        style={{ width: '4rem', margin: '12px', height: '4rem', borderRadius: '4px'}}
                         />
                     </div>
-                    <div>
-                        <h1>Reservation Details</h1>
-                        <p>Date: {reservation.date}</p>
-                        <p>Time: {reservation.time}</p>
-                        <p>Party Size: {reservation.partySize}</p>
+                    <div className='res-request-info'>
+                        <h1>Restaurant name</h1>
+                        <div className='table-details'>
+                            <p>Date: {reservation.date}</p>
+                            <p>Time: {reservation.time}</p>
+                            <p>Party Size: {reservation.partySize}</p>
+                        </div>
+                        <div className="change-res-links">
+                            <Link>Modify</Link>
+                            <Link>Cancel</Link>
+                            <Link>Add to calendar</Link>
+                        </div>
                     </div>
 
                 </div>
