@@ -80,15 +80,23 @@ export const fetchReservation = id => async (dispatch) => {
 }
 
 export const postReservation = reservation => async dispatch => {
-    const res = await csrfFetch(`/api/reservations`, {
+    try {
+        const res = await csrfFetch(`/api/reservations`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(reservation)
     });
 
-    if (res.ok) {
-        const newReservation = await res.json();
-        dispatch(createReservation(newReservation));
+    if (!res.ok) {
+        throw new Error('Failed to create reservation');
+    }
+    const newReservation = await res.json();
+    dispatch(createReservation(newReservation));
+    return newReservation;
+
+    } catch (error) {
+        console.error('Error in postReservation:', error);
+        throw error;
     }
 }
 

@@ -36,12 +36,12 @@ const ReservationForm = () => {
             time,
             party_size,
         };
-
+        console.log("reservation data:", reservationData)
         const newReservation = await dispatch(postReservation(reservationData));
+        console.log("new reservation:", newReservation)
 
-
-        if (newReservation && newReservation.id) {
-            history.push(`/reservations/${newReservation.id}`);
+        if (newReservation && newReservation.reservation && newReservation.reservation.id) {
+            history.push(`/reservations/${newReservation.reservation.id}`);
         } else {
             console.error("Error creating reservation.");
         }
