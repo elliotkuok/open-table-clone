@@ -32,15 +32,16 @@ const ModifyReservationForm = () => {
         const restaurant_id = parseInt(id, 10)
 
         const reservationData = {
+            id,
             restaurant_id,
             user_id,
             date,
             time,
             party_size,
         };
-        console.log("reservation data:", reservationData)
+
         const newReservation = await dispatch(patchReservation(reservationData));
-        console.log("new reservation:", newReservation)
+        console.log("newReservation:", newReservation)
 
         if (newReservation && newReservation.reservation && newReservation.reservation.id) {
             history.push(`/reservations/${newReservation.reservation.id}`);

@@ -132,7 +132,7 @@ const ModifyReservationPage = () => {
         const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
         dispatch(setSelectedDate(formattedDate));
         dispatch(setSelectedSize(selectedSize));
-        history.push(`/restaurants/${restaurant.id}/create`);
+        history.push(`/reservations/${id}/modify-form`);
     }
     
     return (

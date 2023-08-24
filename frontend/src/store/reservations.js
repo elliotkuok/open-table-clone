@@ -102,6 +102,7 @@ export const postReservation = reservation => async dispatch => {
 }
 
 export const patchReservation = reservation => async dispatch => {
+    console.log("patch value:", reservation)
     const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
