@@ -77,16 +77,7 @@ const ModifyReservationPage = () => {
 
                 </div>
                 <h4>Modify your reservation</h4>
-                <div className="search-inputs">
-                    <div className="search-dropdowns">
-                        <input id="date-input" placeholder="date"></input>
-                        <input id="time-input" placeholder="time"></input>
-                        <input id="size-input" placeholder="size"></input>
-                    </div>
-                    <input id="keyword-search" placeholder="search"></input>
-                    <button>Find a new table</button>
-                </div>
-                {/* <FindTableTime /> */}
+                <FindTableTime />
             </div>
         </div>
     )

@@ -3,13 +3,15 @@ import './ReservationPage.css';
 import { fetchReservation, selectReservation } from "../../store/reservations";
 import { Link, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect, useState } from "react";
+import { Modal } from '../../context/Modal';
+import CancelForm from "../CancelFormModal";
 
 const ReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations.reservations[id]);
-
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (!reservation) {
@@ -41,8 +43,13 @@ const ReservationPage = () => {
                         </div>
                         <div className="change-res-links">
                             <Link to={`/reservations/${id}/modify`}>Modify</Link>
-                            <Link>Cancel</Link>
-                            <Link>Add to calendar</Link>
+                            <a onClick={() => setShowModal(true)}>Cancel</a>
+                            {showModal && (
+                                <Modal onClose={() => setShowModal(false)}>
+                                    <CancelForm onClose={() => setShowModal(false)} />
+                                </Modal>
+                            )}
+                            <a>Add to calendar</a>
                         </div>
                     </div>
 

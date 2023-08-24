@@ -13,7 +13,10 @@ const FindTableTime = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
 
-    const [openingTime, closingTime] = restaurant.hours.split(' - ');
+    let openingTime, closingTime;
+if (restaurant && restaurant.hours) {
+  [openingTime, closingTime] = restaurant.hours.split(' - ');
+}
     const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
