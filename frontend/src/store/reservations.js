@@ -138,7 +138,6 @@ const initialState = {
     selectedTime: null,
     selectedDate: null,
     selectedSize: null,
-    reservations: {},
 };
 
 const reservationsReducer = (state = initialState, action) => {

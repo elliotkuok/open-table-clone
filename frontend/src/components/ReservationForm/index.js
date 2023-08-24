@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ReservationForm.css';
+import { postReservation } from '../../store/reservations';
 
 const ReservationForm = () => {
+    const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams(); 
     const restaurant = useSelector(state => state.restaurants[id]);
@@ -18,34 +20,32 @@ const ReservationForm = () => {
         setPhoneNumber(event.target.value);
     };    
 
-    const completeReservation = async () => {
+    const completeReservation = async (e) => {
+        e.preventDefault();
+
         const date = selectedDate;
         const time = selectedTime;
-        const partySize = document.querySelector("#party-size").value;
+        const party_size = parseInt(selectedSize, 10);
+        const user_id = user.id
+        const restaurant_id = parseInt(id, 10)
 
         const reservationData = {
+            restaurant_id,
+            user_id,
             date,
             time,
-            partySize,
-            
+            party_size,
         };
 
-        const response = await fetch('/api/reservations', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(reservationData)
-    });
+        const newReservation = await dispatch(postReservation(reservationData));
 
-    const data = await response.json();
 
-    if (response.ok) {
-        history.push(`/reservations/${data.id}`);
-    } else {
-        console.error("Error creating reservation:", data);
+        if (newReservation && newReservation.id) {
+            history.push(`/reservations/${newReservation.id}`);
+        } else {
+            console.error("Error creating reservation.");
+        }
     }
-}
 
     return (
         <div className='reservation-page-container'>
