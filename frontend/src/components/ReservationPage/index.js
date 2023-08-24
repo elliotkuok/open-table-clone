@@ -40,7 +40,7 @@ const ReservationPage = () => {
                             <p>Party Size: {reservation.partySize}</p>
                         </div>
                         <div className="change-res-links">
-                            <Link>Modify</Link>
+                            <Link to={`/reservations/${id}/modify`}>Modify</Link>
                             <Link>Cancel</Link>
                             <Link>Add to calendar</Link>
                         </div>

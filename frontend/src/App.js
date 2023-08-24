@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import SearchSplash from './components/SearchSplash';
 import RestaurantCarousel from './components/RestaurantCarousel';
 import Footer from './components/Footer';
+import ModifyReservationPage from './components/ModifyReservationPage';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/restaurants/:id">
             <RestaurantPage />
+          </Route>
+          <Route path="/reservations/:id/modify">
+            <ModifyReservationPage />
           </Route>
           <Route path="/reservations/:id">
             <ReservationPage />
