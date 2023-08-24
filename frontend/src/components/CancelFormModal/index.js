@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './CancelForm.css';
 import { useDispatch } from 'react-redux';
 import { destroyReservation } from '../../store/reservations';
+import { useHistory } from 'react-router-dom';
 
 function CancelForm(reservationId) {
 
@@ -10,9 +11,12 @@ function CancelForm(reservationId) {
 
     const resId = parseInt(reservationId.reservationId);
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    const handleCancelButton = () => {
-        dispatch(destroyReservation(resId))
+    const handleCancelButton = async () => {
+        await dispatch(destroyReservation(resId));
+
+        history.push('/');
     }
 
     return (
