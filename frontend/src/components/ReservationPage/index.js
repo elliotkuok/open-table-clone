@@ -46,7 +46,7 @@ const ReservationPage = () => {
                             <a onClick={() => setShowModal(true)}>Cancel</a>
                             {showModal && (
                                 <Modal onClose={() => setShowModal(false)}>
-                                    <CancelForm onClose={() => setShowModal(false)} />
+                                    <CancelForm reservationId={id} onClose={() => setShowModal(false)} />
                                 </Modal>
                             )}
                             <a>Add to calendar</a>

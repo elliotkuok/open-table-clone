@@ -1,0 +1,7 @@
+.cancel-form-container{
+    padding: 16px;
+}
+
+.cancel-form-container button{
+    cursor: pointer;
+}
