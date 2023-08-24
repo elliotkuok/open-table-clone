@@ -38,7 +38,7 @@ const ReservationForm = () => {
         };
         console.log("reservation data:", reservationData)
         const newReservation = await dispatch(postReservation(reservationData));
-        console.log("new reservation:", newReservation)
+        console.log("new reservation runs:", newReservation)
 
         if (newReservation && newReservation.reservation && newReservation.reservation.id) {
             history.push(`/reservations/${newReservation.reservation.id}`);

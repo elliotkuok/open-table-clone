@@ -7,17 +7,19 @@ import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
 
 const ReservationPage = () => {
+    console.log("Rerservation page starts")
     const {id} = useParams();
+    console.log("ID:", id)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
-    const reservation = useSelector(state => state.reservations.reservations[id]);
+    const reservation = useSelector(state => state.reservations[id]);
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (!reservation) {
             dispatch(fetchReservation(id));
         }
-    }, [id, dispatch, reservation]);
+    }, [id, dispatch]);
 
     if (!reservation) {
         return <div>Loading...</div>;

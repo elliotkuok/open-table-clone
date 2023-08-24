@@ -111,7 +111,7 @@ export const patchReservation = reservation => async dispatch => {
 
     if (res.ok) {
         const updatedReservation = await res.json();
-        dispatch(updateReservation(updatedReservation));
+        return dispatch(updateReservation(updatedReservation));
     }
 }
 
@@ -121,7 +121,7 @@ export const destroyReservation = id => async dispatch => {
     });
 
     if (res.ok) {
-        dispatch(deleteReservation(id));
+        dispatch(deleteReservation(id)); //check return
     }
 }
 
@@ -138,14 +138,13 @@ export const selectAllReservations = state => state.reservations
 
 export const selectReservation = function(id) {
     return function(state) {
-      return Object.values(state.reservations.reservations).find(r => r.id.toString() === id)
+      return state.reservations[id]
     }
 }
 
 
 // REDUCER
 const initialState = {
-    reservations: {},
     selectedTime: null,
     selectedDate: null,
     selectedSize: null,
@@ -174,7 +173,7 @@ const reservationsReducer = (state = initialState, action) => {
             nextState[action.payload.id] = action.payload;
             return nextState;
         case RECEIVE_RESERVATION:
-            nextState.reservations[action.payload.reservation.id] = action.payload.reservation;
+            nextState[action.payload.reservation.id] = action.payload.reservation;
             return nextState;
         case RECEIVE_RESERVATIONS:
             return Object.assign(nextState, action.payload);

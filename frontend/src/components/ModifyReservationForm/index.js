@@ -43,8 +43,8 @@ const ModifyReservationForm = () => {
         const newReservation = await dispatch(patchReservation(reservationData));
         console.log("newReservation:", newReservation)
 
-        if (newReservation && newReservation.reservation && newReservation.reservation.id) {
-            history.push(`/reservations/${newReservation.reservation.id}`);
+        if (newReservation && newReservation.payload.reservation.id) {
+            history.push(`/reservations/${newReservation.payload.reservation.id}`);
         } else {
             console.error("Error creating reservation.");
         }
