@@ -10,6 +10,7 @@ import RestaurantCarousel from './components/RestaurantCarousel';
 import Footer from './components/Footer';
 import ModifyReservationPage from './components/ModifyReservationPage';
 import ModifyReservationForm from './components/ModifyReservationForm';
+import UserPage from './components/UserPage';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/reservations/:id">
             <ReservationPage />
+          </Route>
+          <Route path="/user/:id">
+            <UserPage />
           </Route>
           <Route path="/">
             <SearchSplash />
