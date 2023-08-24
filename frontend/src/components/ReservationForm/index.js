@@ -4,13 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import './ReservationForm.css';
 
 const ReservationForm = () => {
-    const selectedTime = useSelector(state => state.reservations.selectedTime);
-    const selectedDate = useSelector(state => state.reservations.selectedDate);
-    const selectedSize = useSelector(state => state.reservations.selectedSize);
     const history = useHistory();
     const { id } = useParams(); 
     const restaurant = useSelector(state => state.restaurants[id]);
     const user = useSelector(state => state.session.user);
+    const selectedTime = useSelector(state => state.reservations.selectedTime);
+    const selectedDate = useSelector(state => state.reservations.selectedDate);
+    const selectedSize = useSelector(state => state.reservations.selectedSize);
+
+    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+    };    
 
     const completeReservation = async () => {
         const date = selectedDate;
@@ -109,8 +115,8 @@ const ReservationForm = () => {
                     <h4>{user.firstName} {user.lastName} (<span id='highlight'>Not {user.firstName}?</span>)</h4>
                     <form>
                         <div className='input-row'>
-                            <input placeholder={"number"}></input>
-                            <input placeholder={"email"}></input>
+                            <input value={phoneNumber} onChange={handlePhoneNumberChange}></input>
+                            <input value={user.email} readOnly />
                         </div>
                         <div className='input-row'>
                             <textarea placeholder={"occasion"}></textarea>
