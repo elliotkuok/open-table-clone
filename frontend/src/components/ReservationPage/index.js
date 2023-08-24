@@ -18,7 +18,7 @@ const ReservationPage = () => {
     }, [id, dispatch, reservation]);
 
     if (!reservation) {
-        return;
+        return <div>Loading...</div>;
     }
     
     return (

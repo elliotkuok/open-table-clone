@@ -143,6 +143,7 @@ export const selectReservation = function(id) {
 
 // REDUCER
 const initialState = {
+    reservations: {},
     selectedTime: null,
     selectedDate: null,
     selectedSize: null,
