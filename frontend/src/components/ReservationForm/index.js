@@ -8,6 +8,8 @@ const ReservationForm = () => {
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
     const history = useHistory();
+    const { id } = useParams(); 
+    const restaurant = useSelector(state => state.restaurants[id]);
 
     const completeReservation = async () => {
         const date = selectedDate;
@@ -51,7 +53,7 @@ const ReservationForm = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                        <h1>Restaurant Name</h1>
+                    <h1>{restaurant ? restaurant.name : 'Loading...'}</h1>
                         <div className='table-details'>
                             <div id='res-date'>
                                 <div>
