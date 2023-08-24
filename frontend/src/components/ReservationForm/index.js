@@ -79,12 +79,12 @@ const ReservationForm = () => {
                     <h4>User Fullname (<span id='highlight'>Not User?</span>)</h4>
                     <form>
                         <div className='input-row'>
-                            <input></input>
-                            <input></input>
+                            <input placeholder={"number"}></input>
+                            <input placeholder={"email"}></input>
                         </div>
                         <div className='input-row'>
-                            <textarea></textarea>
-                            <textarea></textarea>
+                            <textarea placeholder={"occasion"}></textarea>
+                            <textarea placeholder={"request"}></textarea>
                         </div>
                         <button id='make-res-bttn'>Complete reservation</button>
                     </form>
