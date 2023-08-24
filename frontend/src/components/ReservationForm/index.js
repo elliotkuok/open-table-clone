@@ -9,7 +9,6 @@ const ReservationForm = () => {
     const selectedTime = useSelector(state => state.reservations.selectedTime);
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
-    console.log("selected time:", selectedTime)
 
     return (
         <div className='reservation-page-container'>

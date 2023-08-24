@@ -128,16 +128,17 @@ export const selectAllReservations = state => state.reservations
 
 export const selectReservation = function(id) {
     return function(state) {
-      return Object.values(state.reservations).find(r => r.id.toString() === id)
+      return Object.values(state.reservations.reservations).find(r => r.id.toString() === id)
     }
 }
 
 
 // REDUCER
 const initialState = {
-    selectedTime: null, // or an initial value
-    selectedDate: null, 
-    selectedSize: null, 
+    selectedTime: null,
+    selectedDate: null,
+    selectedSize: null,
+    reservations: {},
 };
 
 const reservationsReducer = (state = initialState, action) => {
@@ -163,7 +164,7 @@ const reservationsReducer = (state = initialState, action) => {
             nextState[action.payload.id] = action.payload;
             return nextState;
         case RECEIVE_RESERVATION:
-            nextState[action.payload.reservation.id] = action.payload.reservation;
+            nextState.reservations[action.payload.reservation.id] = action.payload.reservation;
             return nextState;
         case RECEIVE_RESERVATIONS:
             return Object.assign(nextState, action.payload);
