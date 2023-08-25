@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import './CancelForm.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { destroyReservation } from '../../store/reservations';
 import { useHistory } from 'react-router-dom';
 
 function CancelForm(reservationId) {
 
-    // const currentUser = useSelector(state => state.session.user);
-    // const reservation = useSelector(state => state.reservations.reservations[id]);
+    const currentUser = useSelector(state => state.session.user);
 
     const resId = parseInt(reservationId.reservationId);
     const dispatch = useDispatch();
@@ -16,7 +15,7 @@ function CancelForm(reservationId) {
     const handleCancelButton = async () => {
         await dispatch(destroyReservation(resId));
 
-        history.push('/');
+        history.push(`/user/${currentUser.id}`);
     }
 
     return (
