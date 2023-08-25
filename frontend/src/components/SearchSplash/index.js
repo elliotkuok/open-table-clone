@@ -30,20 +30,22 @@ const SearchSplash = () => {
     return (
         <div className="search-banner-container">
             <h1>Find your table for any occasion</h1>
-            <div className="search-inputs">
-                <div className="search-dropdowns">
-                    <input id="date-input"></input>
-                    <input id="time-input"></input>
-                    <input id="size-input"></input>
+            <form on onSubmit={handleSubmit}>
+                <div className="search-inputs">
+                    <div className="search-dropdowns">
+                        <input id="date-input"></input>
+                        <input id="time-input"></input>
+                        <input id="size-input"></input>
+                    </div>
+                    <input
+                        id="keyword-search"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        placeholder={`Location, Restaurant, or Cuisine`}
+                    />
+                    <button type="submit">Let's go</button>
                 </div>
-                <input
-                    id="keyword-search"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    placeholder={`Location, Restaurant, or Cuisine`}
-                />
-                <button onClick={handleSubmit}>Let's go</button>
-            </div>
+            </form>    
         </div>
     )
 }
