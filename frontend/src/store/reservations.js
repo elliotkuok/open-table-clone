@@ -168,8 +168,10 @@ const reservationsReducer = (state = initialState, action) => {
                 selectedDate: action.payload,
             };
         case STORE_USER:
-            nextState[action.payload.id] = action.payload;
-            return nextState;
+            if (action.payload) {
+                nextState[action.payload.id] = action.payload;
+            }
+                return nextState;
         case RECEIVE_RESERVATION:
             nextState[action.payload.reservation.id] = action.payload.reservation;
             return nextState;

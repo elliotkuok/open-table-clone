@@ -30,7 +30,7 @@ const SearchSplash = () => {
     return (
         <div className="search-banner-container">
             <h1>Find your table for any occasion</h1>
-            <form on onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="search-inputs">
                     <div className="search-dropdowns">
                         <input id="date-input"></input>
