@@ -9,6 +9,7 @@
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
+    Reservation.destroy_all
     Restaurant.destroy_all
     User.destroy_all
 
@@ -16,6 +17,8 @@ ApplicationRecord.transaction do
     # For easy testing, so that after seeding, the first `User` has `id` of 1
     ApplicationRecord.connection.reset_pk_sequence!('users')
     ApplicationRecord.connection.reset_pk_sequence!('restaurants')
+    ApplicationRecord.connection.reset_pk_sequence!('reservations')
+
 
     puts "Creating users..."
     # Create a demo user
