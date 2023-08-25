@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import ModifyReservationPage from './components/ModifyReservationPage';
 import ModifyReservationForm from './components/ModifyReservationForm';
 import UserPage from './components/UserPage';
+import SearchResults from './components/SearchResults';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/user/:id">
             <UserPage />
           </Route>
+          <Route path="/search" component={SearchResults} />
           <Route path="/">
             <SearchSplash />
             <RestaurantCarousel />

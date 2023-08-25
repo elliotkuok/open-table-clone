@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-
-  #adding a new route specifically for email validation
   namespace :api do
     resources :users, only: [] do
       collection do
@@ -17,7 +11,12 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show]
     resource :session, only: [:show, :create, :destroy]
 
-    resources :restaurants, only:[:show, :index]
+    resources :restaurants, only:[:show, :index] do
+      collection do
+        get 'search'
+      end
+    end
+
     resources :reservations, only:[:create, :show, :update, :destroy, :index]
   end
 

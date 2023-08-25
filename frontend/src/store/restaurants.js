@@ -34,6 +34,16 @@ export const fetchRestaurant = id => async (dispatch) => {
     }
 }
 
+export const searchRestaurants = async (keyword) => {
+    try {
+      const res = await csrfFetch(`/api/restaurants/search?q=${keyword}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("Error searching for restaurants:", error);
+      return [];
+    }
+  }  
 
 // SELECTORS
 export const selectAllRestaurants = state => state.restaurants

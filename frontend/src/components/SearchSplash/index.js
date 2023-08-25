@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import './SearchSplash.css';
-import { fetchRestaurants, selectAllRestaurants } from "../../store/restaurants";
-import { useEffect } from "react";
+import { searchRestaurants } from "../../store/restaurants";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 const SearchSplash = () => {
     // const restaurants = useSelector(selectAllRestaurants)
@@ -10,6 +11,21 @@ const SearchSplash = () => {
     // useEffect(() => {
     //   dispatch(fetchRestaurants())
     // },[dispatch])
+    const [keyword, setKeyword] = useState('');
+    const [results, setResults] = useState([]);
+    const history = useHistory();
+
+    useEffect(() => {
+        if (keyword) {
+        searchRestaurants(keyword).then(data => setResults(data));
+        } else {
+        setResults([]);
+        }
+    }, [keyword]);
+
+    const handleSubmit = () => {
+        history.push(`/search?q=${keyword}`);
+    };
     
     return (
         <div className="search-banner-container">
@@ -20,8 +36,13 @@ const SearchSplash = () => {
                     <input id="time-input"></input>
                     <input id="size-input"></input>
                 </div>
-                <input id="keyword-search"></input>
-                <button>Let's go</button>
+                <input
+                    id="keyword-search"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder={`Location, Restaurant, or Cuisine`}
+                />
+                <button onClick={handleSubmit}>Let's go</button>
             </div>
         </div>
     )
