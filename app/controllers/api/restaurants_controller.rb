@@ -15,7 +15,14 @@ class Api::RestaurantsController < ApplicationController
 
   def search
     keyword = params[:q]
-    @restaurants = Restaurant.where("name LIKE ? OR address LIKE ? OR description LIKE ? OR cuisine LIKE ? OR neighborhood LIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    @restaurants = Restaurant.where(
+      "name ILIKE ? OR address ILIKE ? OR description ILIKE ? OR cuisine ILIKE ? OR neighborhood ILIKE ?", 
+      "%#{keyword}%", 
+      "%#{keyword}%", 
+      "%#{keyword}%", 
+      "%#{keyword}%", 
+      "%#{keyword}%"
+    )
     render json: @restaurants
   end
 
