@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchRestaurant} from '../../store/restaurants'
 import { useState } from 'react'
-import { selectRestaurant } from '../../store/restaurants'
-import restaurantImage from '../RestaurantPage/assets/restaurant.jpeg';
+import { restaurantImages } from '../../context/restaurantImages';
 
 const RestaurantTile = ({restaurant}) => {
-    const dispatch = useDispatch();
+    const [restaurantImage] = useState(restaurantImages[Math.floor(Math.random() * restaurantImages.length)]);
 
     const getPriceSymbol = (price) => {
         if (price === '$30 and under') {
