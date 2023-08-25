@@ -18,13 +18,13 @@
 .restaurant-carousel-container { /* Container for carousel and buttons */
     position: relative; /* Establishes a point of reference for absolutely positioned children */
     width: 100%;
-    max-width: 1216px; /* or whatever width you want */
+    max-width: 1150px; /* or whatever width you want */
 }
 
 .restaurant-carousel {
     display: flex;
     overflow-x: scroll;
-    scroll-snap-type: x mandatory;
+    /* scroll-snap-type: x mandatory; */
     width: 100%;
     max-width: 1216px;
     gap: 20px;
@@ -40,6 +40,7 @@
     color: black;
     background: white;
     transition: all 0.3s ease; 
+    width: 220px;
 }
 
 .carousel-item:hover {

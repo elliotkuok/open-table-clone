@@ -43,3 +43,37 @@
     height: 130px;
     overflow: hidden;
 }
+
+.book-count {
+    display: flex;
+    margin: 6px 0;
+}
+
+.book-count p {
+    margin-top: 5px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.tile-info button {
+    background: #da3743;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 2rem;
+    justify-content: center;
+    line-height: 32px;
+    margin-bottom: 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    margin-right: 8px;
+    font-family: 'Cabin', sans-serif;
+    padding: 0 8px;
+}
