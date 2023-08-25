@@ -32,6 +32,7 @@ function SearchResults() {
         <SearchBar />
         <div className='search-results-container'>
             <h2>You searched for "{query.get('q')}" in San Francisco Bay Area</h2>
+            <p>{results.length} restaurants match "{query.get('q')}"</p>
             {console.log("results JSX:", results)}
             {results.map(restaurant => (
                 <div key={restaurant.id} className='result-container' onClick={() => handleTileClick(restaurant)}>
@@ -39,7 +40,7 @@ function SearchResults() {
                         <img
                         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
                         alt="Placeholder"
-                        style={{ width: '4rem', height: '4rem', borderRadius: '4px' }}
+                        style={{ width: '205px', height: '205px', borderRadius: '4px' }}
                         />
                     </div>
                     <div className='restaurant-info'>
