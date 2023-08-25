@@ -22,45 +22,45 @@ const UserPage = () => {
     }
 
     return (
-        <div className="background">
-            <div className="reservation-list-container">
-                <h3>Upcoming reservations</h3>
-                <ul className="reservation-list">
-                    {reservations.map(reservation => (
-                        <li key={reservation?.id} className="reservation-index">
-                            <ReservationTile reservation={reservation}/>
-                        </li>
+    <div className="background">
+        <div className="reservation-list-container">
+            <h3>Upcoming reservations</h3>
+            <ul className="reservation-list">
+                {reservations.map(reservation => (
+                    <li key={reservation?.id} className="reservation-index">
+                        <ReservationTile reservation={reservation}/>
+                    </li>
                         
-                    ))}
-                </ul>
-            </div>
-            <div className="reservation-list-container">
-                <h3>Past reservations</h3>
-                <ul className="reservation-list">             
+                ))}
+            </ul>
+        </div>
+        <div className="reservation-list-container">
+            <h3>Past reservations</h3>
+            <ul className="reservation-list">             
                 <div className="reservation-tile-container">
-                <div className='res-img-container'>
-                    <img
-                    src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                    alt="Placeholder"
-                    style={{ width: '4rem', margin: '12px', height: '4rem', borderRadius: '4px'}}
-                    />
-                </div>
-                <div>
-                    {/* <h1>{restaurant.name}</h1> */}
-                    <div className='res-confirmed'>
-                        <div id='confirmation-icon'>
-                            <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            >
-                            <path d="M11.0355339,12.863961 L9.62132034,11.4497475 C9.23079605,11.0592232 8.59763107,11.0592232 8.20710678,11.4497475 C7.81658249,11.8402718 7.81658249,12.4734367 8.20710678,12.863961 L10.3284271,14.9852814 C10.5236893,15.1805435 10.7796116,15.2781746 11.0355339,15.2781746 C11.2914562,15.2781746 11.5473785,15.1805435 11.7426407,14.9852814 L15.9852814,10.7426407 C16.3758057,10.3521164 16.3758057,9.71895142 15.9852814,9.32842712 C15.5947571,8.93790283 14.9615921,8.93790283 14.5710678,9.32842712 L11.0355339,12.863961 Z M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z" fill="#39a25e"></path>
-                            </svg>
-                        </div>
-                        <p>Reservation confirmed</p>
+                    <div className='res-img-container'>
+                        <img
+                        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                        alt="Placeholder"
+                        style={{ width: '4rem', margin: '12px', height: '4rem', borderRadius: '4px'}}
+                        />
                     </div>
-                    <div className='res-detail'>
+                    <div>
+                        {/* <h1>{restaurant.name}</h1> */}
+                        <div className='res-confirmed'>
+                            <div id='confirmation-icon'>
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                >
+                                <path d="M11.0355339,12.863961 L9.62132034,11.4497475 C9.23079605,11.0592232 8.59763107,11.0592232 8.20710678,11.4497475 C7.81658249,11.8402718 7.81658249,12.4734367 8.20710678,12.863961 L10.3284271,14.9852814 C10.5236893,15.1805435 10.7796116,15.2781746 11.0355339,15.2781746 C11.2914562,15.2781746 11.5473785,15.1805435 11.7426407,14.9852814 L15.9852814,10.7426407 C16.3758057,10.3521164 16.3758057,9.71895142 15.9852814,9.32842712 C15.5947571,8.93790283 14.9615921,8.93790283 14.5710678,9.32842712 L11.0355339,12.863961 Z M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z" fill="#39a25e"></path>
+                                </svg>
+                            </div>
+                            <p>Reservation confirmed</p>
+                        </div>
+                        <div className='res-detail'>
                             <div id='res-date'>
                                 <div>
                                     <svg
@@ -87,11 +87,9 @@ const UserPage = () => {
                                 </div>
                                 <p>reservation.date at reservation.time</p>
                             </div>
+                        </div>
                     </div>
-                
-        
                 </div>
-            </div>
             </ul>
         </div>
     </div>
