@@ -12,7 +12,8 @@ const ReservationForm = () => {
     const params = new URLSearchParams(search)
     const partySize = params.get('partySize')
     const time = params.get('time')
-    const date = params.get('date')
+    const unformattedDate = params.get('date')
+    const date = formatDate(unformattedDate)
     const restaurant = useSelector(state => state.restaurants[id]);
     const user = useSelector(state => state.session.user);
 
