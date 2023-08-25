@@ -1,6 +1,12 @@
+.reservation-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .reservation-tile-container {
     border: 1px solid black;
     display: flex;
+    cursor: pointer;
 }
 
 .res-detail, .res-confirmed{
