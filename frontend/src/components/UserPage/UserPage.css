@@ -1,0 +1,10 @@
+.reservation-tile-container {
+    border: 1px solid black;
+    display: flex;
+}
+
+.res-detail, .res-confirmed{
+    display: flex;
+}
+
+.res-date{display: flex;}
