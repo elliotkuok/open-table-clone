@@ -1,0 +1,57 @@
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 48px;
+    padding: 16px 0;
+    background-image: url(//cdn.otstatic.com/cfe/14/images/dtp-desktop-6b28de.png);
+}
+
+.search-bar-container h1 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+.search-inputs {
+    display: flex;
+    border-radius: 4px;
+}
+
+.search-inputs input {
+    height: 48px;
+    border: none;
+}
+#date-input {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+#time-input {
+    border-left: 0.0625rem solid #00000014;
+    border-right: 0.0625rem solid #00000014;
+}
+
+#size-input {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#keyword-search {
+    margin: 0 16px;
+    border-radius: 4px;
+    width: 290px;
+}
+
+.search-bar-container button {
+    background-color: #da3743;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Cabin', sans-serif;
+    outline: none;
+    transition: all .3s ease-out;
+    border-radius: 4px;
+    width: 132px;
+}
