@@ -8,9 +8,7 @@ const ModifyReservationForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams(); 
-    console.log("Id:", id)
     const restaurant = useSelector(state => state.restaurants[id.restaurantId]);
-    console.log("restaurant", restaurant)
     const user = useSelector(state => state.session.user);
     const selectedTime = useSelector(state => state.reservations.selectedTime);
     const selectedDate = useSelector(state => state.reservations.selectedDate);
@@ -41,7 +39,6 @@ const ModifyReservationForm = () => {
         };
 
         const newReservation = await dispatch(patchReservation(reservationData));
-        console.log("newReservation:", newReservation)
 
         if (newReservation && newReservation.payload.reservation.id) {
             history.push(`/reservations/${newReservation.payload.reservation.id}`);

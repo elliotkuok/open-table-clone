@@ -73,7 +73,6 @@ export const fetchReservations = () => async (dispatch) => {
 
 export const fetchReservation = id => async (dispatch) => {
     const res = await csrfFetch(`/api/reservations/${id}`);
-    console.log("fetchReservation:", id)
     if (res.ok) {
         const reservation = await res.json();
         dispatch(receiveReservation(reservation));
@@ -102,7 +101,6 @@ export const postReservation = reservation => async dispatch => {
 }
 
 export const patchReservation = reservation => async dispatch => {
-    console.log("patch value:", reservation)
     const res = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},

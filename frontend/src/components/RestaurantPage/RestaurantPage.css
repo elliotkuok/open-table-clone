@@ -1,17 +1,6 @@
-/* .restaurant-banner {
-    position: relative;
-    max-height: 460px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-.banner-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center bottom;
-} */
-
+.page-container {
+    background: white;
+}
 /* Restaurant Banner */
 .restaurant-banner {
     width: 100%;

@@ -1,5 +1,6 @@
 .carousels-container{
-    margin-bottom: 32px;
+    background: white;
+    padding-bottom: 64px;
 }
 .carousel-container {
     display: flex;

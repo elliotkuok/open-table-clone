@@ -7,9 +7,7 @@ import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
 
 const ReservationPage = () => {
-    console.log("Rerservation page starts")
     const {id} = useParams();
-    console.log("ID:", id)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);

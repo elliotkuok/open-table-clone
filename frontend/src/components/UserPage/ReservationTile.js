@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 
 
 const ReservationTile = ({reservation}) => {
-    console.log("reservation:", reservation);
     const restaurant = useSelector(selectRestaurant(reservation.restaurantId));
     
     const history = useHistory();

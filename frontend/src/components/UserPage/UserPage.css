@@ -1,25 +1,29 @@
-.page-container{
+.background{
     background: #f7f7f7;
+    height: 100%;
 }
 .reservation-list-container {
     display: flex;
     flex-direction: column;
     width: 824px;
-    border: 1px solid blue;
     background: white;
-    margin: auto;
-}
-
-.reservation-list{
-    border: 1px solid red;
-    width: 100%;
+    margin: 56px auto;
+    border-radius: 4px;
+    padding: 32px;
+    border-bottom: 0.0625rem solid #d8d9db;
 }
 
 .reservation-tile-container {
-    border: 1px solid black;
+    border: 0.0625rem solid #d8d9db;
     display: flex;
     cursor: pointer;
-    width: 776px;
+    margin-top: 16px;
+    border-radius: 4px;
+}
+
+.reservation-tile-container:hover {
+    box-shadow: 0 2px 4px #2d333f33;
+    /* transform: translateY(-6px);  */
 }
 
 .res-detail, .res-confirmed{
