@@ -5,13 +5,14 @@ import { useEffect } from "react";
 import ReservationTile from "./ReservationTile"
 
 const UserPage = () => {
-    const reservations = useSelector(selectAllReservations)
+    const reservationsObj = useSelector(selectAllReservations)
+    const reservations = Object.values(reservationsObj).filter(Boolean)
+    {console.log("res value", reservations)}
     const dispatch = useDispatch()
-    console.log("reservations", reservations)
+
     useEffect(() => {
       dispatch(fetchReservations())
     },[dispatch])
-    console.log("after useEffect", reservations)
 
     if (!reservations) {
         return <div>Loading...</div>;
@@ -21,13 +22,13 @@ const UserPage = () => {
         <div className="reservation-list-container">
             <h3>Upcoming Reservations</h3>
             <ul className="reservation-list">
-                {Object.values(reservations).map(reservation => (
+                {reservations.map(reservation => (
                     <li key={reservation?.id} className="reservation-index">
-                        <ReservationTile reservationId={reservation?.id}/>
+                        <ReservationTile reservation={reservation}/>
                     </li>
+                    
                 ))}
             </ul>
-            {console.log("jsx:", reservations)}
         </div>
     )
 }
