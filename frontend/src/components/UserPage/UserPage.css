@@ -1,12 +1,25 @@
+.page-container{
+    background: #f7f7f7;
+}
 .reservation-list-container {
     display: flex;
     flex-direction: column;
+    width: 824px;
+    border: 1px solid blue;
+    background: white;
+    margin: auto;
+}
+
+.reservation-list{
+    border: 1px solid red;
+    width: 100%;
 }
 
 .reservation-tile-container {
     border: 1px solid black;
     display: flex;
     cursor: pointer;
+    width: 776px;
 }
 
 .res-detail, .res-confirmed{
@@ -14,3 +27,4 @@
 }
 
 .res-date{display: flex;}
+

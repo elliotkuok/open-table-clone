@@ -38,6 +38,13 @@
     scroll-snap-align: start;
     text-decoration: none;
     color: black;
+    background: white;
+    transition: all 0.3s ease; 
+}
+
+.carousel-item:hover {
+    box-shadow: 0 2px 4px #2d333f33;
+    transform: translateY(-6px); 
 }
 
 /* Carousel navigation */

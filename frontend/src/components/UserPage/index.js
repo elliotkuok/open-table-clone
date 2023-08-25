@@ -19,6 +19,7 @@ const UserPage = () => {
     }
 
     return (
+    <div className="page-container">
         <div className="reservation-list-container">
             <h3>Upcoming Reservations</h3>
             <ul className="reservation-list">
@@ -30,6 +31,8 @@ const UserPage = () => {
                 ))}
             </ul>
         </div>
+    </div>
+
     )
 }
 
