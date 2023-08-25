@@ -1,0 +1,19 @@
+.search-results-container {
+    /* border: 1px solid black; */
+    width: 800px;
+    margin: 0 auto;
+    background: white;
+}
+
+.search-results-container h2 {
+    margin: 20px 0;
+    font-weight: 400;
+}
+
+.result-container {
+    /* border: 1px solid black; */
+    display: flex;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 0.0625rem solid #d8d9db;
+}
