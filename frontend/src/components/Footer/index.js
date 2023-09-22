@@ -10,6 +10,7 @@ const Footer = () => {
             <a href="https://www.npmjs.com/package/js-datepicker">Datepicker.js</a>
             <a href="https://codepen.io/4m6/pen/wvqEzEr">Star Ratings</a>
             <a href="https://github.com/jackocnr/intl-tel-input">Telephone Input</a>
+            <a href="https://date-fns.org/">Date-fns</a>
             <p>Restaurants Near Me</p>
             <p>Delivery Near Me</p>
             <p>Restaurants Open Now</p>

@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { format, closestTo } from 'date-fns';
 
 //CONSTANTS
 export const RECEIVE_RESERVATIONS = "RECEIVE_RESERVATIONS";
@@ -140,12 +141,24 @@ export const selectReservation = function(id) {
     }
 }
 
+const roundToNearestQuarterHour = (date) => {
+    const quarters = [0, 15, 30, 45].map((minutes) => 
+      new Date(new Date(date).setMinutes(minutes, 0, 0))
+    );
+    return closestTo(date, quarters);
+}
+
+const currentDate = new Date();
+const roundedTime = roundToNearestQuarterHour(currentDate);
+const selectedTime = format(roundedTime, 'h:mm a');
+const selectedDate = new Date();
+const selectedSize = 2;
 
 // REDUCER
 const initialState = {
-    selectedTime: null,
-    selectedDate: null,
-    selectedSize: null,
+    selectedTime: selectedTime,
+    selectedDate: selectedDate,
+    selectedSize: selectedSize,
 };
 
 const reservationsReducer = (state = initialState, action) => {
