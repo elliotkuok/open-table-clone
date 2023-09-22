@@ -27,12 +27,13 @@ const FindTableTime = () => {
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
-      }, [dispatch, id]);
+    }, [dispatch, id]);
 
-      const datePickerRef = useRef(null);
+    const datePickerRef = useRef(null);
 
-      useEffect(() => {
+    useEffect(() => {
         if (!datePickerRef.current) {
+            console.log("selectedDate", selectedDate)
             datePickerRef.current = datePicker('.date-picker', {
                 dateSelected: selectedDate,
                 formatter: (input, date, instance) => {
@@ -40,6 +41,7 @@ const FindTableTime = () => {
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
+                    console.log("setSelectedDate", setSelectedDate(date));
                     setSelectedDate(date);
                 },
                 showAllDates: true,
@@ -124,11 +126,12 @@ const FindTableTime = () => {
     };
     
     const handleTimeSelect = (time) => {
+        console.log("time", time)
         dispatch(setSelectedTime(time));
-        const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
-        dispatch(setSelectedDate(formattedDate));
+        console.log("setSelectedTime:", selectedTime)
+        dispatch(setSelectedDate(selectedDate));
         dispatch(setSelectedSize(selectedSize));
-        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${selectedTime}&date=${selectedDate}`);
+        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${time}&date=${selectedDate}`);
     }
 
     return (
