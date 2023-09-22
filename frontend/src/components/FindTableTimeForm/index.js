@@ -12,11 +12,15 @@ const FindTableTime = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
+    const selectedTime = useSelector((state) => state.reservations.selectedTime);
+    const partySize = useSelector((state) => state.reservations.partySize);
 
     let openingTime, closingTime;
-if (restaurant && restaurant.hours) {
-  [openingTime, closingTime] = restaurant.hours.split(' - ');
-}
+    if (restaurant && restaurant.hours) {
+        [openingTime, closingTime] = restaurant.hours.split(' - ');
+    }
+
+    console.log("hours:", restaurant.hours)
     const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
@@ -24,11 +28,11 @@ if (restaurant && restaurant.hours) {
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
-      }, [dispatch, id]);
+    }, [dispatch, id]);
 
-      const datePickerRef = useRef(null);
+    const datePickerRef = useRef(null);
 
-      useEffect(() => {
+    useEffect(() => {
         if (!datePickerRef.current) {
             datePickerRef.current = datePicker('.date-picker', {
                 dateSelected: selectedDate,
@@ -44,7 +48,7 @@ if (restaurant && restaurant.hours) {
             });
         }
     }, []);
-    
+
     if (!restaurant) {
         return;
     }
@@ -119,17 +123,23 @@ if (restaurant && restaurant.hours) {
     
         return times;
     };
-    
+
+    const handlePartySizeChange = (e) => {
+        dispatch(setSelectedSize(e.target.value));
+    }
+
+    const handleTimeChange = (e) => {
+        dispatch(setSelectedTime(e.target.value));
+    }
+
     const handleTimeSelect = (time) => {
-        const selectedTime = document.querySelector("#time-input select").value;
-        const selectedSize = document.querySelector("#party-size").value;
         const newSuggestedTimes = getSuggestedTimes(selectedTime);
         setSuggestedTimes(newSuggestedTimes);
         dispatch(setSelectedTime(time));
         const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
         dispatch(setSelectedDate(formattedDate));
-        dispatch(setSelectedSize(selectedSize));
-        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${selectedTime}&date=${selectedDate}`);
+        dispatch(setSelectedSize(partySize));
+        history.push(`/restaurants/${restaurant.id}/create?partySize=${partySize}&time=${selectedTime}&date=${selectedDate}`);
     }
 
     return (
@@ -137,7 +147,7 @@ if (restaurant && restaurant.hours) {
             <div className="table-time-container">
                 <h4>Make a reservation</h4>
                 <h5>Party Size</h5>
-                <select defaultValue={2} id="party-size">
+                <select defaultValue={2} onChange={handlePartySizeChange} value={partySize}>
                     {partySizeOptions.map(option => (
                         <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
                     ))}
@@ -149,7 +159,7 @@ if (restaurant && restaurant.hours) {
                     </div>
                     <div id="time-input">
                         <h5>Time</h5>
-                        <select>
+                        <select value={selectedTime} onChange={handleTimeChange}>
                             {timeSlots.map((timeSlot, index) => (
                                 <option key={index} value={timeSlot}>
                                     {timeSlot}
@@ -160,7 +170,6 @@ if (restaurant && restaurant.hours) {
                 </div>
                 <button id="find-time-bttn" onClick={e => {
                     e.preventDefault();
-                    const selectedTime = document.querySelector("#time-input select").value;
                     setSuggestedTimes(getSuggestedTimes(selectedTime));
                 }}>Find a time</button>
                 <div className="times-container">

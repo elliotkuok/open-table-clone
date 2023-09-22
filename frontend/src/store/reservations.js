@@ -155,12 +155,12 @@ const reservationsReducer = (state = initialState, action) => {
         case SET_SELECTED_SIZE:
             return {
                 ...state,
-                selectedSize: action.payload, // Update selected time in state
+                selectedSize: action.payload,
             };
         case SET_SELECTED_TIME:
             return {
                 ...state,
-                selectedTime: action.payload, // Update selected time in state
+                selectedTime: action.payload,
             };
         case SET_SELECTED_DATE:
             return {
