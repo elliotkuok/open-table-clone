@@ -85,7 +85,7 @@ const FindTableTime = () => {
     
         timePeriods.forEach(amPm => {
             for (let hour = 1; hour <= 12; hour++) {
-                for (let minute = 0; minute < 60; minute += 30) {
+                for (let minute = 0; minute < 60; minute += 15) {
                     const displayHour = hour === 0 ? 12 : hour;
                     const time = `${displayHour}:${minute.toString().padStart(2, '0')} ${amPm}`;
                     timeSlots.push(time);

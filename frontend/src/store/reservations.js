@@ -141,15 +141,18 @@ export const selectReservation = function(id) {
     }
 }
 
-const roundToNearestQuarterHour = (date) => {
-    const quarters = [0, 15, 30, 45].map((minutes) => 
-      new Date(new Date(date).setMinutes(minutes, 0, 0))
-    );
-    return closestTo(date, quarters);
-}
+const roundUpToNearestQuarterHour = (date) => {
+    const minutes = date.getMinutes();
+    const over = minutes % 15;
+    let adjustment = 0;
+    if (over > 0) {
+        adjustment = 15 - over;
+    }
+    return new Date(date.getTime() + adjustment * 60 * 1000); // add the adjustment in milliseconds
+};
 
 const currentDate = new Date();
-const roundedTime = roundToNearestQuarterHour(currentDate);
+const roundedTime = roundUpToNearestQuarterHour(currentDate);
 const selectedTime = format(roundedTime, 'h:mm a');
 const selectedDate = new Date();
 const selectedSize = 2;
