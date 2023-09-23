@@ -3,10 +3,12 @@ import './SearchSplash.css';
 import { searchRestaurants } from "../../store/restaurants";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { setSelectedTime, setSelectedDate, setSelectedSize } from '../../store/reservations';
+import SearchBar from "../SearchBar";
 
 const SearchSplash = () => {
     // const restaurants = useSelector(selectAllRestaurants)
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     
     // useEffect(() => {
     //   dispatch(fetchRestaurants())
@@ -14,6 +16,14 @@ const SearchSplash = () => {
     const [keyword, setKeyword] = useState('');
     const [results, setResults] = useState([]);
     const history = useHistory();
+    const selectedTime = useSelector(state => state.reservations.selectedTime);
+    const selectedDate = useSelector(state => state.reservations.selectedDate);
+    const selectedSize = useSelector(state => state.reservations.selectedSize);
+
+    const partySizeOptions = [];
+    for (let i = 1; i <= 20; i++) {
+        partySizeOptions.push(i);
+    }
 
     useEffect(() => {
         if (keyword) {
@@ -30,22 +40,7 @@ const SearchSplash = () => {
     return (
         <div className="search-banner-container">
             <h1>Find your table for any occasion</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="search-inputs">
-                    <div className="search-dropdowns">
-                        <input id="date-input"></input>
-                        <input id="time-input"></input>
-                        <input id="size-input"></input>
-                    </div>
-                    <input
-                        id="keyword-search"
-                        value={keyword}
-                        onChange={(e) => setKeyword(e.target.value)}
-                        placeholder={`Location, Restaurant, or Cuisine`}
-                    />
-                    <button type="submit">Let's go</button>
-                </div>
-            </form>    
+            <SearchBar />   
         </div>
     )
 }

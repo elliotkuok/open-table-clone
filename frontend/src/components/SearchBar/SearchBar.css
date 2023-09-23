@@ -5,7 +5,6 @@
     flex-direction: column;
     height: 48px;
     padding: 16px 0;
-    background-image: url(//cdn.otstatic.com/cfe/14/images/dtp-desktop-6b28de.png);
 }
 
 .search-bar-container h1 {
@@ -21,7 +20,20 @@
 .search-inputs input {
     height: 48px;
     border: none;
+    font-weight: 400;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 16px;
 }
+
+.search-inputs select {
+    height: 50px;
+    border: none;
+}
+
+.search-dropdowns {
+    display: flex;
+}
+
 #date-input {
     border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;

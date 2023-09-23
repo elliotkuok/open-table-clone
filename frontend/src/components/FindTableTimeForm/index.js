@@ -33,7 +33,6 @@ const FindTableTime = () => {
 
     useEffect(() => {
         if (!datePickerRef.current) {
-            console.log("selectedDate", selectedDate)
             datePickerRef.current = datePicker('.date-picker', {
                 dateSelected: selectedDate,
                 formatter: (input, date, instance) => {
@@ -41,7 +40,6 @@ const FindTableTime = () => {
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
-                    console.log("setSelectedDate", setSelectedDate(date));
                     setSelectedDate(date);
                 },
                 showAllDates: true,
@@ -87,7 +85,7 @@ const FindTableTime = () => {
     
         timePeriods.forEach(amPm => {
             for (let hour = 1; hour <= 12; hour++) {
-                for (let minute = 0; minute < 60; minute += 15) {
+                for (let minute = 0; minute < 60; minute += 30) {
                     const displayHour = hour === 0 ? 12 : hour;
                     const time = `${displayHour}:${minute.toString().padStart(2, '0')} ${amPm}`;
                     timeSlots.push(time);

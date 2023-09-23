@@ -39,7 +39,9 @@ function SearchResults() {
 
   return (
     <div className='page-container'>
-      <SearchBar />
+      <div id='searchBar-container'>
+        <SearchBar />
+      </div>
       <div className='search-results-container'>
         <h2>You searched for "{query.get('q')}" in San Francisco Bay Area</h2>
         <p>{results.length} restaurants match "{query.get('q')}"</p>

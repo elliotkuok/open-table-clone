@@ -143,12 +143,12 @@ export const selectReservation = function(id) {
 
 const roundUpToNearestQuarterHour = (date) => {
     const minutes = date.getMinutes();
-    const over = minutes % 15;
+    const over = minutes % 30;
     let adjustment = 0;
     if (over > 0) {
-        adjustment = 15 - over;
+        adjustment = 30 - over;
     }
-    return new Date(date.getTime() + adjustment * 60 * 1000); // add the adjustment in milliseconds
+    return new Date(date.getTime() + adjustment * 60 * 1000);
 };
 
 const currentDate = new Date();
