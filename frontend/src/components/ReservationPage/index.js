@@ -5,12 +5,15 @@ import { Link, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect, useState } from "react";
 import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
+import { selectRestaurant } from "../../store/restaurants";
 
 const ReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);
+    const restaurantId = reservation?.restaurantId;
+    const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
@@ -35,7 +38,8 @@ const ReservationPage = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                        <h1>Restaurant name</h1>
+                        {/* <h1>{restaurant.name}</h1> */}
+                        <h1>Restaurant Name</h1>
                         <div className='table-details'>
                             <p>Date: {reservation.date}</p>
                             <p>Time: {reservation.time}</p>
