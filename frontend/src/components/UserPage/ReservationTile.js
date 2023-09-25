@@ -26,7 +26,7 @@ const ReservationTile = ({reservation}) => {
                 />
             </div>
             <div>
-                {/* <h1>{restaurant.name}</h1> */}
+                <h1>Restaurant Name</h1>
                 <div className='res-confirmed'>
                     <div id='confirmation-icon'>
                         <svg
