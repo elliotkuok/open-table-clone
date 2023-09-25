@@ -7,6 +7,8 @@ import 'js-datepicker/dist/datepicker.min.css';
 import './TableCalendar.css';
 import './FindTableTimeForm.css';
 import { setSelectedTime, setSelectedDate, setSelectedSize } from '../../store/reservations';
+import LoginForm from "../LoginFormModal/LoginForm";
+import { Modal } from '../../context/Modal';
 
 const FindTableTime = () => {
     const {id} = useParams();
@@ -15,6 +17,8 @@ const FindTableTime = () => {
     const selectedTime = useSelector(state => state.reservations.selectedTime);
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
+    const [showModal, setShowModal] = useState(false);
+    const user = useSelector(state => state.session.user);
 
     let openingTime, closingTime;
     if (restaurant && restaurant.hours) {
@@ -124,7 +128,11 @@ const FindTableTime = () => {
     };
     
     const handleTimeSelect = (time) => {
-        console.log("time", time)
+        if (!user) {
+            setShowModal(true);
+            return;
+        }
+
         dispatch(setSelectedTime(time));
         console.log("setSelectedTime:", selectedTime)
         dispatch(setSelectedDate(selectedDate));
@@ -133,51 +141,62 @@ const FindTableTime = () => {
     }
 
     return (
-        <form>
-            <div className="table-time-container">
-                <h4>Make a reservation</h4>
-                <h5>Party Size</h5>
-                <select defaultValue={selectedSize} id="party-size" onChange={(e) => dispatch(setSelectedSize(e.target.value))}>
-                    {partySizeOptions.map(option => (
-                        <option key={option} value={option}>
-                            {option} {option !== 1 ? 'people' : 'person'}
-                        </option>
-                    ))}
-                </select>
-                <div id="date-time-container">
-                    <div id="date-input">
-                        <h5>Date</h5>
-                        <input type="text" className="date-picker" />
+        <>
+             {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+                <LoginForm onClose={() => setShowModal(false)} />
+            </Modal>
+        )}
+
+            <form>
+                <div className="table-time-container">
+                    <h4>Make a reservation</h4>
+                    <h5>Party Size</h5>
+                    <select defaultValue={selectedSize} id="party-size" onChange={(e) => dispatch(setSelectedSize(e.target.value))}>
+                        {partySizeOptions.map(option => (
+                            <option key={option} value={option}>
+                                {option} {option !== 1 ? 'people' : 'person'}
+                            </option>
+                        ))}
+                    </select>
+                    <div id="date-time-container">
+                        <div id="date-input">
+                            <h5>Date</h5>
+                            <input type="text" className="date-picker" />
+                        </div>
+                        <div id="time-input">
+                            <h5>Time</h5>
+                            <select value={selectedTime} onChange={(e) => dispatch(setSelectedTime(e.target.value))}>
+                                {timeSlots.map((timeSlot, index) => (
+                                    <option key={index} value={timeSlot}>
+                                        {timeSlot}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                    <div id="time-input">
-                        <h5>Time</h5>
-                        <select value={selectedTime} onChange={(e) => dispatch(setSelectedTime(e.target.value))}>
-                            {timeSlots.map((timeSlot, index) => (
-                                <option key={index} value={timeSlot}>
-                                    {timeSlot}
-                                </option>
-                            ))}
-                        </select>
+                    <button id="find-time-bttn" onClick={e => {
+                        e.preventDefault();
+                        setSuggestedTimes(getSuggestedTimes(selectedTime));
+                    }}>Find a time</button>
+                    <div className="times-container">
+                        {suggestedTimes.length > 0 && <h5>Select a time</h5>}
+                        <div>
+                            {
+                                suggestedTimes.map((time, index) => (
+                                    <button key={index} className="suggested-time-bttn" onClick={(e) => {
+                                        e.preventDefault();
+                                        handleTimeSelect(time);
+                                    }}>
+                                        {time}
+                                    </button>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
-                <button id="find-time-bttn" onClick={e => {
-                    e.preventDefault();
-                    setSuggestedTimes(getSuggestedTimes(selectedTime));
-                }}>Find a time</button>
-                <div className="times-container">
-                    {suggestedTimes.length > 0 && <h5>Select a time</h5>}
-                    <div>
-                        {
-                            suggestedTimes.map((time, index) => (
-                                <button key={index} className="suggested-time-bttn" onClick={() => handleTimeSelect(time)}>
-                                    {time}
-                                </button>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        </>
     )
 }
 
