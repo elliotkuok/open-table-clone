@@ -33,7 +33,7 @@ const UserPage = () => {
             <ul className="reservation-list">
                 {upcomingReservations.map(reservation => (
                     <li key={reservation?.id} className="reservation-index">
-                        <ReservationTile reservation={reservation}/>
+                        <ReservationTile reservation={reservation} isUpcoming={true}/>
                     </li>
                         
                 ))}
@@ -44,7 +44,7 @@ const UserPage = () => {
             <ul className="reservation-list">
                 {pastReservations.map(reservation => (
                     <li key={reservation?.id} className="reservation-index">
-                        <ReservationTile reservation={reservation}/>
+                        <ReservationTile reservation={reservation} isUpcoming={false}/>
                     </li>                        
                 ))}
             </ul>

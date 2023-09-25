@@ -13,11 +13,20 @@
     border-bottom: 0.0625rem solid #d8d9db;
 }
 
+.restaurant-details {
+    margin-left: 16px;
+}
+
+.restaurant-details h1 {
+    font-size: 18px;
+}
+
 .reservation-tile-container {
     border: 0.0625rem solid #d8d9db;
     display: flex;
     cursor: pointer;
     margin-top: 16px;
+    padding: 16px;
     border-radius: 4px;
 }
 
@@ -26,9 +35,32 @@
     /* transform: translateY(-6px);  */
 }
 
+.res-confirmed{
+    margin: 8px 0;
+    align-items: center;
+}
+
+.res-confirmed p {
+    margin-left: 4px;
+}
+
 .res-detail, .res-confirmed{
     display: flex;
 }
 
-.res-date{display: flex;}
+#res-specs {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+}
+
+#res-specs p {
+    margin-left: 4px;
+}
+
+.res-img-container img{
+    width: 8em;
+    height: 8em;
+    border-radius: 4px;
+}
 
