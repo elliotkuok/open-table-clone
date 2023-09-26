@@ -148,7 +148,7 @@ const ModifyReservationPage = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                    <h1>{restaurant ? restaurant.name : 'Loading...'}</h1>
+                    <h1>{reservation.restaurantName}</h1>
                         <div className='table-details'>
                             <div id='res-date'>
                                 <div>

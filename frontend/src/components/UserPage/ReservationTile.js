@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 
 
 const ReservationTile = ({reservation, isUpcoming}) => {
-    const restaurant = useSelector(selectRestaurant(reservation.restaurantId));
     
     const history = useHistory();
 
@@ -47,7 +46,7 @@ const ReservationTile = ({reservation, isUpcoming}) => {
                 />
             </div>
             <div className='restaurant-details'>
-                <h1>Restaurant Name</h1>
+                <h1>{reservation.restaurantName}</h1>
                 <div className='res-confirmed'>
                     <div id='confirmation-icon'>
                         {isUpcoming ? confirmedIcon : completedIcon}

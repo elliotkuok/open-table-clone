@@ -38,8 +38,7 @@ const ReservationPage = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                        {/* <h1>{restaurant.name}</h1> */}
-                        <h1>Restaurant Name</h1>
+                        <h1>{reservation.restaurantName}</h1>
                         <div className='table-details'>
                             <p>Date: {reservation.date}</p>
                             <p>Time: {reservation.time}</p>
