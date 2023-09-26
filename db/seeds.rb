@@ -73,5 +73,14 @@ ApplicationRecord.transaction do
         party_size: 2
     )
 
+    Reservation.create!(
+        restaurant_id: 5, 
+        user_id: 1,
+        date: 'Aug 22, 2023',
+        time: '7:30 PM',
+        party_size: 6
+    )
+
+
     puts "Done!"
 end

@@ -48,13 +48,13 @@
     display: flex;
 }
 
-#res-specs {
+.res-specs {
     display: flex;
     align-items: center;
     margin-right: 16px;
 }
 
-#res-specs p {
+.res-specs p {
     margin-left: 4px;
 }
 

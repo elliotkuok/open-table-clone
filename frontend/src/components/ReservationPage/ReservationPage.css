@@ -5,3 +5,31 @@
 .reservation-page-container .search-inputs {
     border: 1px solid black;
 }
+
+.table-res-details {
+    display: flex;
+    margin: 16px 0;
+}
+
+.table-res-details p {
+    font-weight: 500;
+}
+
+.change-res-links a{
+    color: #da3743;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.change-res-links a:not(:last-child) {
+    border-right: 0.0625rem solid #d8d9db;
+    margin-right: 8px;
+    padding-right: 8px;
+}
+
+.res-img-container img{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 4px;
+}
