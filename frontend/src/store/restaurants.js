@@ -27,6 +27,7 @@ export const fetchRestaurants = () => async (dispatch) => {
 }
 
 export const fetchRestaurant = id => async (dispatch) => {
+    console.log("fetchid", id)
     const res = await csrfFetch(`/api/restaurants/${id}`);
     if (res.ok) {
         const restaurant = await res.json();

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './ModifyReservationPage.css';
 import "../SearchSplash/SearchSplash.css";
 import { fetchReservation, selectReservation } from "../../store/reservations";
-import { selectRestaurant } from "../../store/restaurants";
+import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
 import { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
 import datePicker from 'js-datepicker';
@@ -14,20 +14,33 @@ const ModifyReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const reservation = useSelector(selectReservation(id));
-    const restaurant = useSelector(selectRestaurant(id));
-
-    let openingTime, closingTime;
-    if (restaurant && restaurant.hours) {
-    [openingTime, closingTime] = restaurant.hours.split(' - ');
-    }
+    // let restaurant = useSelector(selectRestaurant(reservation[id]?.restaurantId));
+    let restaurant = dispatch(fetchRestaurant(1))
+    console.log("select")
+    
+    // restaurant = Object.values(restaurant)
+    console.log("restaurant:", restaurant)
+    
+    
     const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
-
+    
     let history = useHistory();
-
+    let openingTime, closingTime;
+    useEffect(() => {
+    if (restaurant && restaurant?.id) {
+        console.log("RestaurantID:", restaurant.id)
+        console.log("store hours:", restaurant.id.hours)
+        [openingTime, closingTime] = restaurant.id.hours.split(' - ');
+        console.log("hours", openingTime, closingTime)
+    }}, [restaurant?.id]);
+    
     useEffect(() => {
         dispatch(fetchReservation(id));
-      }, [dispatch, id]);
+        console.log("restaurantId:", reservation.restaurantId)
+        dispatch(fetchRestaurant(reservation.restaurantId));
+        console.log("Restaurant", restaurant)
+      }, [dispatch]);
 
       const datePickerRef = useRef(null);
 
@@ -58,12 +71,12 @@ const ModifyReservationPage = () => {
     }
 
     const convertToMinutes = (time) => {
-        const [hoursMinutes, period] = time.split(' ');
-        let [hours, minutes] = hoursMinutes.split(':');
-        hours = parseInt(hours);
-        if (period === 'PM' && hours < 12) hours += 12;
-        if (period === 'AM' && hours === 12) hours = 0;
-        return hours * 60 + parseInt(minutes);
+        // const [hoursMinutes, period] = time.split(' ');
+        // let [hours, minutes] = hoursMinutes.split(':');
+        // hours = parseInt(hours);
+        // if (period === 'PM' && hours < 12) hours += 12;
+        // if (period === 'AM' && hours === 12) hours = 0;
+        // return hours * 60 + parseInt(minutes);
     };
 
     const convertTo12HourFormat = (minutes) => {
