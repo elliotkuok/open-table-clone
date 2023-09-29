@@ -76,6 +76,7 @@ export const fetchReservation = id => async (dispatch) => {
     const res = await csrfFetch(`/api/reservations/${id}`);
     if (res.ok) {
         const reservation = await res.json();
+        console.log("Fetched reservation:", reservation); // Debugging line
         dispatch(receiveReservation(reservation));
     }
 }
@@ -189,7 +190,13 @@ const reservationsReducer = (state = initialState, action) => {
             }
                 return nextState;
         case RECEIVE_RESERVATION:
+            // nextState[action.payload.reservation.id] = action.payload.reservation;
+            // return nextState;
+            case RECEIVE_RESERVATION:
+            console.log("Reducer state before:", nextState); // Debugging line
+            console.log("Payload received:", action.payload.reservation); // Debugging line
             nextState[action.payload.reservation.id] = action.payload.reservation;
+            console.log("Reducer state after:", nextState); // Debugging line
             return nextState;
         case RECEIVE_RESERVATIONS:
             return Object.assign(nextState, action.payload);

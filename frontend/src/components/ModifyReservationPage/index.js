@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './ModifyReservationPage.css';
 import "../SearchSplash/SearchSplash.css";
 import { fetchReservation, selectReservation } from "../../store/reservations";
-import { selectRestaurant } from "../../store/restaurants";
+import { fetchRestaurant, selectRestaurant } from "../../store/restaurants";
 import { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
 import datePicker from 'js-datepicker';
@@ -14,12 +14,19 @@ const ModifyReservationPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const reservation = useSelector(selectReservation(id));
-    const restaurant = useSelector(selectRestaurant(id));
+    const restaurantId = reservation?.restaurantId;
+    let restaurant = dispatch(fetchRestaurant(restaurantId))
 
     let openingTime, closingTime;
+
     if (restaurant && restaurant.hours) {
     [openingTime, closingTime] = restaurant.hours.split(' - ');
     }
+
+    console.log("restaurant:", restaurant)
+    console.log("hours:", restaurant.hours)
+    console.log("opening:", openingTime)
+    console.log("closing:", closingTime)
     const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
@@ -27,6 +34,7 @@ const ModifyReservationPage = () => {
 
     useEffect(() => {
         dispatch(fetchReservation(id));
+        dispatch(fetchRestaurant(restaurantId));
       }, [dispatch, id]);
 
       const datePickerRef = useRef(null);
@@ -58,12 +66,12 @@ const ModifyReservationPage = () => {
     }
 
     const convertToMinutes = (time) => {
-        const [hoursMinutes, period] = time.split(' ');
-        let [hours, minutes] = hoursMinutes.split(':');
-        hours = parseInt(hours);
-        if (period === 'PM' && hours < 12) hours += 12;
-        if (period === 'AM' && hours === 12) hours = 0;
-        return hours * 60 + parseInt(minutes);
+        // const [hoursMinutes, period] = time.split(' ');
+        // let [hours, minutes] = hoursMinutes.split(':');
+        // hours = parseInt(hours);
+        // if (period === 'PM' && hours < 12) hours += 12;
+        // if (period === 'AM' && hours === 12) hours = 0;
+        // return hours * 60 + parseInt(minutes);
     };
 
     const convertTo12HourFormat = (minutes) => {
