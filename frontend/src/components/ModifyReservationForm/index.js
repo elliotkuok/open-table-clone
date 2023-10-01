@@ -105,9 +105,9 @@ const ModifyReservationForm = () => {
                     </div>
 
                 </div>
-                <div className='timer-banner'>
+                {/* <div className='timer-banner'>
                     <p>You can still try to complete your reservation, but this table may no longer be available.</p>
-                </div>
+                </div> */}
                 <div className='diner-details-container'>
                     <div className='diner-name'>
                         <h4>Diner details</h4>
