@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ModifyReservationForm.css';
-import { patchReservation } from '../../store/reservations';
+import { patchReservation, selectReservation } from '../../store/reservations';
 
 const ModifyReservationForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams(); 
+    const reservation = useSelector(selectReservation(id));
     const restaurant = useSelector(state => state.restaurants[id.restaurantId]);
     const user = useSelector(state => state.session.user);
     const selectedTime = useSelector(state => state.reservations.selectedTime);
@@ -60,7 +61,7 @@ const ModifyReservationForm = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                    <h1>{restaurant ? restaurant.name : 'Loading...'}</h1>
+                    <h1>{reservation?.restaurantName}</h1>
                         <div className='table-details'>
                             <div id='res-date'>
                                 <div>
