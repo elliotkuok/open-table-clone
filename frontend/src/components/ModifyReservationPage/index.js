@@ -120,10 +120,14 @@ const ModifyReservationPage = () => {
 
     const getSuggestedTimes = (selectedTime) => {
         const times = [];
-    
         const selectedMinutes = convertToMinutes(selectedTime);
         const openingMinutes = convertToMinutes(openingTime);
-        const closingMinutes = convertToMinutes(closingTime) - 90;
+        let closingMinutes = convertToMinutes(closingTime);
+    
+        // If closingMinutes is less than openingMinutes, it means closing time is on the next day
+        if (closingMinutes <= openingMinutes) closingMinutes += 24 * 60; 
+    
+        closingMinutes = closingMinutes - 90; // Substract 90 minutes from closingMinutes
     
         const intervals = [-30, -15, 0, 15, 30];
     
@@ -136,6 +140,7 @@ const ModifyReservationPage = () => {
     
         return times;
     };
+    
     
     const handleTimeSelect = (time) => {
         const selectedTime = document.querySelector("#time-input select").value;
@@ -235,9 +240,11 @@ const ModifyReservationPage = () => {
                         <button id="find-time-bttn" onClick={e => {
                             e.preventDefault();
                             const selectedTime = document.querySelector("#time-input select").value;
+                            {console.log("selectedTime", selectedTime)}
                             setSuggestedTimes(getSuggestedTimes(selectedTime));
-                        }}>Find a new</button>
+                        }}>Find a new time</button>
                         <div className="times-container">
+                            {console.log("suggestedtime", suggestedTimes)}
                             {suggestedTimes.length > 0 && <h5>Select a time</h5>}
                             <div>
                                 {
