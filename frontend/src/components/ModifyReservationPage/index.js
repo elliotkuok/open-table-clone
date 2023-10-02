@@ -17,6 +17,7 @@ const ModifyReservationPage = () => {
         dispatch(fetchReservation(id));
     }, [dispatch, id]);
     const reservation = useSelector(selectReservation(id));
+    console.log("reservation", reservation)
     const restaurantId = reservation?.restaurantId;
     useEffect(() => {
         if (restaurantId) {
@@ -148,8 +149,13 @@ const ModifyReservationPage = () => {
         const newSuggestedTimes = getSuggestedTimes(selectedTime);
         setSuggestedTimes(newSuggestedTimes);
         dispatch(setSelectedTime(time));
-        const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
-        dispatch(setSelectedDate(formattedDate));
+        
+        if (selectedDate instanceof Date) {
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            const formattedDate = new Intl.DateTimeFormat('en-US', options).format(selectedDate);
+            dispatch(setSelectedDate(formattedDate));
+        }
+        
         dispatch(setSelectedSize(selectedSize));
         history.push(`/reservations/${id}/modify-form`);
     }
