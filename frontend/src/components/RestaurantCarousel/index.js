@@ -46,8 +46,8 @@ const CuisineCarousel = ({ cuisine }) => {
                         </Link>
                     ))}
                 </div>
-                <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>
-                <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button>
+                {/* <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>
+                <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button> */}
             </div>
         </div>
 
