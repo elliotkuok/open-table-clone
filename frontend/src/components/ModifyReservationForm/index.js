@@ -142,7 +142,7 @@ const ModifyReservationForm = () => {
                 <p>We may contact you about this reservation, so please ensure your email and phone number are up to date.</p>
                 <p>Your table will be reserved for 1 hour 45 minutes for parties of up to 2; 2 hours 15 minutes for parties of up to 6; and 2 hours for parties of 7+.</p>
                 <h5>A note from the restaurant</h5>
-                <p>Thank you for joining us at The Progress! We look forward to taking care of you!</p>
+                <p>Thank you for joining us at {reservation?.restaurantName}! We look forward to taking care of you!</p>
                 <p>If you are running behind, please let us know. We are happy to hold your table for 15 minutes before releasing to the next guest.</p>
             </div>
         </div>

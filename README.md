@@ -27,15 +27,18 @@ Each restaurant page provides users with comprehensive details about the establi
 ![Restaurant Page](./storage/restaurant-page.png)
 
 
-**Feature 2:**  Modifying reservations
+**Feature 2:**  Reservations CRUD
 
 This feature was essential for allowing users to modify the details of existing reservations. One notable challenge was persisting the correct information through multiple components involved in modifying a reservation.
 
+![User Page](./storage/user-page.png)
 
+![Reservation Page](./storage/reservation-page.png)
 
-# Another sample code snippet related to the second feature
-With [technical solution], users can now [benefit or outcome of your solution, e.g., "easily manage all their reservations in one place"].
+![Modify Reservation Page](./storage/modify-reservation-page.png)
 
-Future Improvements
+![Modify Reservation Form](./storage/modify-reservation-form.png)
+
+# Future Improvements
 - Implement a user review system where users can rate and review restaurants from past reservations.
 - Add a "Favorites" feature, allowing users to save and quickly access their preferred dining spots.

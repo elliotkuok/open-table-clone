@@ -66,7 +66,7 @@ const ReservationPage = () => {
                     <div className='res-details-container'>
                         <div className='res-img-container'>
                             <img
-                            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                            src="https://assets.bonappetit.com/photos/631788f25635b01b337f6bb4/4:3/w_2000,h_1500,c_limit/220827_GuangXu_BA-UncleLou_014.jpg"
                             alt="Placeholder"
                             />
                         </div>
