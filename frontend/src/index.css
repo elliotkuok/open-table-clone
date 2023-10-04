@@ -34,3 +34,9 @@ body {
     background-color: #f7f7f7;
     margin: 0;
 }
+
+select {
+    font-family: "Josefin Sans", sans-serif;
+    color: #2d333f;
+    font-size: 16px;
+}

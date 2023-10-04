@@ -1,7 +1,106 @@
-.reservation-list-container {
+#reservation-page-container {
     display: flex;
+    margin: auto;
+    padding: 56px;
+    justify-content: center;
+}
+.res-container {
+    display: flex;
+    flex-direction: column;
+    /* width: 824px; */
+    background: white;
+    border-radius: 4px;
+    padding: 32px;
+    margin-right: 32px;
+    border-bottom: 0.0625rem solid #d8d9db;
+    width: 636px;
 }
 
 .reservation-page-container .search-inputs {
     border: 1px solid black;
+}
+
+.table-res-details {
+    display: flex;
+    margin: 16px 0;
+}
+
+.table-res-details p {
+    font-weight: 500;
+}
+
+.change-res-links a{
+    color: #da3743;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.change-res-links a:not(:last-child) {
+    border-right: 0.0625rem solid #d8d9db;
+    margin-right: 8px;
+    padding-right: 8px;
+}
+
+.res-img-container img{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 4px;
+}
+
+#reservation-page-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reservation-page-button {
+    background-color: #fff;
+    border: 0.0625rem solid #f1f2f4;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem 0 #2d333f33;
+    box-sizing: border-box;
+    color: #2d333f;
+    display: inline-block;
+    flex: 0 0 calc(50% - 8px);
+    outline: none;
+    padding: 16px;
+    text-decoration: none;
+    transition: all .3s ease-out;
+}
+
+#diner-details {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #6f737b;
+    /* margin: 56px auto; */
+    padding: 24px;
+    width: 300px;
+    height: 50px;
+}
+
+#diner-details p {
+    margin-top: 16px;
+}
+
+.res-page-bttn-content {
+    display: flex;
+}
+
+.res-page-bttn-content p{
+    margin-top: 15px;
+    margin-left: 12px;
+    font-weight: 600;
+}
+
+.res-page-bttn-content span {
+    background-color: #da3743;
+    border-radius: 100%;
+    padding: 8px;
+    display: inline-block;
+    font-size: 0;
+    height: 1.5rem;
+    line-height: 1;
+    min-width: 1.5rem;
+    width: 1.5rem;
 }

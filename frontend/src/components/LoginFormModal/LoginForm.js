@@ -69,6 +69,7 @@ function LoginForm({onClose}) {
 
   useEffect(() => {
       if (errors.password) clearError('password');
+      if (!areErrorsPresent()) setContinueButtonDisabled(false);
   }, [password]);
 
   useEffect(() => {

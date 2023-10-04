@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { format, closestTo } from 'date-fns';
 
 //CONSTANTS
 export const RECEIVE_RESERVATIONS = "RECEIVE_RESERVATIONS";
@@ -75,6 +76,7 @@ export const fetchReservation = id => async (dispatch) => {
     const res = await csrfFetch(`/api/reservations/${id}`);
     if (res.ok) {
         const reservation = await res.json();
+        console.log("Fetched reservation:", reservation); // Debugging line
         dispatch(receiveReservation(reservation));
     }
 }
@@ -140,12 +142,27 @@ export const selectReservation = function(id) {
     }
 }
 
+const roundUpToNearestQuarterHour = (date) => {
+    const minutes = date.getMinutes();
+    const over = minutes % 30;
+    let adjustment = 0;
+    if (over > 0) {
+        adjustment = 30 - over;
+    }
+    return new Date(date.getTime() + adjustment * 60 * 1000);
+};
+
+const currentDate = new Date();
+const roundedTime = roundUpToNearestQuarterHour(currentDate);
+const selectedTime = format(roundedTime, 'h:mm a');
+const selectedDate = new Date();
+const selectedSize = 2;
 
 // REDUCER
 const initialState = {
-    selectedTime: null,
-    selectedDate: null,
-    selectedSize: null,
+    selectedTime: selectedTime,
+    selectedDate: selectedDate,
+    selectedSize: selectedSize,
 };
 
 const reservationsReducer = (state = initialState, action) => {
@@ -173,7 +190,13 @@ const reservationsReducer = (state = initialState, action) => {
             }
                 return nextState;
         case RECEIVE_RESERVATION:
+            // nextState[action.payload.reservation.id] = action.payload.reservation;
+            // return nextState;
+            case RECEIVE_RESERVATION:
+            console.log("Reducer state before:", nextState); // Debugging line
+            console.log("Payload received:", action.payload.reservation); // Debugging line
             nextState[action.payload.reservation.id] = action.payload.reservation;
+            console.log("Reducer state after:", nextState); // Debugging line
             return nextState;
         case RECEIVE_RESERVATIONS:
             return Object.assign(nextState, action.payload);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import restaurantImage from './assets/restaurant.jpeg';
+import restaurantImage from './assets/restaurant.jpg';
 import './RestaurantPage.css';
 import './StarRating.css';
 import { useDispatch, useSelector } from 'react-redux';

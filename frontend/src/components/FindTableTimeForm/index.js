@@ -7,28 +7,35 @@ import 'js-datepicker/dist/datepicker.min.css';
 import './TableCalendar.css';
 import './FindTableTimeForm.css';
 import { setSelectedTime, setSelectedDate, setSelectedSize } from '../../store/reservations';
+import LoginForm from "../LoginFormModal/LoginForm";
+import { Modal } from '../../context/Modal';
 
 const FindTableTime = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
+    const selectedTime = useSelector(state => state.reservations.selectedTime);
+    const selectedDate = useSelector(state => state.reservations.selectedDate);
+    const selectedSize = useSelector(state => state.reservations.selectedSize);
+    const [showModal, setShowModal] = useState(false);
+    const user = useSelector(state => state.session.user);
 
     let openingTime, closingTime;
-if (restaurant && restaurant.hours) {
-  [openingTime, closingTime] = restaurant.hours.split(' - ');
-}
-    const [selectedDate, setChosenDate] = useState(new Date());
+    if (restaurant && restaurant.hours) {
+        [openingTime, closingTime] = restaurant.hours.split(' - ');
+    }
+
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
     let history = useHistory();
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
-      }, [dispatch, id]);
+    }, [dispatch, id]);
 
-      const datePickerRef = useRef(null);
+    const datePickerRef = useRef(null);
 
-      useEffect(() => {
+    useEffect(() => {
         if (!datePickerRef.current) {
             datePickerRef.current = datePicker('.date-picker', {
                 dateSelected: selectedDate,
@@ -37,7 +44,7 @@ if (restaurant && restaurant.hours) {
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
-                    setChosenDate(date);
+                    setSelectedDate(date);
                 },
                 showAllDates: true,
                 minDate: new Date()
@@ -121,62 +128,75 @@ if (restaurant && restaurant.hours) {
     };
     
     const handleTimeSelect = (time) => {
-        const selectedTime = document.querySelector("#time-input select").value;
-        const selectedSize = document.querySelector("#party-size").value;
-        const newSuggestedTimes = getSuggestedTimes(selectedTime);
-        setSuggestedTimes(newSuggestedTimes);
+        if (!user) {
+            setShowModal(true);
+            return;
+        }
+
         dispatch(setSelectedTime(time));
-        const formattedDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(selectedDate);
-        dispatch(setSelectedDate(formattedDate));
+        console.log("setSelectedTime:", selectedTime)
+        dispatch(setSelectedDate(selectedDate));
         dispatch(setSelectedSize(selectedSize));
-        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${selectedTime}&date=${selectedDate}`);
+        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${time}&date=${selectedDate}`);
     }
 
     return (
-        <form>
-            <div className="table-time-container">
-                <h4>Make a reservation</h4>
-                <h5>Party Size</h5>
-                <select defaultValue={2} id="party-size">
-                    {partySizeOptions.map(option => (
-                        <option key={option} value={option}>{option} {option !== 1 ? 'people' : 'person'}</option>
-                    ))}
-                </select>
-                <div id="date-time-container">
-                    <div id="date-input">
-                        <h5>Date</h5>
-                        <input type="text" className="date-picker" />
+        <>
+             {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+                <LoginForm onClose={() => setShowModal(false)} />
+            </Modal>
+        )}
+
+            <form>
+                <div className="table-time-container">
+                    <h4>Make a reservation</h4>
+                    <h5>Party Size</h5>
+                    <select defaultValue={selectedSize} id="party-size" onChange={(e) => dispatch(setSelectedSize(e.target.value))}>
+                        {partySizeOptions.map(option => (
+                            <option key={option} value={option}>
+                                {option} {option !== 1 ? 'people' : 'person'}
+                            </option>
+                        ))}
+                    </select>
+                    <div id="date-time-container">
+                        <div id="date-input">
+                            <h5>Date</h5>
+                            <input type="text" className="date-picker" />
+                        </div>
+                        <div id="time-input">
+                            <h5>Time</h5>
+                            <select value={selectedTime} onChange={(e) => dispatch(setSelectedTime(e.target.value))}>
+                                {timeSlots.map((timeSlot, index) => (
+                                    <option key={index} value={timeSlot}>
+                                        {timeSlot}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                    <div id="time-input">
-                        <h5>Time</h5>
-                        <select>
-                            {timeSlots.map((timeSlot, index) => (
-                                <option key={index} value={timeSlot}>
-                                    {timeSlot}
-                                </option>
-                            ))}
-                        </select>
+                    <button id="find-time-bttn" onClick={e => {
+                        e.preventDefault();
+                        setSuggestedTimes(getSuggestedTimes(selectedTime));
+                    }}>Find a time</button>
+                    <div className="times-container">
+                        {suggestedTimes.length > 0 && <h5>Select a time</h5>}
+                        <div>
+                            {
+                                suggestedTimes.map((time, index) => (
+                                    <button key={index} className="suggested-time-bttn" onClick={(e) => {
+                                        e.preventDefault();
+                                        handleTimeSelect(time);
+                                    }}>
+                                        {time}
+                                    </button>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
-                <button id="find-time-bttn" onClick={e => {
-                    e.preventDefault();
-                    const selectedTime = document.querySelector("#time-input select").value;
-                    setSuggestedTimes(getSuggestedTimes(selectedTime));
-                }}>Find a time</button>
-                <div className="times-container">
-                    {suggestedTimes.length > 0 && <h5>Select a time</h5>}
-                    <div>
-                        {
-                            suggestedTimes.map((time, index) => (
-                                <button key={index} className="suggested-time-bttn" onClick={() => handleTimeSelect(time)}>
-                                    {time}
-                                </button>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        </>
     )
 }
 

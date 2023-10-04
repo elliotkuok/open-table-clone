@@ -6,42 +6,68 @@ import { selectRestaurant } from '../../store/restaurants';
 import { useHistory } from 'react-router-dom';
 
 
-const ReservationTile = ({reservation}) => {
-    const restaurant = useSelector(selectRestaurant(reservation.restaurantId));
+const ReservationTile = ({reservation, isUpcoming}) => {
+    const imgSamples = [
+        "https://assets.bonappetit.com/photos/631788f25635b01b337f6bb4/4:3/w_2000,h_1500,c_limit/220827_GuangXu_BA-UncleLou_014.jpg",
+        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+        "https://media.timeout.com/images/105940814/750/422/image.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIn7Cr0PMTJS4OiGciuPfnrdS3Tkj4cORKOdxpkaVTv-myF8SQJ9t274Gt1ZZ7XrGtYwo&usqp=CAU"
+    ]
+
+    const getRandomImage = (images) => {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        return images[randomIndex];
+    };
     
+    const randomImageSrc = getRandomImage(imgSamples);
+
     const history = useHistory();
 
     const handleTileClick = () => {
         history.push(`/reservations/${reservation.id}`);
     };
     
+    const confirmedIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            >
+            <path d="M11.0355339,12.863961 L9.62132034,11.4497475 C9.23079605,11.0592232 8.59763107,11.0592232 8.20710678,11.4497475 C7.81658249,11.8402718 7.81658249,12.4734367 8.20710678,12.863961 L10.3284271,14.9852814 C10.5236893,15.1805435 10.7796116,15.2781746 11.0355339,15.2781746 C11.2914562,15.2781746 11.5473785,15.1805435 11.7426407,14.9852814 L15.9852814,10.7426407 C16.3758057,10.3521164 16.3758057,9.71895142 15.9852814,9.32842712 C15.5947571,8.93790283 14.9615921,8.93790283 14.5710678,9.32842712 L11.0355339,12.863961 Z M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z" fill="#39a25e"></path>
+        </svg>
+    );
+
+    const completedIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            >
+            <path fillRule="evenodd" clip-rule="evenodd" d="M3.54142 5.74079C3.6587 5.3038 4.05479 5 4.50724 5H20.5535C21.0595 5 21.4858 5.37796 21.5463 5.88033L22.9928 17.8803C23.0271 18.1643 22.938 18.4494 22.7482 18.6634C22.5584 18.8775 22.2861 19 22 19H6.45517C5.96641 19 5.54926 18.6467 5.46881 18.1646L5.16463 16.3418H2.00001C1.68905 16.3418 1.39578 16.1972 1.20653 15.9504C1.01728 15.7037 0.953583 15.3829 1.03419 15.0826L3.54142 5.74079ZM6.99929 15.1853L7.30212 17H20.8722L19.6668 7H5.68826L6.49645 11.8351L6.49906 11.8516L6.99929 15.1853ZM4.27983 10.7051L4.52244 12.1566L4.85033 14.3418H3.30379L4.27983 10.7051Z" fill="#2D333F"></path>
+            <path fillRule="evenodd" clip-rule="evenodd" d="M8.5 12C8.5 11.4477 8.94772 11 9.5 11L17.2254 11C17.7777 11 18.2254 11.4477 18.2254 12C18.2254 12.5523 17.7777 13 17.2254 13L9.5 13C8.94772 13 8.5 12.5523 8.5 12Z" fill="#2D333F"></path>
+        </svg>
+    );
 
     return (
         <div className="reservation-tile-container" onClick={handleTileClick}>
             <div className='res-img-container'>
                 <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                src={randomImageSrc}
                 alt="Placeholder"
-                style={{ width: '4rem', margin: '12px', height: '4rem', borderRadius: '4px'}}
                 />
             </div>
-            <div>
-                {/* <h1>{restaurant.name}</h1> */}
+            <div className='restaurant-details'>
+                <h1>{reservation.restaurantName}</h1>
                 <div className='res-confirmed'>
                     <div id='confirmation-icon'>
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        >
-                        <path d="M11.0355339,12.863961 L9.62132034,11.4497475 C9.23079605,11.0592232 8.59763107,11.0592232 8.20710678,11.4497475 C7.81658249,11.8402718 7.81658249,12.4734367 8.20710678,12.863961 L10.3284271,14.9852814 C10.5236893,15.1805435 10.7796116,15.2781746 11.0355339,15.2781746 C11.2914562,15.2781746 11.5473785,15.1805435 11.7426407,14.9852814 L15.9852814,10.7426407 C16.3758057,10.3521164 16.3758057,9.71895142 15.9852814,9.32842712 C15.5947571,8.93790283 14.9615921,8.93790283 14.5710678,9.32842712 L11.0355339,12.863961 Z M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z" fill="#39a25e"></path>
-                        </svg>
+                        {isUpcoming ? confirmedIcon : completedIcon}
                     </div>
-                    <p>Reservation confirmed</p>
+                    <p>{isUpcoming ? 'Reservation confirmed' : 'Reservation completed'}</p>
                 </div>
                 <div className='res-detail'>
-                        <div id='res-date'>
+                        <div className='res-specs'>
                             <div>
                                 <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +80,7 @@ const ReservationTile = ({reservation}) => {
                             </div>
                             <p>{reservation.partySize}</p>
                         </div>
-                        <div id='res-date'>
+                        <div className='res-specs'>
                             <div>
                                 <svg
                                 xmlns="http://www.w3.org/2000/svg"

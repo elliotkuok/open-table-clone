@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ModifyReservationForm.css';
-import { patchReservation } from '../../store/reservations';
+import { patchReservation, selectReservation } from '../../store/reservations';
 
 const ModifyReservationForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams(); 
+    const reservation = useSelector(selectReservation(id));
     const restaurant = useSelector(state => state.restaurants[id.restaurantId]);
     const user = useSelector(state => state.session.user);
     const selectedTime = useSelector(state => state.reservations.selectedTime);
@@ -60,7 +61,7 @@ const ModifyReservationForm = () => {
                         />
                     </div>
                     <div className='res-request-info'>
-                    <h1>{restaurant ? restaurant.name : 'Loading...'}</h1>
+                    <h1>{reservation?.restaurantName}</h1>
                         <div className='table-details'>
                             <div id='res-date'>
                                 <div>
@@ -105,9 +106,9 @@ const ModifyReservationForm = () => {
                     </div>
 
                 </div>
-                <div className='timer-banner'>
+                {/* <div className='timer-banner'>
                     <p>You can still try to complete your reservation, but this table may no longer be available.</p>
-                </div>
+                </div> */}
                 <div className='diner-details-container'>
                     <div className='diner-name'>
                         <h4>Diner details</h4>
@@ -141,7 +142,7 @@ const ModifyReservationForm = () => {
                 <p>We may contact you about this reservation, so please ensure your email and phone number are up to date.</p>
                 <p>Your table will be reserved for 1 hour 45 minutes for parties of up to 2; 2 hours 15 minutes for parties of up to 6; and 2 hours for parties of 7+.</p>
                 <h5>A note from the restaurant</h5>
-                <p>Thank you for joining us at The Progress! We look forward to taking care of you!</p>
+                <p>Thank you for joining us at {reservation?.restaurantName}! We look forward to taking care of you!</p>
                 <p>If you are running behind, please let us know. We are happy to hold your table for 15 minutes before releasing to the next guest.</p>
             </div>
         </div>

@@ -1,24 +1,44 @@
-# README
+# Overview
+ReadyTable is a clone of OpenTable, a leading online restaurant reservation platform that allows users to discover, explore, and instantly book tables at a vast array of restaurants across the globe. With its intuitive user interface, diners can effortlessly filter restaurants based on location, cuisine, restaurant name, and available reservation times, making the dining-out experience more accessible and enjoyable.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Link to Live Site](https://readytable.onrender.com/)
 
-Things you may want to cover:
+# Features
+- User Authentication: Users can sign up, log in, and maintain sessions to secure their reservations and personal settings.
+- Restaurant Browsing: Users can scroll through a list of restaurants, view detailed information, and select a restaurant based on their preferences.
+- Dynamic Search: Our dynamic search functionality allows users to find restaurants based on a keyword, be it the name of the restaurant, location, or type of cuisine.
+- Restaurant Carousel: A visually appealing carousel component that displays different cuisines, enabling users to quickly view and select from multiple options.
+- Reservation System: Users can pick their desired date, time, and party size to make a reservation at their chosen restaurant.
 
-* Ruby version
+# Technologies Used
+**Frontend:** JavaScript, React, Redux, CSS, HTML
 
-* System dependencies
+**Backend:** Ruby on Rails, Node.js
 
-* Configuration
+**Database:** PostgreSQL
 
-* Database creation
+**Hosting:** Render
 
-* Database initialization
+# Key Features
+**Feature 1:** Restaurant pages
 
-* How to run the test suite
+Each restaurant page provides users with comprehensive details about the establishment. This includes a description, address, operating hours, cuisine type, and more. Users can get a feel for what the dining experience would be like even before making a reservation. Additionally, directly integrated into the restaurant page is the reservation system. Users can quickly see available time slots and table options, allowing them to seamlessly book a reservation without navigating away from the page.
 
-* Services (job queues, cache servers, search engines, etc.)
+![Restaurant Page](./storage/restaurant-page.png)
 
-* Deployment instructions
 
-* ...
+**Feature 2:**  Reservations CRUD
+
+This feature was essential for allowing users to modify the details of existing reservations. One notable challenge was persisting the correct information through multiple components involved in modifying a reservation.
+
+![User Page](./storage/user-page.png)
+
+![Reservation Page](./storage/reservation-page.png)
+
+![Modify Reservation Page](./storage/modify-reservation-page.png)
+
+![Modify Reservation Form](./storage/modify-reservation-form.png)
+
+# Future Improvements
+- Implement a user review system where users can rate and review restaurants from past reservations.
+- Add a "Favorites" feature, allowing users to save and quickly access their preferred dining spots.
