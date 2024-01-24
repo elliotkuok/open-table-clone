@@ -88,19 +88,18 @@ function LoginForm({onClose}) {
     setEmail(e.target.value);
     const isValid = isEmailValid(e.target.value);
     setEmailInDatabase(isValid);
+    document.getElementById("invalid-email").innerHTML = "";
   };
 
   const handleContinue = (e) => {
     if (!showPasswordInput) {
-      e.preventDefault(); // Prevent default only when form should not be submitted
+      e.preventDefault();
       if (isEmailValid(email)) {
         setSubmittedEmail(email);
         setContinueButtonDisabled(false);
         setShowPasswordInput(true);
         if (emailInDatabase) {
         } else {
-          // Render the form with additional inputs for new user
-          // You can set any default values for the inputs here
           setPassword("");
           setFirstName("");
           setLastName("");
@@ -109,7 +108,8 @@ function LoginForm({onClose}) {
           setShowAdditionalInputs(true);
         }
       } else {
-        setContinueButtonDisabled(true); 
+        setContinueButtonDisabled(true);
+        document.getElementById("invalid-email").innerHTML = "Please use valid email format";
       }
     }
   };

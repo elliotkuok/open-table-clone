@@ -91,7 +91,7 @@
     color: #ccc;
 }
 
-p.error-message {
+p.error-message, #invalid-email {
     position: absolute;
     margin-top: -5px;
     font-size: 12px;
