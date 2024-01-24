@@ -18,8 +18,7 @@ const RestaurantTile = ({restaurant}) => {
     };
 
     useEffect(() => {
-        // Generate a random booking count between 10 and 300
-        const newRandomBookingCount = Math.floor(Math.random() * (300 - 10 + 1)) + 10;
+        const newRandomBookingCount = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
         setRandomBookingCount(newRandomBookingCount);
       }, []);    
 
