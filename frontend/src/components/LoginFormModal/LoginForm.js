@@ -193,7 +193,6 @@ function LoginForm({onClose}) {
 
   return (
     <>
-    {sessionUser && <Redirect to="/" />}
     <div className="login-form">
       {showPasswordInput && (
         <i className="back-icon" onClick={handleBack}>
