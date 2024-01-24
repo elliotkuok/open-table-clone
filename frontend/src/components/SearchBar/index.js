@@ -23,13 +23,13 @@ const SearchBar = () => {
     useEffect(() => {
         if (!datePickerRef.current) {
             datePickerRef.current = datePicker('.date-picker', {
-                dateSelected: selectedDate,
+                dateSelected: new Date(selectedDate),
                 formatter: (input, date, instance) => {
                     const options = { month: 'short', day: 'numeric', year: 'numeric' };
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
-                    dispatch(setSelectedDate(new Date(date).toLocaleDateString('en-US'))); // Update the selectedDate in the Redux store
+                    dispatch(setSelectedDate(new Date(date).toLocaleDateString('en-US')));
                 },
                 showAllDates: true,
                 minDate: new Date()
