@@ -36,3 +36,15 @@
     border: none;
     font-size: 14px;
 }
+
+.cancel-res-details {
+    display: flex;
+}
+
+.cancel-res-details svg {
+    height: 1.5rem;
+}
+
+#cancel-res-size {
+    margin-right: 8px;
+}
