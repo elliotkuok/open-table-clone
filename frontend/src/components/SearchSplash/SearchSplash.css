@@ -6,12 +6,12 @@
     height: 248px;
     background: linear-gradient(.647turn,#1a0a47cc,#0d1b4599 .01%,#0d1b45cc 51.04%,#0d1b45 99.1%);
 }
-
 .search-banner-container h1 {
     color: white;
     font-size: 48px;
     margin-bottom: 16px;
 }
+/* 
 .search-inputs {
     display: flex;
     border-radius: 4px;
@@ -41,7 +41,7 @@
     border-radius: 4px;
     width: 290px;
 }
-
+*/
 .search-banner-container button {
     background-color: #da3743;
     color: #fff;
@@ -53,4 +53,4 @@
     transition: all .3s ease-out;
     border-radius: 4px;
     width: 132px;
-}
+} 
