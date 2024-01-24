@@ -23,8 +23,13 @@ const UserPage = () => {
 
     const currentDateTime = moment();
 
-    const upcomingReservations = reservations.filter(reservation => moment(reservation.date + ' ' + reservation.time).isAfter(currentDateTime));
-    const pastReservations = reservations.filter(reservation => moment(reservation.date + ' ' + reservation.time).isBefore(currentDateTime));
+    const upcomingReservations = reservations
+        .filter(reservation => moment(reservation.date + ' ' + reservation.time).isAfter(currentDateTime))
+        .sort((a, b) => moment(a.date + ' ' + a.time).diff(moment(b.date + ' ' + b.time)));
+
+    const pastReservations = reservations
+        .filter(reservation => moment(reservation.date + ' ' + reservation.time).isBefore(currentDateTime))
+        .sort((a, b) => moment(b.date + ' ' + b.time).diff(moment(a.date + ' ' + a.time)));
 
     return (
     <div className="background">
