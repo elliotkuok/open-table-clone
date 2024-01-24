@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { Link } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -11,6 +11,7 @@ function ProfileButton({ user }) {
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const history = useHistory();
+    const location = useLocation();
 
   useEffect(() => {
     fetchUserData();
@@ -50,7 +51,11 @@ function ProfileButton({ user }) {
 
   const handleLogout = () => {
     dispatch(sessionActions.logout());
-    history.push('/');
+    const path = location.pathname;
+    const restaurantIdRegex = /^\/restaurants\/\d+$/;
+    if (!restaurantIdRegex.test(path)) {
+        history.push('/');
+    }
   };
 
   return (
