@@ -63,7 +63,8 @@ const SearchBar = () => {
         }
     }, [keyword]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         history.push(`/search?q=${keyword}`);
     };
     
