@@ -21,13 +21,15 @@ function CancelForm(reservationId) {
     return (
         <div className='cancel-form-container'>
             <h1>Are you sure you want to cancel this reservation?</h1>
-            <h2>Restaurant Name</h2>
-            <div className='table-details'>
-                <p>Size</p>
-                <p>Date</p>
-                <p>Time</p>
-            </div>
             <div>
+                <h2>Restaurant Name</h2>
+                <div className='table-details'>
+                    <p>Size</p>
+                    <p>Date</p>
+                    <p>Time</p>
+                </div>
+            </div>
+            <div id='cancelation-btns'>
                 <a>Nevermind</a>
                 <button onClick={handleCancelButton}>Confirm cancellation</button>
             </div>
