@@ -10,7 +10,7 @@
     font-weight: 400;
 }
 .search-results-container p {
-    margin: 20px 0 64px;
+    margin: 20px 0 48px;
     font-weight: 400;
 }
 
@@ -27,4 +27,9 @@
     border-top: 0.0625rem solid #d8d9db;
     border-bottom: 0.0625rem solid #d8d9db;
     cursor: pointer;
+}
+
+.info-details {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
 }
