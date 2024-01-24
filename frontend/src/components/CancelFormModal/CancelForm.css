@@ -1,13 +1,20 @@
 .cancel-form-container{
     padding: 32px;
     width: 420px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cancel-form-container h1 {
     font-size: 24px;
     font-weight: 500;
     line-height: 28px;
+    margin-top: 16px;
     margin-bottom: 32px;
+}
+
+.cancel-form-container h2 {
+    padding-bottom: 4px;
 }
 
 .cancel-form-container button{
@@ -25,6 +32,7 @@
     color: #da3743;
     font-weight: 500;
     margin-right: 16px;
+    cursor: pointer;
 }
 
 #cancelation-btns button {
@@ -47,4 +55,9 @@
 
 #cancel-res-size {
     margin-right: 8px;
+}
+
+#x-icon {
+    margin-left: auto;
+    cursor: pointer;
 }
