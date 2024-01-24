@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function ProfileButton({ user }) {
     const [lastName, setLastName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
+    const history = useHistory();
 
   useEffect(() => {
     fetchUserData();
@@ -47,7 +49,8 @@ function ProfileButton({ user }) {
   };
 
   const handleLogout = () => {
-    dispatch(sessionActions.logout()); // Dispatch your logout action here
+    dispatch(sessionActions.logout());
+    history.push('/');
   };
 
   return (
