@@ -191,9 +191,13 @@ function LoginForm({onClose}) {
     return emailRegex.test(email);
   };
 
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  }
+
   return (
     <>
-    <div className="login-form">
+    <div className="login-form" onClick={stopPropagation}>
       {showPasswordInput && (
         <i className="back-icon" onClick={handleBack}>
           &lt; {/* Use HTML entity for "<" */}

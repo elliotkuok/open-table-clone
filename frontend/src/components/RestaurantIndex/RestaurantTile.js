@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { restaurantImages } from '../../context/restaurantImages';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { setSelectedTime } from '../../store/reservations';
+import { Modal } from '../../context/Modal';
+import LoginForm from "../LoginFormModal/LoginForm";
 
 const RestaurantTile = ({restaurant}) => {
     const user = useSelector(state => state.session.user);
@@ -39,13 +41,16 @@ const RestaurantTile = ({restaurant}) => {
         }
 
         dispatch(setSelectedTime(time));
-        // dispatch(setSelectedDate(selectedDate));
-        // dispatch(setSelectedSize(selectedSize));
         history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${time}&date=${selectedDate}`);
     }
 
     return (
         <>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm onClose={() => setShowModal(false)} />
+                </Modal>
+            )}
             <div className='tile-img-container'>
                 <img src={restaurantImage}></img>
             </div>

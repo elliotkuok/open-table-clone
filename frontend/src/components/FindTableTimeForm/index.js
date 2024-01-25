@@ -142,11 +142,11 @@ const FindTableTime = () => {
 
     return (
         <>
-             {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-                <LoginForm onClose={() => setShowModal(false)} />
-            </Modal>
-        )}
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm onClose={() => setShowModal(false)} />
+                </Modal>
+            )}
 
             <form>
                 <div className="table-time-container">
