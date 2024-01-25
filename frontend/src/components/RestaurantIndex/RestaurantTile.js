@@ -71,7 +71,7 @@ const RestaurantTile = ({restaurant}) => {
                     </div>
                     <p>Booked {randomBookingCount} times today</p>
                 </div>
-                <div className='buttons'>
+                <div className='home-time-bttns'>
                     <button onClick={(e) => {
                         e.preventDefault();
                         handleTimeSelect("1:00 PM");
