@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { restaurantImages } from '../../context/restaurantImages';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { setSelectedTime } from '../../store/reservations';
 
 const RestaurantTile = ({restaurant}) => {
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    const selectedDate = useSelector(state => state.reservations.selectedDate);
+    const selectedSize = useSelector(state => state.reservations.selectedSize);
     const [restaurantImage] = useState(restaurantImages[Math.floor(Math.random() * restaurantImages.length)]);
     const [randomBookingCount, setRandomBookingCount] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+
+    let history = useHistory();
  
     const getPriceSymbol = (price) => {
         if (price === '$30 and under') {
@@ -21,6 +31,18 @@ const RestaurantTile = ({restaurant}) => {
         const newRandomBookingCount = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
         setRandomBookingCount(newRandomBookingCount);
       }, []);    
+
+    const handleTimeSelect = (time) => {
+        if (!user) {
+            setShowModal(true);
+            return;
+        }
+
+        dispatch(setSelectedTime(time));
+        // dispatch(setSelectedDate(selectedDate));
+        // dispatch(setSelectedSize(selectedSize));
+        history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${time}&date=${selectedDate}`);
+    }
 
     return (
         <>
@@ -50,9 +72,18 @@ const RestaurantTile = ({restaurant}) => {
                     <p>Booked {randomBookingCount} times today</p>
                 </div>
                 <div className='buttons'>
-                    <button>1:00 PM</button>
-                    <button>1:15 PM</button>
-                    <button>1:30 PM</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        handleTimeSelect("1:00 PM");
+                    }}>1:00 PM</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        handleTimeSelect("1:15 PM");
+                    }}>1:15 PM</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        handleTimeSelect("1:30 PM");
+                    }}>1:30 PM</button>
                 </div>
             </div>
         </>
