@@ -9,12 +9,11 @@ function CancelForm({reservationId, onClose}) {
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);
 
-    const resId = parseInt(reservationId.reservationId);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const handleCancelButton = async () => {
-        await dispatch(destroyReservation(resId));
+        await dispatch(destroyReservation(reservation.id));
 
         history.push(`/user/${currentUser.id}`);
     }
