@@ -53,8 +53,12 @@
     margin-top: 5px;
 }
 
-.buttons {
+.home-time-bttns {
     display: flex;
+}
+
+.home-time-bttns button:hover {
+    background: #931b23;;
 }
 
 .tile-info button {

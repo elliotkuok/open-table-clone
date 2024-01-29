@@ -15,7 +15,7 @@ const SearchResult = ({restaurant, handleTileClick}) => {
             />
           </div>
           <div className='restaurant-info'>
-            <div>{restaurant.name}</div>
+            <p>{restaurant.name}</p>
             <div className='overview-info-component'>
               <div>
                 <i data-star={restaurant.rating}></i>

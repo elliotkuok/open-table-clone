@@ -32,7 +32,7 @@ ApplicationRecord.transaction do
 
     puts "Creating restaurants..."
     # Create restaurants
-    1000.times do 
+    500.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
         # address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",

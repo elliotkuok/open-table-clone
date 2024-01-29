@@ -22,7 +22,7 @@ function NavigationBar() {
         ) : (
           <LoginFormModal />
         )}
-        {/* Add your search button here */}
+        {/* Add search button here */}
         {/* <button className="search-button">Search</button> */}
       </div>
     </nav>

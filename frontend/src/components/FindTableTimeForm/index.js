@@ -38,13 +38,13 @@ const FindTableTime = () => {
     useEffect(() => {
         if (!datePickerRef.current) {
             datePickerRef.current = datePicker('.date-picker', {
-                dateSelected: selectedDate,
+                dateSelected: new Date(selectedDate),
                 formatter: (input, date, instance) => {
                     const options = { month: 'short', day: 'numeric', year: 'numeric' };
                     input.value = new Intl.DateTimeFormat('en-US', options).format(date);
                 },
                 onSelect: (instance, date) => {
-                    setSelectedDate(date);
+                    dispatch(setSelectedDate(new Date(date).toLocaleDateString('en-US')));
                 },
                 showAllDates: true,
                 minDate: new Date()
@@ -142,11 +142,11 @@ const FindTableTime = () => {
 
     return (
         <>
-             {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-                <LoginForm onClose={() => setShowModal(false)} />
-            </Modal>
-        )}
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm onClose={() => setShowModal(false)} />
+                </Modal>
+            )}
 
             <form>
                 <div className="table-time-container">

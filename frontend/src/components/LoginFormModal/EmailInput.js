@@ -4,7 +4,7 @@ export function EmailInput({ email, handleEmailChange, continueButtonDisabled, h
     return (
       <div>
         <h1>Enter your email</h1>
-        <p>Enter the email associated with your OpenTable account, or enter a new email.</p>
+        <p>Enter the email associated with your ReadyTable account, or enter a new email.</p>
         <input
           className={inputClass}
           type="text"
@@ -13,6 +13,7 @@ export function EmailInput({ email, handleEmailChange, continueButtonDisabled, h
           onChange={handleEmailChange}
           required
         />
+        <p id="invalid-email"></p>
         <button
           type="submit"
           onClick={handleContinue}
