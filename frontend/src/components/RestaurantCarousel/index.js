@@ -10,11 +10,42 @@ const CuisineCarousel = ({ cuisine }) => {
     const restaurants = useSelector(selectAllRestaurants);
     const dispatch = useDispatch();
     const [scrollAmount, setScrollAmount] = useState(0);
+    const [isLeftButtonVisible, setIsLeftButtonVisible] = useState(false);
+    const [isRightButtonVisible, setIsRightButtonVisible] = useState(true);
     const carouselRef = useRef(null);
 
     useEffect(() => {
       dispatch(fetchRestaurants());
     }, [dispatch]);
+
+    useEffect(() => {
+        const updateButtonVisibility = () => {
+            if (carouselRef.current) {
+                const scrollLeft = carouselRef.current.scrollLeft;
+                const scrollWidth = carouselRef.current.scrollWidth;
+                const clientWidth = carouselRef.current.clientWidth;
+                const isLeftVisible = scrollLeft > 0;
+                const isRightVisible = scrollLeft + clientWidth < scrollWidth;
+
+                setIsLeftButtonVisible(isLeftVisible);
+                setIsRightButtonVisible(isRightVisible);
+            }
+        };
+
+        const handleScroll = () => {
+            updateButtonVisibility();
+        };
+
+        if (carouselRef.current) {
+            carouselRef.current.addEventListener("scroll", handleScroll);
+        }
+
+        return () => {
+            if (carouselRef.current) {
+                carouselRef.current.removeEventListener("scroll", handleScroll);
+            }
+        };
+    }, []);
 
     const cuisineRestaurants = Object.values(restaurants).filter(restaurant => restaurant.cuisine === cuisine);
 
@@ -51,8 +82,8 @@ const CuisineCarousel = ({ cuisine }) => {
                         </Link>
                     ))}
                 </div>
-                <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>
-                <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button>
+                {isLeftButtonVisible && <button className="carousel-button left-button" onClick={scrollLeft}>&lt;</button>}
+                {isRightButtonVisible && <button className="carousel-button right-button" onClick={scrollRight}>&gt;</button>}
             </div>
         </div>
 
