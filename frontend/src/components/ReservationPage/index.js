@@ -118,16 +118,18 @@ const ReservationPage = () => {
                                     <p>{reservation.date} at {reservation.time}</p>
                                 </div>
                             </div>
-                            <div className="change-res-links">
-                                <Link to={`/reservations/${id}/modify`}>Modify</Link>
-                                <a onClick={() => setShowModal(true)}>Cancel</a>
-                                {showModal && (
-                                    <Modal onClose={() => setShowModal(false)}>
-                                        <CancelForm reservationId={id} onClose={() => setShowModal(false)} />
-                                    </Modal>
-                                )}
-                                <a>Add to calendar</a>
-                            </div>
+                            {reservationStatus && (
+                                <div className="change-res-links">
+                                    <Link to={`/reservations/${id}/modify`}>Modify</Link>
+                                    <a onClick={() => setShowModal(true)}>Cancel</a>
+                                    {showModal && (
+                                        <Modal onClose={() => setShowModal(false)}>
+                                            <CancelForm reservationId={id} onClose={() => setShowModal(false)} />
+                                        </Modal>
+                                    )}
+                                    <a>Add to calendar</a>
+                                </div>
+                            )}
                         </div>
 
                     </div>
@@ -135,7 +137,7 @@ const ReservationPage = () => {
                 </div>
                 <div id="reservation-page-buttons-container">
                     
-                    <a className="reservation-page-button">
+                    <a className="reservation-page-button" href={reservationStatus ? "mailto:abc@example.com" : "https://amazon.com"}>
                         <div className="res-page-bttn-content">
                             <span>
                                 <svg
@@ -144,10 +146,11 @@ const ReservationPage = () => {
                                     height="24"
                                     viewBox="0 0 24 24"
                                     >
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19 4H5C3.89543 4 3 4.89543 3 6V15C3 16.1046 3.89543 17 5 17H11L15.36 20.63C15.6583 20.8785 16.0735 20.9318 16.425 20.7668C16.7765 20.6018 17.0006 20.2483 17 19.86V17H19C20.1046 17 21 16.1046 21 15V6C21 4.89543 20.1046 4 19 4ZM7.75 9.5C7.05964 9.5 6.5 10.0596 6.5 10.75C6.5 11.4404 7.05964 12 7.75 12C8.44036 12 9 11.4404 9 10.75C9 10.0596 8.44036 9.5 7.75 9.5ZM11 10.75C11 10.0596 11.5596 9.5 12.25 9.5C12.9404 9.5 13.5 10.0596 13.5 10.75C13.5 11.4404 12.9404 12 12.25 12C11.5596 12 11 11.4404 11 10.75ZM16.25 9.5C15.5596 9.5 15 10.0596 15 10.75C15 11.4404 15.5596 12 16.25 12C16.9404 12 17.5 11.4404 17.5 10.75C17.5 10.0596 16.9404 9.5 16.25 9.5Z" fill="#FFF"></path>
+                                    {reservationStatus ? <path fill-rule="evenodd" clip-rule="evenodd" d="M19 4H5C3.89543 4 3 4.89543 3 6V15C3 16.1046 3.89543 17 5 17H11L15.36 20.63C15.6583 20.8785 16.0735 20.9318 16.425 20.7668C16.7765 20.6018 17.0006 20.2483 17 19.86V17H19C20.1046 17 21 16.1046 21 15V6C21 4.89543 20.1046 4 19 4ZM7.75 9.5C7.05964 9.5 6.5 10.0596 6.5 10.75C6.5 11.4404 7.05964 12 7.75 12C8.44036 12 9 11.4404 9 10.75C9 10.0596 8.44036 9.5 7.75 9.5ZM11 10.75C11 10.0596 11.5596 9.5 12.25 9.5C12.9404 9.5 13.5 10.0596 13.5 10.75C13.5 11.4404 12.9404 12 12.25 12C11.5596 12 11 11.4404 11 10.75ZM16.25 9.5C15.5596 9.5 15 10.0596 15 10.75C15 11.4404 15.5596 12 16.25 12C16.9404 12 17.5 11.4404 17.5 10.75C17.5 10.0596 16.9404 9.5 16.25 9.5Z" fill="#FFF"></path> : <path d="M3 6.6A3.6 3.6 0 0 1 6.6 3h10.8A3.6 3.6 0 0 1 21 6.6v7.2a3.6 3.6 0 0 1-3.6 3.6H6.6A3.6 3.6 0 0 1 3 13.8V6.6Zm4.09.945V9.06h9.82V7.545H7.09Zm9.82 3.03H7.09v1.515h9.82v-1.515ZM9.442 21c-.383 0-.716-.153-.716-.576V17.4h6.546s-4.142 2.382-4.91 3.024c-.24.2-.613.576-.92.576Z" fill="#FFF"></path>}
+                                    
                                 </svg>
                             </span>
-                            <p>Send message</p>
+                            <p>{reservationStatus ? "Send message" : "Rate and review"}</p>
                         </div>
                     </a>
                     <a className="reservation-page-button">
@@ -159,10 +162,12 @@ const ReservationPage = () => {
                                     height="24"
                                     viewBox="0 0 24 24"
                                     >
+                                    {reservationStatus ?
                                     <path d="M20.9387 4.57022L15.0619 22.1841C14.8534 22.809 14.1773 23.1468 13.5518 22.9385C13.2356 22.8332 12.9779 22.6007 12.8409 22.2972L9.53042 14.9614C9.41001 14.6946 9.19562 14.4814 8.92805 14.3622L1.70817 11.1476C1.10592 10.8795 0.835288 10.1743 1.10369 9.57264C1.24007 9.26691 1.49877 9.03249 1.81662 8.92665L19.4286 3.06153C20.0541 2.85322 20.7302 3.19096 20.9387 3.81588C21.0204 4.0607 21.0204 4.3254 20.9387 4.57022Z" fill="#FFF"></path>
+                                    : <path d="M3 5.001a2 2 0 0 1 2.443-1.95L11 4.314v16.678l-6.444-1.466A2 2 0 0 1 3 17.576V5.001ZM13 21V4.323l5.572-1.22A2 2 0 0 1 21 5.057v12.582a2 2 0 0 1-1.572 1.954L13 21Z" fill="#FFF"></path>}
                                 </svg>
                             </span>
-                            <p>Get directions</p>
+                            <p>{reservationStatus ? "Get directions" : "Browse menu"}</p>
                         </div>
                     </a>
                 </div>
