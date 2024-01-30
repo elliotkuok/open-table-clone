@@ -3,6 +3,7 @@ import { useHistory, useLocation, useParams } from 'react-router-dom/cjs/react-r
 import { useDispatch, useSelector } from 'react-redux';
 import './ReservationForm.css';
 import { postReservation } from '../../store/reservations';
+import { fetchRestaurant, selectRestaurant } from '../../store/restaurants';
 
 const ReservationForm = () => {
     const dispatch = useDispatch();
@@ -14,10 +15,18 @@ const ReservationForm = () => {
     const time = params.get('time')
     const unformattedDate = params.get('date')
     const date = formatDate(unformattedDate)
-    const restaurant = useSelector(state => state.restaurants[id]);
+    const restaurant = useSelector(selectRestaurant(id));
     const user = useSelector(state => state.session.user);
-
+    
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || "");
+
+    useEffect(() => {
+        dispatch(fetchRestaurant(id));
+      }, [dispatch, id]);
+
+      if (!restaurant) {
+        return;
+    }
 
     const handlePhoneNumberChange = (event) => {
         setPhoneNumber(event.target.value);
@@ -60,7 +69,7 @@ const ReservationForm = () => {
                 <div className='res-details-container'>
                     <div className='res-img-container'>
                         <img
-                        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                        src={restaurant.image}
                         alt="Placeholder"
                         style={{ width: '4rem', height: '4rem', borderRadius: '4px' }}
                         />
