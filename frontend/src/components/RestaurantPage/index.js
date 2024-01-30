@@ -23,10 +23,7 @@ const RestaurantPage = () => {
     return (
         <div className="page-container">
             <div className="content">
-                {/* <div className="restaurant-banner">
-                    <img className="banner-image" src={restaurantImage} alt="restaurant" />
-                </div> */}
-                <div className="restaurant-banner" style={{ backgroundImage: `url(${restaurantImage})` }}></div>
+                <div className="restaurant-banner" style={{ backgroundImage: `url(${restaurant.image})` }}></div>
                 <div className="restaurant-container">
                     <div className='restaurant-info'>
                         <div className='restaurant-tabs'>
