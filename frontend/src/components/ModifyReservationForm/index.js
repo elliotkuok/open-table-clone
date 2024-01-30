@@ -42,7 +42,7 @@ const ModifyReservationForm = () => {
         const time = selectedTime;
         const party_size = parseInt(selectedSize, 10);
         const user_id = user.id
-        const restaurant_id = parseInt(id, 10)
+        const restaurant_id = parseInt(restaurantId, 10)
 
         const reservationData = {
             id,
