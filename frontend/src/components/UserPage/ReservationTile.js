@@ -1,32 +1,26 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './UserPage.css';
 import { useEffect } from "react";
 import { width } from 'dom-helpers';
-import { selectRestaurant } from '../../store/restaurants';
+import { selectRestaurant, fetchRestaurant } from '../../store/restaurants';
 import { useHistory } from 'react-router-dom';
 
 
 const ReservationTile = ({reservation, isUpcoming}) => {
-    const imgSamples = [
-        "https://assets.bonappetit.com/photos/631788f25635b01b337f6bb4/4:3/w_2000,h_1500,c_limit/220827_GuangXu_BA-UncleLou_014.jpg",
-        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
-        "https://media.timeout.com/images/105940814/750/422/image.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIn7Cr0PMTJS4OiGciuPfnrdS3Tkj4cORKOdxpkaVTv-myF8SQJ9t274Gt1ZZ7XrGtYwo&usqp=CAU"
-    ]
-
-    const getRandomImage = (images) => {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        return images[randomIndex];
-    };
+    const dispatch = useDispatch();
     
-    const randomImageSrc = getRandomImage(imgSamples);
-
     const history = useHistory();
 
     const handleTileClick = () => {
         history.push(`/reservations/${reservation.id}`);
     };
-    
+
+    useEffect(() => {
+        dispatch(fetchRestaurant(reservation.restaurantId));
+    }, [dispatch, reservation.restaurantId]);
+    const restaurant = useSelector(selectRestaurant(reservation.restaurantId.toString()));
+    console.log("restaurant", restaurant)
+
     const confirmedIcon = (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +48,7 @@ const ReservationTile = ({reservation, isUpcoming}) => {
         <div className="reservation-tile-container" onClick={handleTileClick}>
             <div className='res-img-container'>
                 <img
-                src={randomImageSrc}
+                src={restaurant?.image}
                 alt="Placeholder"
                 />
             </div>
