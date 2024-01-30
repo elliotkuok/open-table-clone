@@ -98,3 +98,28 @@
     display: flex;
     align-items: center;
 }
+
+#query-btn-container {
+    display: flex;
+}
+
+@media screen and (max-width: 1056px) {
+    .search-inputs {
+        display: flex;
+        flex-direction: column;
+        margin-top: 32px;
+    }
+
+    #query-btn-container {
+        margin-top: 16px;
+    }
+
+    #search-input-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .search-bar-container {
+        margin-bottom: 32px;
+    }
+}
