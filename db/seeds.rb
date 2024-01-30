@@ -5,6 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
+
+image_urls = [
+    'https://readytable-seeds.s3.us-west-1.amazonaws.com/1.avif',
+    'https://readytable-seeds.s3.us-west-1.amazonaws.com/2.avif',
+    'https://readytable-seeds.s3.us-west-1.amazonaws.com/3.avif',
+  ]
 
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
@@ -59,7 +66,8 @@ ApplicationRecord.transaction do
         dining_style: ['Casual', 'Fine Dining', 'Quick Bites', 'Barbecue', 'Bistro', 'Brasserie', 'Buffet', 'Cafe', 'Diner', 'Family Style', 'Fast Food', 'Gastropub', 'Pizzeria', 'Pub', 'Steakhouse', 'Sushi', 'Tapas/Small Plates', 'Vegetarian/Vegan'].sample,
         dress_code: ["Casual", "Business Casual", "Smart Casual", "Dressy", "None"].sample,
         parking_details: ["Street Parking", "Public Parking Lot", "Valet Parking", "Garage Parking", "Parking Garage Nearby", "Private Lot", "On-site Parking", "Paid Parking", "Complimentary Valet", "Self-Parking", "Nearby Parking", "Covered Parking", "Free Parking", "Metered Parking", "Hotel Parking", "Secure Parking", "Ample Parking", "Parking Available", "Designated Parking Area"].sample,
-        website: Faker::Internet.url
+        website: Faker::Internet.url,
+        image: image_urls.sample
         }) 
     end
 

@@ -52,7 +52,7 @@ const RestaurantTile = ({restaurant}) => {
                 </Modal>
             )}
             <div className='tile-img-container'>
-                <img src={restaurantImage}></img>
+                <img src={restaurant.image}></img>
             </div>
             <div className='tile-info'>
                 <h5>{restaurant.name}</h5>
