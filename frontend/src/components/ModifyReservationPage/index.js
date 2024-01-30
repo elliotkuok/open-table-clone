@@ -24,6 +24,7 @@ const ModifyReservationPage = () => {
             dispatch(fetchRestaurant(restaurantId));
         }
     }, [restaurantId]);
+    
     const restaurant = useSelector(state => {
         if (restaurantId) {
             return state.restaurants[restaurantId]

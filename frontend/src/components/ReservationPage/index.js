@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect, useState } from "react";
 import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
-import { selectRestaurant } from "../../store/restaurants";
+import { selectRestaurant, fetchRestaurant } from "../../store/restaurants";
 import moment from "moment";
 
 const ReservationPage = () => {
@@ -14,7 +14,7 @@ const ReservationPage = () => {
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);
     const restaurantId = reservation?.restaurantId;
-    const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
+    // const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
     const [showModal, setShowModal] = useState(false);
     
 
@@ -24,10 +24,22 @@ const ReservationPage = () => {
         }
     }, [id, dispatch]);
 
+    
+    useEffect(() => {
+        if (restaurantId) {
+            dispatch(fetchRestaurant(restaurantId));
+        }
+    }, [restaurantId]);
+    
+    const restaurant = useSelector(state => {
+        if (restaurantId) {
+            return state.restaurants[restaurantId]
+        }
+    });
+    
     if (!reservation) {
         return <div>Loading...</div>;
     }
-
     const dateTimeString = `${reservation.date} ${reservation.time}`;
     const reservationDate = moment(dateTimeString, 'MMM D, YYYY h:mm A').toDate();
 
@@ -66,7 +78,7 @@ const ReservationPage = () => {
                     <div className='res-details-container'>
                         <div className='res-img-container'>
                             <img
-                            src="https://assets.bonappetit.com/photos/631788f25635b01b337f6bb4/4:3/w_2000,h_1500,c_limit/220827_GuangXu_BA-UncleLou_014.jpg"
+                            src={restaurant?.image}
                             alt="Placeholder"
                             />
                         </div>
