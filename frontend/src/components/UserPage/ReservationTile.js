@@ -18,8 +18,8 @@ const ReservationTile = ({reservation, isUpcoming}) => {
     useEffect(() => {
         dispatch(fetchRestaurant(reservation.restaurantId));
     }, [dispatch, reservation.restaurantId]);
+    
     const restaurant = useSelector(selectRestaurant(reservation.restaurantId.toString()));
-    console.log("restaurant", restaurant)
 
     const confirmedIcon = (
         <svg
