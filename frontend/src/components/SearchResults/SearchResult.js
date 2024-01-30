@@ -2,14 +2,12 @@ import { useState } from 'react'
 import { restaurantImages } from '../../context/restaurantImages';
 
 const SearchResult = ({restaurant, handleTileClick}) => {
-    const [restaurantImage] = useState(restaurantImages[Math.floor(Math.random() * restaurantImages.length)]);
-
 
     return (
         <div className='result-container' onClick={() => handleTileClick(restaurant)}>
           <div className='res-img-container'>
             <img
-              src={restaurantImage}
+              src={restaurant.image}
               alt="Placeholder"
               style={{ width: '205px', height: '205px', borderRadius: '4px' }}
             />
