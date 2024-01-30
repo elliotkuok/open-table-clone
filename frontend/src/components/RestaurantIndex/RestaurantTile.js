@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { restaurantImages } from '../../context/restaurantImages';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { setSelectedTime } from '../../store/reservations';
 import { Modal } from '../../context/Modal';
@@ -11,7 +10,6 @@ const RestaurantTile = ({restaurant}) => {
     const dispatch = useDispatch();
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
-    const [restaurantImage] = useState(restaurantImages[Math.floor(Math.random() * restaurantImages.length)]);
     const [randomBookingCount, setRandomBookingCount] = useState(0);
     const [showModal, setShowModal] = useState(false);
 

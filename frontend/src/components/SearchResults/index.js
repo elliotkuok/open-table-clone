@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import SearchBar from '../SearchBar';
 import './SearchResults.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
-import { restaurantImages } from '../../context/restaurantImages';
 import SearchResult from './SearchResult';
 
 function useQuery() {

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { restaurantImages } from '../../context/restaurantImages';
 
 const SearchResult = ({restaurant, handleTileClick}) => {
 
