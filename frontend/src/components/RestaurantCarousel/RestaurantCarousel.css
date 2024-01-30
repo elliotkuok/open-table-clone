@@ -16,6 +16,12 @@
     font-size: 1.5rem;
 }
 
+@media screen and (min-width: 1216px) {
+    .carousel-header h3 {
+      margin-left: 32px;
+    }
+}
+
 .restaurant-carousel-container { /* Container for carousel and buttons */
     position: relative; /* Establishes a point of reference for absolutely positioned children */
     width: 100%;
