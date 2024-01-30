@@ -104,3 +104,11 @@
     min-width: 1.5rem;
     width: 1.5rem;
 }
+
+.res-request-info > a {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Cabin', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+}

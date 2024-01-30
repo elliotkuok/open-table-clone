@@ -83,7 +83,9 @@ const ReservationPage = () => {
                             />
                         </div>
                         <div className='res-request-info'>
-                            <h1>{reservation.restaurantName}</h1>
+                            <Link to={`/restaurants/${restaurantId}`}>
+                                {reservation.restaurantName}
+                            </Link>
                             <div className='res-confirmed'>
                                 {reservationStatus ? confirmedIcon : completedIcon}
                                 <p>{reservationStatus ? 'Reservation confirmed' : 'Reservation completed'}</p>
