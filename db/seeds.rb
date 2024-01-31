@@ -57,6 +57,7 @@ image_urls = [
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
+    Review.destroy_all
     Reservation.destroy_all
     Restaurant.destroy_all
     User.destroy_all
@@ -66,6 +67,7 @@ ApplicationRecord.transaction do
     ApplicationRecord.connection.reset_pk_sequence!('users')
     ApplicationRecord.connection.reset_pk_sequence!('restaurants')
     ApplicationRecord.connection.reset_pk_sequence!('reservations')
+    ApplicationRecord.connection.reset_pk_sequence!('reviews')
 
 
     puts "Creating users..."
@@ -130,6 +132,18 @@ ApplicationRecord.transaction do
         party_size: 6
     )
 
+    puts "Creating reviews..."
+    puts "Creating a review for user: #{User.find_by(email: 'demo@user.io').inspect}"
+    Review.create!(
+        reservation_id: 2,
+        overall_rating: 5,
+        food_rating: 5,
+        service_rating: 5,
+        ambience_rating: 4,
+        value_rating: 4,
+        content: "I really love it here"
+    )
+    puts "Review created!"
 
     puts "Done!"
 end
