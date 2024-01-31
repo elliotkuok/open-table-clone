@@ -7,6 +7,7 @@ import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
 import { selectRestaurant, fetchRestaurant } from "../../store/restaurants";
 import moment from "moment";
+import ReviewFormModal from "../ReviewFormModal";
 
 const ReservationPage = () => {
     const {id} = useParams();
@@ -70,6 +71,17 @@ const ReservationPage = () => {
             <path fillRule="evenodd" clipRule="evenodd" d="M8.5 12C8.5 11.4477 8.94772 11 9.5 11L17.2254 11C17.7777 11 18.2254 11.4477 18.2254 12C18.2254 12.5523 17.7777 13 17.2254 13L9.5 13C8.94772 13 8.5 12.5523 8.5 12Z" fill="#2D333F"></path>
         </svg>
     );
+
+    const handleButtonClick = () => {
+        if (reservationStatus) {
+          // If reservationStatus is true, open the link
+          window.location.href = "mailto:abc@example.com";
+        } else {
+        //   // If reservationStatus is false, set the state to open the modal
+          setShowModal(true)
+        }
+      };
+    
     
     return (
         <div id="reservation-page-container">
@@ -137,7 +149,7 @@ const ReservationPage = () => {
                 </div>
                 <div id="reservation-page-buttons-container">
                     
-                    <a className="reservation-page-button" href={reservationStatus ? "mailto:abc@example.com" : "https://amazon.com"}>
+                    <a className="reservation-page-button" onClick={handleButtonClick}>
                         <div className="res-page-bttn-content">
                             <span>
                                 <svg
@@ -153,8 +165,13 @@ const ReservationPage = () => {
                             <p>{reservationStatus ? "Send message" : "Rate and review"}</p>
                         </div>
                     </a>
+                    {showModal && (
+                        <Modal onClose={() => setShowModal(false)}>
+                            <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} onClose={() => setShowModal(false)}/>
+                        </Modal>
+                    )}
                     <a className="reservation-page-button">
-                    <div className="res-page-bttn-content">
+                        <div className="res-page-bttn-content">
                             <span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

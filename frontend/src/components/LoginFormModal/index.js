@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-// import { Modal } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 // import './LoginForm.css';
 

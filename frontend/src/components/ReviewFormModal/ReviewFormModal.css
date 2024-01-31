@@ -1,0 +1,24 @@
+#ratings-modal-container {
+    display: flex;
+}
+
+#ratings-modal-content {
+    text-align: center;
+}
+
+#ratings-modal-content h1 {
+    font-size: 24px;
+    max-width: 90%;
+    margin: auto;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0; 
+}
+
+.rating-title {
+    width: 50px;
+    text-align: left;
+}
