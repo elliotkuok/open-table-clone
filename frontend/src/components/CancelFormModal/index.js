@@ -24,7 +24,7 @@ function CancelForm({reservationId, onClose}) {
 
     return (
             <div className='cancel-form-container'>
-                <div id="x-icon" onClick={handleCloseModal}>
+                <div className="x-icon" onClick={handleCloseModal}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

@@ -14,7 +14,7 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
 
     return (
             <div className='ratings-modal-container'>
-                <div id="x-icon" onClick={handleCloseModal}>
+                <div className="x-icon" onClick={handleCloseModal}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -56,6 +56,10 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
                             <StarRating />
                         </div>
                     </div>
+                    <div>
+                        <textarea placeholder='Please enter your review here (optional)'></textarea>
+                    </div>
+                    <button type='submit'>Submit</button>
                 </div>
                 
                 
