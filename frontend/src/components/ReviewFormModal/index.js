@@ -38,27 +38,22 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
                         <div className='rating'>
                             <p className='rating-title'>Overall</p>
                             <StarRating />
-                            <p className='rating-placeholder'>Placeholder</p>
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Food</p>
                             <StarRating />
-                            <p className='rating-placeholder'>Placeholder</p>
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Service</p>
                             <StarRating />
-                            <p className='rating-placeholder'>Placeholder</p>
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Ambience</p>
                             <StarRating />
-                            <p className='rating-placeholder'>Placeholder</p>
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Value</p>
                             <StarRating />
-                            <p className='rating-placeholder'>Placeholder</p>
                         </div>
                     </div>
                 </div>
