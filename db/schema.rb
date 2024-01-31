@@ -79,8 +79,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_221624) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "restaurant_id", null: false
     t.bigint "reservation_id", null: false
     t.integer "overall_rating", null: false
     t.integer "food_rating", null: false
@@ -91,8 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_221624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
-    t.index ["restaurant_id"], name: "index_reviews_on_restaurant_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,6 +110,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_221624) do
   add_foreign_key "reservations", "restaurants"
   add_foreign_key "reservations", "users"
   add_foreign_key "reviews", "reservations"
-  add_foreign_key "reviews", "restaurants"
-  add_foreign_key "reviews", "users"
 end
