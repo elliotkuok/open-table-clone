@@ -40,3 +40,7 @@ select {
     color: #2d333f;
     font-size: 16px;
 }
+
+a {
+    cursor: pointer;
+}

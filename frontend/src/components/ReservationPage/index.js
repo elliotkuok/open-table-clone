@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import './ReservationPage.css';
 import { fetchReservation, selectReservation } from "../../store/reservations";
-import { Link, useParams } from 'react-router-dom/cjs/react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { useEffect, useState } from "react";
 import { Modal } from '../../context/Modal';
 import CancelForm from "../CancelFormModal";
@@ -15,6 +15,7 @@ const ReservationPage = () => {
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);
     const restaurantId = reservation?.restaurantId;
+    const history = useHistory();
     // const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
     const [showModal, setShowModal] = useState(false);
     
@@ -74,15 +75,22 @@ const ReservationPage = () => {
 
     const handleButtonClick = () => {
         if (reservationStatus) {
-          // If reservationStatus is true, open the link
           window.location.href = "mailto:abc@example.com";
         } else {
-        //   // If reservationStatus is false, set the state to open the modal
           setShowModal(true)
         }
-      };
+    };
     
-    
+    const handleDirBtnClick = () => {
+        if (reservationStatus) {
+            const restaurantAddress = encodeURIComponent(restaurant.address);
+            const googleMapsURL = `https://www.google.com/maps/search/?api=1&query=${restaurantAddress}`;
+            window.open(googleMapsURL, "_blank");
+          } else {
+            history.push(`/restaurants/${restaurantId}`);
+          }
+    }
+
     return (
         <div id="reservation-page-container">
             <div className="res-container">
@@ -170,7 +178,7 @@ const ReservationPage = () => {
                             <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} onClose={() => setShowModal(false)}/>
                         </Modal>
                     )}
-                    <a className="reservation-page-button">
+                    <a className="reservation-page-button" onClick={handleDirBtnClick}>
                         <div className="res-page-bttn-content">
                             <span>
                                 <svg
