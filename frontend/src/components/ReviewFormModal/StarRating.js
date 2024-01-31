@@ -6,6 +6,8 @@ import { Rating } from 'react-simple-star-rating';
 const StarRating = () => {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
+    const [clicked, setClicked] = useState(false); 
+    const [hovered, setHovered] = useState(false);
 
     const placeholderTexts = [
         "Poor",
@@ -28,7 +30,10 @@ const StarRating = () => {
                                 type="radio"
                                 name="rating"
                                 value={currentRating}
-                                onChange={() => setRating(currentRating)}
+                                onChange={() => {
+                                    setRating(currentRating);
+                                    setClicked(true);
+                                }}
                             />
                             <span
                                 className="star"
@@ -36,8 +41,14 @@ const StarRating = () => {
                                     color:
                                         currentRating <= (hover || rating) ? "#da3743" : "#e4e5e9",
                                 }}
-                                onMouseEnter={() => setHover(currentRating)}
-                                onMouseLeave={() => setHover(null)}
+                                onMouseEnter={() => {
+                                    setHover(currentRating);
+                                    setHovered(true);
+                                }}
+                                onMouseLeave={() => {
+                                    setHover(null);
+                                    setHovered(false);
+                                }}
                             >
                                 &#9733;
                             </span>
@@ -46,7 +57,7 @@ const StarRating = () => {
                 })}
             </div>
             <div className="placeholder-text">
-                {hover ? placeholderTexts[hover - 1] : ""}
+                {hovered ? placeholderTexts[hover - 1] : (clicked ? placeholderTexts[rating - 1] : "")}
             </div>
         </div>
     );
