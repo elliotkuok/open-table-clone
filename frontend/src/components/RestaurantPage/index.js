@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurant, selectRestaurant } from '../../store/restaurants';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import FindTableTime from '../FindTableTimeForm';
+import UserReview from './UserReview';
 
 const RestaurantPage = () => {
     const {id} = useParams();
@@ -109,8 +110,78 @@ const RestaurantPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div id='reviews'>
-                            <h2>What 31 people are saying</h2>
+                        <div id='reviews-section-container'>
+                            <div>
+                                <h2>What 31 people are saying</h2>
+                                <h4>Overall ratings and reviews</h4>
+                                <div id='review-summary-container'>
+                                    <div>
+                                        <p>Reviews can only be made by diners who have eaten at this restaurant</p>
+                                        <div id='avg-review-text-container'>
+                                            <div>
+                                                {Array.from({ length: 5 }).map((_, index) => (
+                                                    <span>
+                                                    ★
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <p>4.3 based on recent ratings</p>
+                                        </div>
+                                        <div id='individual-rtg-avg'>
+                                            <div>
+                                                <h4>4.3</h4>
+                                                <p>Food</p>
+                                            </div>
+                                            <div>
+                                                <h4>4.4</h4>
+                                                <p>Service</p>
+                                            </div>
+                                            <div>
+                                                <h4>4.3</h4>
+                                                <p>Ambience</p>
+                                            </div>
+                                            <div>
+                                                <h4>3.8</h4>
+                                                <p>Value</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <li id='meter-list'>
+                                            <label for="meter-5" className='meter-label'>5</label>
+                                            <meter id="meter-5" className='rating-meter' value="69.64285714285714" min="0" max="100"><div></div></meter>
+                                        </li>
+                                        <li id='meter-list'>
+                                            <label for="meter-4" className='meter-label'>4</label>
+                                            <meter id="meter-4" className='rating-meter' value="69.64285714285714" min="0" max="100"><div></div></meter>
+                                        </li>
+                                        <li id='meter-list'>
+                                            <label for="meter-3" className='meter-label'>3</label>
+                                            <meter id="meter-3" className='rating-meter' value="69.64285714285714" min="0" max="100"><div></div></meter>
+                                        </li>
+                                        <li id='meter-list'>
+                                            <label for="meter-2" className='meter-label'>2</label>
+                                            <meter id="meter-2" className='rating-meter' value="69.64285714285714" min="0" max="100"><div></div></meter>
+                                        </li>
+                                        <li id='meter-list'>
+                                            <label for="meter-1" className='meter-label'>1</label>
+                                            <meter id="meter-1" className='rating-meter' value="69.64285714285714" min="0" max="100"><div></div></meter>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div id='users-reviews-search-container'>
+                                    <div>
+                                        <input></input>
+                                        <div id='review-num-sort-container'>
+                                            <p># Reviews</p>
+                                            <button>Sort Dropdown</button>
+                                        </div>
+                                    </div>
+                                    <div id='users-reviews-container'>
+                                        <UserReview />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='restaurant-sidebar'>

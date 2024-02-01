@@ -88,7 +88,7 @@
     margin-top: 32px;
 }
 
-#menu h2, #reviews h2 {
+#menu h2, #reviews-section-container h2 {
     border-bottom: 1px solid lightgray;
     margin: 0;
     padding: 16px 0;
@@ -180,3 +180,47 @@ margin-top: 18px;
     margin-left: 5px;
 }
   
+
+/* Review styling */
+#review-summary-container {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    padding: 16px 0;
+}
+#avg-review-text-container {
+    display: flex;
+}
+
+#individual-rtg-avg {
+    display: flex;
+}
+
+#meter-list {
+    list-style-type: none
+}
+
+#users-reviews-search-container input{
+    width: 100%;
+    margin: 16px 0;
+}
+
+#users-reviews-container {
+    margin: 32px 0;
+}
+
+#review-num-sort-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rst-user-review-container {
+    display: flex;
+}
+
+.rating-date-container {
+    display: flex;
+}
+
+.rating-breakdown-container{
+    display: flex;
+}
