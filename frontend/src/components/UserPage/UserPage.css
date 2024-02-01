@@ -64,3 +64,10 @@
     border-radius: 4px;
 }
 
+.user-rating-container {
+    display: flex;
+    margin-top: 8px;
+}
+.user-rating-container p {
+    margin-right: 8px;
+}

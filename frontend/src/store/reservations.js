@@ -190,9 +190,6 @@ const reservationsReducer = (state = initialState, action) => {
             }
                 return nextState;
         case RECEIVE_RESERVATION:
-            // nextState[action.payload.reservation.id] = action.payload.reservation;
-            // return nextState;
-            case RECEIVE_RESERVATION:
             console.log("Reducer state before:", nextState); // Debugging line
             console.log("Payload received:", action.payload.reservation); // Debugging line
             nextState[action.payload.reservation.id] = action.payload.reservation;

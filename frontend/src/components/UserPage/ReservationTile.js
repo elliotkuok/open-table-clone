@@ -88,8 +88,18 @@ const ReservationTile = ({reservation, isUpcoming}) => {
                             <p>{reservation.date} at {reservation.time}</p>
                         </div>
                 </div>
-            
-    
+                {!isUpcoming && (
+                    <div className='user-rating-container'>
+                        <p>{reservation.review ? "Your rating" : "Leave a review"}</p>
+                        <div>
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        &#9733;
+                        </div>
+                    </div>
+                ) }
             </div>
         </div>
     )
