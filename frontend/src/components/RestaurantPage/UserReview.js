@@ -3,7 +3,11 @@ const UserReview = () => {
     return (
         <div className='rst-user-review-container'>
             <div className='rst-user-profile'>
-                <p>Pic</p>
+                <button id="profile-button">
+                    <span style={{ marginTop: '4px', marginLeft: '2px'}}>
+                    DU
+                    </span>
+                </button>
                 <p>Name</p>
                 <p>Location</p>
                 <p># of reviews</p>

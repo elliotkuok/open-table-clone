@@ -171,7 +171,7 @@ const RestaurantPage = () => {
                                 </div>
                                 <div id='users-reviews-search-container'>
                                     <div>
-                                        <input></input>
+                                        <input placeholder='Search all reviews'></input>
                                         <div id='review-num-sort-container'>
                                             <p># Reviews</p>
                                             <button>Sort Dropdown</button>
