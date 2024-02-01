@@ -80,6 +80,86 @@ ApplicationRecord.transaction do
         phone_number: '5103626446'
     )
 
+    User.create!(
+        email: 'user1@example.com',
+        password: 'password',
+        first_name: 'John',
+        last_name: 'Doe',
+        phone_number: '1234567890'
+    )
+    
+    User.create!(
+        email: 'user2@example.com',
+        password: 'password',
+        first_name: 'Jane',
+        last_name: 'Smith',
+        phone_number: '9876543210'
+    )
+    
+    User.create!(
+        email: 'user3@example.com',
+        password: 'password',
+        first_name: 'Alice',
+        last_name: 'Johnson',
+        phone_number: '5555555555'
+    )
+    
+    User.create!(
+        email: 'user4@example.com',
+        password: 'password',
+        first_name: 'Bob',
+        last_name: 'Brown',
+        phone_number: '7777777777'
+    )
+    
+    User.create!(
+        email: 'user5@example.com',
+        password: 'password',
+        first_name: 'Eva',
+        last_name: 'Williams',
+        phone_number: '8888888888'
+    )
+    
+    User.create!(
+        email: 'user6@example.com',
+        password: 'password',
+        first_name: 'Michael',
+        last_name: 'Davis',
+        phone_number: '9999999999'
+    )
+    
+    User.create!(
+        email: 'user7@example.com',
+        password: 'password',
+        first_name: 'Sophia',
+        last_name: 'Wilson',
+        phone_number: '3333333333'
+    )
+    
+    User.create!(
+        email: 'user8@example.com',
+        password: 'password',
+        first_name: 'Matthew',
+        last_name: 'Moore',
+        phone_number: '4444444444'
+    )
+    
+    User.create!(
+        email: 'user9@example.com',
+        password: 'password',
+        first_name: 'Olivia',
+        last_name: 'Lee',
+        phone_number: '6666666666'
+    )
+    
+    User.create!(
+        email: 'user10@example.com',
+        password: 'password',
+        first_name: 'Daniel',
+        last_name: 'Taylor',
+        phone_number: '2222222222'
+    )
+    
     puts "Creating restaurants..."
     # Create restaurants
     500.times do 
@@ -147,6 +227,78 @@ ApplicationRecord.transaction do
         party_size: 4
     )
 
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 2,
+        date: 'Jan 10, 2023',
+        time: '12:00 PM',
+        party_size: 6
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 3,
+        date: 'Feb 5, 2023',
+        time: '1:30 PM',
+        party_size: 8
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 4,
+        date: 'Mar 20, 2023',
+        time: '3:45 PM',
+        party_size: 10
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 5,
+        date: 'Apr 8, 2023',
+        time: '5:15 PM',
+        party_size: 4
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 6,
+        date: 'May 15, 2023',
+        time: '6:30 PM',
+        party_size: 7
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 7,
+        date: 'Jun 25, 2023',
+        time: '2:45 PM',
+        party_size: 9
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 8,
+        date: 'Jul 12, 2023',
+        time: '4:30 PM',
+        party_size: 5
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 9,
+        date: 'Aug 8, 2023',
+        time: '7:00 PM',
+        party_size: 11
+    )
+    
+    Reservation.create!(
+        restaurant_id: 2,
+        user_id: 10,
+        date: 'Sep 1, 2023',
+        time: '8:00 PM',
+        party_size: 12
+    )    
+
     puts "Creating reviews..."
     Review.create!(
         reservation_id: 2,
@@ -167,6 +319,96 @@ ApplicationRecord.transaction do
         value_rating: 5,
         content: ""
     )
+
+    Review.create!(
+        reservation_id: 5,
+        overall_rating: 3,
+        food_rating: 3,
+        service_rating: 4,
+        ambience_rating: 2,
+        value_rating: 3,
+        content: "Not bad, could be better."
+    )
+    
+    Review.create!(
+        reservation_id: 6,
+        overall_rating: 5,
+        food_rating: 5,
+        service_rating: 5,
+        ambience_rating: 5,
+        value_rating: 5,
+        content: "Absolutely fantastic!"
+    )
+    
+    Review.create!(
+        reservation_id: 7,
+        overall_rating: 4,
+        food_rating: 4,
+        service_rating: 3,
+        ambience_rating: 4,
+        value_rating: 4,
+        content: "Good food, but service could improve."
+    )
+    
+    Review.create!(
+        reservation_id: 8,
+        overall_rating: 2,
+        food_rating: 2,
+        service_rating: 1,
+        ambience_rating: 3,
+        value_rating: 2,
+        content: "Disappointing experience."
+    )
+    
+    Review.create!(
+        reservation_id: 9,
+        overall_rating: 5,
+        food_rating: 5,
+        service_rating: 5,
+        ambience_rating: 5,
+        value_rating: 5,
+        content: "The best restaurant in town!"
+    )
+    
+    Review.create!(
+        reservation_id: 10,
+        overall_rating: 3,
+        food_rating: 4,
+        service_rating: 3,
+        ambience_rating: 3,
+        value_rating: 2,
+        content: "Average dining experience."
+    )
+    
+    Review.create!(
+        reservation_id: 11,
+        overall_rating: 4,
+        food_rating: 5,
+        service_rating: 4,
+        ambience_rating: 4,
+        value_rating: 4,
+        content: "Lovely atmosphere and great food."
+    )
+    
+    Review.create!(
+        reservation_id: 12,
+        overall_rating: 5,
+        food_rating: 5,
+        service_rating: 5,
+        ambience_rating: 5,
+        value_rating: 5,
+        content: "A truly wonderful dining experience!"
+    )
+    
+    Review.create!(
+        reservation_id: 13,
+        overall_rating: 2,
+        food_rating: 2,
+        service_rating: 3,
+        ambience_rating: 2,
+        value_rating: 2
+    )
+    
     
 
     puts "Done!"
