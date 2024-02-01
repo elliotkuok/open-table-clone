@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { width } from 'dom-helpers';
 import { selectRestaurant, fetchRestaurant } from '../../store/restaurants';
 import { useHistory } from 'react-router-dom';
+import { fetchReview, selectReview } from '../../store/reviews';
 
 
 const ReservationTile = ({reservation, isUpcoming}) => {
@@ -18,8 +19,15 @@ const ReservationTile = ({reservation, isUpcoming}) => {
     useEffect(() => {
         dispatch(fetchRestaurant(reservation.restaurantId));
     }, [dispatch, reservation.restaurantId]);
+
+    useEffect(() => {
+        if (reservation.reviewId) {
+            dispatch(fetchReview(reservation.reviewId));
+        }
+    }, [dispatch, reservation.reviewId]);
     
     const restaurant = useSelector(selectRestaurant(reservation.restaurantId.toString()));
+    const review = useSelector(selectReview(reservation.reviewId))
 
     const confirmedIcon = (
         <svg
@@ -90,11 +98,11 @@ const ReservationTile = ({reservation, isUpcoming}) => {
                 </div>
                 {!isUpcoming && (
                     <div className='user-rating-container'>
-                        <p>{reservation.review ? "Your rating" : "Leave a review"}</p>
+                        <p>{reservation.reviewId ? "Your rating" : "Leave a review"}</p>
                         <div>
                             {Array.from({ length: 5 }).map((_, index) => (
-                                <span key={index} className={reservation.review ? 'red-star' : 'grey-star'}>
-                                    ★
+                                <span key={index} className={index < review?.overallRating ? 'red-star' : 'grey-star'}>
+                                ★
                                 </span>
                             ))}
                         </div>
