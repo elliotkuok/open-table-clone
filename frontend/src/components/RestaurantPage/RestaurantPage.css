@@ -217,10 +217,19 @@ margin-top: 18px;
     display: flex;
 }
 
+.rst-user-profile {
+    margin-right: 16px;
+}
+
 .rating-date-container {
     display: flex;
 }
 
 .rating-breakdown-container{
     display: flex;
+}
+
+.rst-user-review-container {
+    padding: 32px;
+    border-bottom: 1px solid lightgray;
 }

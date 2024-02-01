@@ -9,7 +9,6 @@ const UserReview = () => {
                     </span>
                 </button>
                 <p>Name</p>
-                <p>Location</p>
                 <p># of reviews</p>
             </div>
             <div className='rst-user-review'>
