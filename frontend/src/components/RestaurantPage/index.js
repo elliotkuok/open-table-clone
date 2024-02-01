@@ -167,7 +167,7 @@ const RestaurantPage = () => {
                                                     </span>
                                                 ))}
                                             </div>
-                                            <p>{avgOverallRating !== 0 ? avgOverallRating+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
+                                            <p>{filteredReviews.length !== 0 ? filteredReviews.length+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
                                         </div>
                                         <div id='individual-rtg-avg'>
                                             <div>
