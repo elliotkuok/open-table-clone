@@ -27,6 +27,10 @@ const RestaurantPage = () => {
     if (!restaurant) {
         return;
     }
+
+    const filteredReviews = Object.values(reviews).filter(
+        (review) => parseInt(review.restaurantId, 10) === parseInt(id, 10)
+    );
     
     return (
         <div className="page-container">
@@ -180,18 +184,17 @@ const RestaurantPage = () => {
                                     <div>
                                         <input placeholder='Search all reviews'></input>
                                         <div id='review-num-sort-container'>
-                                            <p># Reviews</p>
+                                            <p>{filteredReviews.length} Review{filteredReviews.length === 1 ? "" : "s"}</p>
                                             <button>Sort Dropdown</button>
                                         </div>
                                     </div>
                                     <div id='users-reviews-container'>
-                                        {Object.values(reviews).map(review => {
-                                            const restaurantId = parseInt(review.restaurantId, 10);
-                                            const userId = parseInt(id, 10); 
-                                            return userId === restaurantId && (
-                                                <UserReview key={review.id} review={review} />
-                                            );
-                                        })}
+                                        {filteredReviews.map((review) => (
+                                            <UserReview key={review.id} review={review} />
+                                        ))}
+                                        {filteredReviews.length === 0 && (
+                                            <p>This restaurant doesn't have any views yet. Be the first!</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
