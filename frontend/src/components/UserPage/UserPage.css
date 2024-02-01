@@ -71,3 +71,11 @@
 .user-rating-container p {
     margin-right: 8px;
 }
+
+.red-star {
+    color: red;
+}
+
+.grey-star {
+    color: grey;
+}

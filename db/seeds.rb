@@ -115,7 +115,6 @@ ApplicationRecord.transaction do
     end
 
     puts "Creating reservations..."
-    # Create a demo user
     Reservation.create!(
         restaurant_id: 1, 
         user_id: 1,
@@ -132,8 +131,23 @@ ApplicationRecord.transaction do
         party_size: 6
     )
 
+    Reservation.create!(
+        restaurant_id: 2, 
+        user_id: 1,
+        date: 'Dec 8, 2023',
+        time: '7:30 PM',
+        party_size: 4
+    )
+
+    Reservation.create!(
+        restaurant_id: 4, 
+        user_id: 1,
+        date: 'Sep 15, 2023',
+        time: '7:30 PM',
+        party_size: 4
+    )
+
     puts "Creating reviews..."
-    puts "Creating a review for user: #{User.find_by(email: 'demo@user.io').inspect}"
     Review.create!(
         reservation_id: 2,
         overall_rating: 5,
@@ -143,7 +157,17 @@ ApplicationRecord.transaction do
         value_rating: 4,
         content: "I really love it here"
     )
-    puts "Review created!"
+
+    Review.create!(
+        reservation_id: 3,
+        overall_rating: 3,
+        food_rating: 2,
+        service_rating: 4,
+        ambience_rating: 3,
+        value_rating: 5,
+        content: ""
+    )
+    
 
     puts "Done!"
 end

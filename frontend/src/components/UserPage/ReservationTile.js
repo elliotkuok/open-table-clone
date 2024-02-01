@@ -92,11 +92,11 @@ const ReservationTile = ({reservation, isUpcoming}) => {
                     <div className='user-rating-container'>
                         <p>{reservation.review ? "Your rating" : "Leave a review"}</p>
                         <div>
-                        &#9733;
-                        &#9733;
-                        &#9733;
-                        &#9733;
-                        &#9733;
+                            {Array.from({ length: 5 }).map((_, index) => (
+                                <span key={index} className={reservation.review ? 'red-star' : 'grey-star'}>
+                                    ★
+                                </span>
+                            ))}
                         </div>
                     </div>
                 ) }
