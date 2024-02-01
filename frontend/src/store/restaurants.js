@@ -43,7 +43,7 @@ export const searchRestaurants = async (keyword) => {
       console.error("Error searching for restaurants:", error);
       return [];
     }
-  }  
+}  
 
 // SELECTORS
 export const selectAllRestaurants = state => state.restaurants
