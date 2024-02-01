@@ -154,7 +154,7 @@ const RestaurantPage = () => {
                         </div>
                         <div id='reviews-section-container'>
                             <div>
-                                <h2>What {avgOverallRating} people are saying</h2>
+                                <h2>What {filteredReviews.length} people are saying</h2>
                                 <h4>Overall ratings and reviews</h4>
                                 <div id='review-summary-container'>
                                     <div>
