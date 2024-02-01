@@ -14,6 +14,7 @@ const RestaurantPage = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
     const reviews = useSelector(selectAllReviews)
+    console.log("reviews", reviews)
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
@@ -184,7 +185,13 @@ const RestaurantPage = () => {
                                         </div>
                                     </div>
                                     <div id='users-reviews-container'>
-                                        <UserReview />
+                                        {Object.values(reviews).map(review => {
+                                            const restaurantId = parseInt(review.restaurantId, 10);
+                                            const userId = parseInt(id, 10); 
+                                            return userId === restaurantId && (
+                                                <UserReview key={review.id} review={review} />
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
-const UserReview = () => {
-
+const UserReview = ({review}) => {
+    
     return (
         <div className='rst-user-review-container'>
             <div className='rst-user-profile'>
