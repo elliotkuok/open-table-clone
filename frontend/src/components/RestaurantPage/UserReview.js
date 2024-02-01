@@ -17,13 +17,13 @@ const UserReview = ({review}) => {
                     <p>Dined on (insert date)</p>
                 </div>
                 <div className='rating-breakdown-container'>
-                    <p>Overall <span>#</span></p>
-                    <p>Food <span>#</span></p>
-                    <p>Service <span>#</span></p>
-                    <p>Ambience <span>#</span></p>
-                    <p>Value <span>#</span></p>
+                    <p>Overall <span>{review.overallRating}</span></p>
+                    <p>Food <span>{review.foodRating}</span></p>
+                    <p>Service <span>{review.serviceRating}</span></p>
+                    <p>Ambience <span>{review.ambienceRating}</span></p>
+                    <p>Value <span>{review.valueRating}</span></p>
                 </div>
-                <p>I had a great time</p>
+                <p>{review.content ? review.content : <br></br>}</p>
                 <div className='helpful-report-container'>
                     <a>Is this helpful?</a>
                     <button>Report</button>

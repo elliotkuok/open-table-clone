@@ -32,6 +32,33 @@ const RestaurantPage = () => {
         (review) => parseInt(review.restaurantId, 10) === parseInt(id, 10)
     );
     
+    let avgOverallRating = 0;
+    let avgFoodRating = 0;
+    let avgServiceRating = 0;
+    let avgAmbienceRating = 0;
+    let avgValueRating = 0;
+    
+    if (filteredReviews.length > 0) {
+        const overallRatings = filteredReviews.map((review) => review.overallRating);
+        const foodRatings = filteredReviews.map((review) => review.foodRating);
+        const serviceRatings = filteredReviews.map((review) => review.serviceRating);
+        const ambienceRatings = filteredReviews.map((review) => review.ambienceRating);
+        const valueRatings = filteredReviews.map((review) => review.valueRating);
+
+        const sumOverallRatings = overallRatings.reduce((total, rating) => total + rating, 0);
+        const sumFoodRatings = foodRatings.reduce((total, rating) => total + rating, 0);
+        const sumServiceRatings = serviceRatings.reduce((total, rating) => total + rating, 0);
+        const sumAmbienceRatings = ambienceRatings.reduce((total, rating) => total + rating, 0);
+        const sumValueRatings = valueRatings.reduce((total, rating) => total + rating, 0);
+
+        avgOverallRating = sumOverallRatings / overallRatings.length;
+        avgFoodRating = sumFoodRatings / foodRatings.length;
+        avgServiceRating = sumServiceRatings / serviceRatings.length;
+        avgAmbienceRating = sumAmbienceRatings / ambienceRatings.length;
+        avgValueRating = sumValueRatings / valueRatings.length;
+    }
+
+    
     return (
         <div className="page-container">
             <div className="content">
@@ -56,7 +83,7 @@ const RestaurantPage = () => {
                                     <div>
                                         <i data-star={restaurant.rating}></i>
                                     </div>
-                                    <div className='info-details'>{restaurant.rating}</div>
+                                    <div className='info-details'>{avgOverallRating}</div>
                                 </div>
                                 <div className='overview-info-component'>
                                     <div>
@@ -123,7 +150,7 @@ const RestaurantPage = () => {
                         </div>
                         <div id='reviews-section-container'>
                             <div>
-                                <h2>What 31 people are saying</h2>
+                                <h2>What {avgOverallRating} people are saying</h2>
                                 <h4>Overall ratings and reviews</h4>
                                 <div id='review-summary-container'>
                                     <div>
@@ -136,23 +163,23 @@ const RestaurantPage = () => {
                                                     </span>
                                                 ))}
                                             </div>
-                                            <p>4.3 based on recent ratings</p>
+                                            <p>{avgOverallRating !== 0 ? avgOverallRating+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
                                         </div>
                                         <div id='individual-rtg-avg'>
                                             <div>
-                                                <h4>4.3</h4>
+                                                <h4>{avgFoodRating}</h4>
                                                 <p>Food</p>
                                             </div>
                                             <div>
-                                                <h4>4.4</h4>
+                                                <h4>{avgServiceRating}</h4>
                                                 <p>Service</p>
                                             </div>
                                             <div>
-                                                <h4>4.3</h4>
+                                                <h4>{avgAmbienceRating}</h4>
                                                 <p>Ambience</p>
                                             </div>
                                             <div>
-                                                <h4>3.8</h4>
+                                                <h4>{avgValueRating}</h4>
                                                 <p>Value</p>
                                             </div>
                                         </div>
