@@ -1,4 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchReservation} from "../../store/reservations";
+
 const UserReview = ({review}) => {
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        const reservationId = parseInt(review.reservationId, 10);
+        dispatch(fetchReservation(reservationId));
+    }, [dispatch, review.reservationId])
+    
+    const reservationDate = useSelector(state => state.reservations[review.reservationId]?.date);
     
     return (
         <div className='rst-user-review-container'>
@@ -13,11 +25,17 @@ const UserReview = ({review}) => {
             </div>
             <div className='rst-user-review'>
                 <div className='rating-date-container'>
-                    <span>★★★★★</span>
-                    <p>Dined on (insert date)</p>
+                    <div>
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <span key={index} className={index < review?.overallRating ? 'red-star' : 'grey-star'}>
+                            ★
+                            </span>
+                        ))}
+                    </div>
+                    <p>Dined on {reservationDate}</p>
                 </div>
                 <div className='rating-breakdown-container'>
-                    <p>Overall <span>{review.overallRating}</span></p>
+                    {/* <p>Overall <span>{review.overallRating}</span></p> */}
                     <p>Food <span>{review.foodRating}</span></p>
                     <p>Service <span>{review.serviceRating}</span></p>
                     <p>Ambience <span>{review.ambienceRating}</span></p>

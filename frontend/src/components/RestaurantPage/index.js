@@ -81,7 +81,11 @@ const RestaurantPage = () => {
                             <div className='overview-info'>
                                 <div className='overview-info-component'>
                                     <div>
-                                        <i data-star={restaurant.rating}></i>
+                                        {Array.from({ length: 5 }).map((_, index) => (
+                                            <span key={index} className={index < avgOverallRating ? 'red-star' : 'grey-star'}>
+                                            ★
+                                            </span>
+                                        ))}
                                     </div>
                                     <div className='info-details'>{avgOverallRating}</div>
                                 </div>
