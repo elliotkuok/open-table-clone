@@ -2,5 +2,6 @@
     json.set! review.id do
       json.extract! review, :id, :reservation_id, :overall_rating, :food_rating, :service_rating, :ambience_rating, :value_rating, :content, :created_at, :updated_at
       json.restaurantId review.reservation&.restaurant_id
+      json.userId review.reservation&.user_id
     end
 end
