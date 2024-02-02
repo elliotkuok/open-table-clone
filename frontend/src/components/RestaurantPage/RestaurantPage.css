@@ -90,7 +90,7 @@
 
 #menu h2, #reviews-section-container h2 {
     border-bottom: 1px solid lightgray;
-    margin: 0;
+    margin: 0 0 16px;
     padding: 16px 0;
     font-size: 24px;
 }
@@ -186,7 +186,17 @@ margin-top: 18px;
     display: flex;
     border-bottom: 1px solid lightgray;
     padding: 16px 0;
+    justify-content: space-between;
 }
+
+#review-summary-txt-container {
+    width: 60%;
+}
+
+#meters-container {
+    width: 40%;
+}
+
 #avg-review-text-container {
     display: flex;
 }
@@ -196,8 +206,30 @@ margin-top: 18px;
 }
 
 #meter-list {
-    list-style-type: none
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    margin-bottom: 8px;
+    align-items: center;
 }
+
+#meter-list label {
+    margin-right: 4px;
+}
+
+.rating-meter {
+    width: 95%;
+    appearance: none;
+    border: 0.0625rem #d8d9db solid;
+    height: 20px;
+    /* background: #fff; */
+}
+
+.meter-filled {
+    background: #da3743;
+    height: 18px;
+}
+
 
 #users-reviews-search-container input{
     width: 100%;
