@@ -190,8 +190,13 @@ margin-top: 18px;
 }
 
 #review-summary-txt-container {
-    width: 60%;
+    width: calc(60% - 16px);
 }
+
+#review-summary-txt-container p {
+    line-height: 22px;
+}
+
 
 #meters-container {
     width: 40%;
@@ -199,10 +204,32 @@ margin-top: 18px;
 
 #avg-review-text-container {
     display: flex;
+    /* align-items: center; */
 }
 
-#individual-rtg-avg {
+#avg-review-text-container p {
+    line-height: 20px;
+    margin-left: 6px;
+}
+
+#individual-rtg-avg-container {
     display: flex;
+}
+
+.individual-rtg-avg {
+    display: flex;
+    flex-direction: column;
+    border-right: 0.0625rem solid #d8d9db;
+    padding: 0 8px;
+    align-items: center;
+}
+
+#last-indvd-rating-avg {
+    border-right: none;
+}
+
+.individual-rtg-avg h4 {
+    padding-bottom: 6px;
 }
 
 #meter-list {
@@ -211,10 +238,14 @@ margin-top: 18px;
     width: 100%;
     margin-bottom: 8px;
     align-items: center;
+    justify-content: flex-end;
 }
 
 #meter-list label {
     margin-right: 4px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    color: #2d333f;
 }
 
 .rating-meter {
@@ -232,12 +263,19 @@ margin-top: 18px;
 
 
 #users-reviews-search-container input{
-    width: 100%;
-    margin: 16px 0;
+    width: 93.5%;
+    margin: 32px 0;
+    border: 0.0625rem solid #d8d9db;
+    border-radius: 4px;
+    height: 48px;
+    outline-color: #2d333f;
+    padding: 0 0px 0 40px;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 #users-reviews-container {
-    margin: 32px 0;
+    margin: 0 0 32px;
 }
 
 #review-num-sort-container {
@@ -264,4 +302,30 @@ margin-top: 18px;
 .rst-user-review-container {
     padding: 32px;
     border-bottom: 1px solid lightgray;
+}
+
+#avg-review-text-container {
+    margin: 16px 0;
+}
+
+#review-num-sort-container {
+    display: flex;
+    align-items: center;
+}
+
+#review-num-sort-container select {
+    border: 0.0625rem solid #d8d9db;
+    border-radius: 4px;
+    height: 100%;
+    display: block;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    padding-left: 8px;
+    padding-right: 16px;
+    min-height: 48px;
+    font-weight: 300;
+}
+
+#review-num-sort-container p {
+    font-weight: 500;
 }

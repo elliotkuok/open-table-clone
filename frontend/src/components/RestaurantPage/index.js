@@ -81,7 +81,7 @@ const RestaurantPage = () => {
                             <a href="#menu">
                                 Menu
                             </a>
-                            <a href="#reviews">
+                            <a href="#reviews-section-container">
                                 Reviews
                             </a>
                         </div>
@@ -178,20 +178,20 @@ const RestaurantPage = () => {
                                             </div>
                                             <p>{filteredReviews.length !== 0 ? filteredReviews.length+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
                                         </div>
-                                        <div id='individual-rtg-avg'>
-                                            <div>
+                                        <div id='individual-rtg-avg-container'>
+                                            <div className='individual-rtg-avg'>
                                                 <h4>{avgFoodRating}</h4>
                                                 <p>Food</p>
                                             </div>
-                                            <div>
+                                            <div className='individual-rtg-avg'>
                                                 <h4>{avgServiceRating}</h4>
                                                 <p>Service</p>
                                             </div>
-                                            <div>
+                                            <div className='individual-rtg-avg'>
                                                 <h4>{avgAmbienceRating}</h4>
                                                 <p>Ambience</p>
                                             </div>
-                                            <div>
+                                            <div className='individual-rtg-avg' id='last-indvd-rating-avg'>
                                                 <h4>{avgValueRating}</h4>
                                                 <p>Value</p>
                                             </div>
@@ -231,11 +231,15 @@ const RestaurantPage = () => {
                                     </div>
                                 </div>
                                 <div id='users-reviews-search-container'>
-                                    <div>
                                         <input placeholder='Search all reviews'></input>
+                                    <div>
                                         <div id='review-num-sort-container'>
                                             <p>{filteredReviews.length} Review{filteredReviews.length === 1 ? "" : "s"}</p>
-                                            <button>Sort Dropdown</button>
+                                            <select>
+                                                <option value="newestReview">Newest</option>
+                                                <option value="highestRating">Highest rating</option>
+                                                <option value="lowestRating">Lowest rating</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div id='users-reviews-container'>
