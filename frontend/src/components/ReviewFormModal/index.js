@@ -3,13 +3,50 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewFormModal.css';
 import StarRating from './StarRating';
+import { postReview } from '../../store/reviews';
 
 function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
     const {id} = useParams();
+    const dispatch = useDispatch();
 
+    const [ratings, setRatings] = useState({
+        overallRating: null,
+        foodRating: null,
+        serviceRating: null,
+        ambienceRating: null,
+        valueRating: null,
+    });
+
+    const [reviewContent, setReviewContent] = useState('');
 
     const handleCloseModal = () => {
         onClose();
+    };
+
+    const handleRatingChange = (category, value) => {
+        setRatings({
+            ...ratings,
+            [category]: value,
+        });
+    };
+
+    const handleSubmit = async () => {
+        const reviewData = {
+            reservationId: parseInt(id),
+            overallRating: ratings.overallRating,
+            foodRating: ratings.foodRating,
+            serviceRating: ratings.serviceRating,
+            ambienceRating: ratings.ambienceRating,
+            valueRating: ratings.valueRating,
+            content: reviewContent
+        };
+
+        try {
+            await dispatch(postReview(reviewData, reservation.id));
+            onClose();
+        } catch (error) {
+            console.error('Error submitting review:', error);
+        }
     };
 
     return (
@@ -37,29 +74,45 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
                     <div id='ratings-container'>
                         <div className='rating'>
                             <p className='rating-title'>Overall</p>
-                            <StarRating />
+                            <StarRating
+                                onRatingClick={(value) => handleRatingChange('overallRating', value)}
+                            />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Food</p>
-                            <StarRating />
+                            <StarRating
+                                onRatingClick={(value) => handleRatingChange('foodRating', value)}
+                            />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Service</p>
-                            <StarRating />
+                            <StarRating
+                                onRatingClick={(value) => handleRatingChange('serviceRating', value)}
+                            />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Ambience</p>
-                            <StarRating />
+                            <StarRating
+                                onRatingClick={(value) => handleRatingChange('ambienceRating', value)}
+                            />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Value</p>
-                            <StarRating />
+                            <StarRating
+                                onRatingClick={(value) => handleRatingChange('valueRating', value)}
+                            />
                         </div>
                     </div>
                     <div>
-                        <textarea placeholder='Please enter your review here (optional)'></textarea>
+                        <textarea
+                            placeholder='Please enter your review here (optional)'
+                            value={reviewContent}
+                            onChange={(e) => setReviewContent(e.target.value)}
+                        ></textarea>
                     </div>
-                    <button type='submit'>Submit</button>
+                    <button type='submit' onClick={handleSubmit}>
+                        Submit
+                    </button>
                 </div>
                 
                 

@@ -3,7 +3,7 @@ import './ReviewFormModal.css';
 import { Rating } from 'react-simple-star-rating';
 
 
-const StarRating = () => {
+const StarRating = ({ onRatingClick }) => {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [clicked, setClicked] = useState(false); 
@@ -33,6 +33,7 @@ const StarRating = () => {
                                 onChange={() => {
                                     setRating(currentRating);
                                     setClicked(true);
+                                    onRatingClick(currentRating);
                                 }}
                             />
                             <span
