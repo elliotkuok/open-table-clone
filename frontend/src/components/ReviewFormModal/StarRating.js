@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ReviewFormModal.css';
 import { Rating } from 'react-simple-star-rating';
 
@@ -16,6 +16,10 @@ const StarRating = ({ onRatingClick, initialRatings, category }) => {
         "Very good",
         "Outstanding"
     ];
+
+    useEffect(() => {
+        setRating(initialRatings[category]);
+    }, [initialRatings, category]);
   
     return (
         <div className='stars-text'>

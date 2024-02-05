@@ -3,14 +3,14 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewFormModal.css';
 import StarRating from './StarRating';
-import { patchReview, postReview, selectAllReviews } from '../../store/reviews';
+import { fetchReview, patchReview, postReview, selectReview } from '../../store/reviews';
 
 function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
     const {id} = useParams();
     const dispatch = useDispatch();
 
-    const reviews = useSelector(selectAllReviews);
-    const initialRatings = reviews[reservation.reviewId] || {
+    const review = useSelector(selectReview(reservation.reviewId));
+    const initialRatings = review || {
         overallRating: null,
         foodRating: null,
         serviceRating: null,
@@ -20,6 +20,12 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
 
     const [ratings, setRatings] = useState(initialRatings);
     const [reviewContent, setReviewContent] = useState(initialRatings?.content);
+
+    useEffect(() => {
+        if (reservation.reviewId) {
+            dispatch(fetchReview(reservation.reviewId));
+        }
+    }, [reservation.reviewId, dispatch]);
 
     const handleCloseModal = () => {
         onClose();
