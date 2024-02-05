@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewFormModal.css';
 import StarRating from './StarRating';
-import { postReview } from '../../store/reviews';
+import { patchReview, postReview, selectAllReviews } from '../../store/reviews';
 
 function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
     const {id} = useParams();
     const dispatch = useDispatch();
 
-    const [ratings, setRatings] = useState({
+    const reviews = useSelector(selectAllReviews);
+    const initialRatings = reviews[reservation.reviewId] || {
         overallRating: null,
         foodRating: null,
         serviceRating: null,
         ambienceRating: null,
         valueRating: null,
-    });
+    };
 
-    const [reviewContent, setReviewContent] = useState('');
+    const [ratings, setRatings] = useState(initialRatings);
+    const [reviewContent, setReviewContent] = useState(initialRatings?.content);
 
     const handleCloseModal = () => {
         onClose();
@@ -32,7 +34,7 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
 
     const handleSubmit = async () => {
         const reviewData = {
-            reservationId: parseInt(id),
+            reservationId: parseInt(id, 10),
             overallRating: ratings.overallRating,
             foodRating: ratings.foodRating,
             serviceRating: ratings.serviceRating,
@@ -40,12 +42,20 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
             valueRating: ratings.valueRating,
             content: reviewContent
         };
-
-        try {
-            await dispatch(postReview(reviewData, reservation.id));
-            onClose();
-        } catch (error) {
-            console.error('Error submitting review:', error);
+        if (reservation.reviewId) {
+            try {
+                await dispatch(patchReview(reviewData, reservation.id));
+                onClose();
+            } catch (error) {
+                console.error('Error updating review:', error);
+            }
+        } else {
+            try {
+                await dispatch(postReview(reviewData, reservation.id));
+                onClose();
+            } catch (error) {
+                console.error('Error creating review:', error);
+            }
         }
     };
 
@@ -75,31 +85,41 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation}){
                         <div className='rating'>
                             <p className='rating-title'>Overall</p>
                             <StarRating
-                                onRatingClick={(value) => handleRatingChange('overallRating', value)}
+                            onRatingClick={(value) => handleRatingChange('overallRating', value)}
+                            initialRatings={initialRatings}
+                            category="overallRating"
                             />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Food</p>
                             <StarRating
-                                onRatingClick={(value) => handleRatingChange('foodRating', value)}
+                            onRatingClick={(value) => handleRatingChange('foodRating', value)}
+                            initialRatings={initialRatings}
+                            category="foodRating"
                             />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Service</p>
                             <StarRating
-                                onRatingClick={(value) => handleRatingChange('serviceRating', value)}
+                            onRatingClick={(value) => handleRatingChange('serviceRating', value)}
+                            initialRatings={initialRatings}
+                            category="serviceRating"
                             />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Ambience</p>
                             <StarRating
-                                onRatingClick={(value) => handleRatingChange('ambienceRating', value)}
+                            onRatingClick={(value) => handleRatingChange('ambienceRating', value)}
+                            initialRatings={initialRatings}
+                            category="ambienceRating"
                             />
                         </div>
                         <div className='rating'>
                             <p className='rating-title'>Value</p>
                             <StarRating
-                                onRatingClick={(value) => handleRatingChange('valueRating', value)}
+                            onRatingClick={(value) => handleRatingChange('valueRating', value)}
+                            initialRatings={initialRatings}
+                            category="valueRating"
                             />
                         </div>
                     </div>
