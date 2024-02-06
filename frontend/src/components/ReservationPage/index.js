@@ -18,8 +18,9 @@ const ReservationPage = () => {
     const restaurantId = reservation?.restaurantId;
     const review = useSelector(selectReview(reservation?.reviewId));
     const history = useHistory();
-    // const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
     const [showModal, setShowModal] = useState(false);
+    const [showCancelModal, setShowCancelModal] = useState(false);
+    const [showReviewModal, setShowReviewModal] = useState(false);
     
 
     useEffect(() => {
@@ -86,6 +87,7 @@ const ReservationPage = () => {
           window.location.href = "mailto:abc@example.com";
         } else {
           setShowModal(true)
+          setShowReviewModal(true)
         }
     };
     
@@ -149,10 +151,18 @@ const ReservationPage = () => {
                             {reservationStatus && (
                                 <div className="change-res-links">
                                     <Link to={`/reservations/${id}/modify`}>Modify</Link>
-                                    <a onClick={() => setShowModal(true)}>Cancel</a>
+                                    {console.log("beforecancelstate:", showCancelModal)}
+                                    <a onClick={() => {
+                                        setShowModal(true) 
+                                        setShowCancelModal(true)
+                                        console.log("cancelstate:", showCancelModal)
+                                    }}>Cancel</a>
                                     {showModal && (
                                         <Modal onClose={() => setShowModal(false)}>
-                                            <CancelForm reservationId={id} onClose={() => setShowModal(false)} />
+                                            <CancelForm reservationId={id} onClose={() => {
+                                                setShowModal(false)
+                                                setShowCancelModal(false)
+                                                }} />
                                         </Modal>
                                     )}
                                     <a>Add to calendar</a>
@@ -181,9 +191,12 @@ const ReservationPage = () => {
                             <p>{reservationStatus ? "Send message" : "Rate and review"}</p>
                         </div>
                     </a>
-                    {showModal && (
+                    {showModal && showReviewModal && (
                         <Modal onClose={() => setShowModal(false)}>
-                            <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} review={review} onClose={() => setShowModal(false)}/>
+                            <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} review={review} onClose={() => {
+                                setShowModal(false)
+                                setShowReviewModal(false)
+                                }}/>
                         </Modal>
                     )}
                     <a className="reservation-page-button" onClick={handleDirBtnClick}>
