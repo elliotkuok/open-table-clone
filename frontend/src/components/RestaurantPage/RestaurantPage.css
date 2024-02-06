@@ -284,12 +284,43 @@ margin-top: 18px;
 }
 
 .rst-user-profile {
-    margin-right: 16px;
+    margin-right: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rst-user-profile p {
+    text-align: center;
+    width: 60px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.review-profile-pic {
+    margin-top: 4px;
+    margin-bottom: 12px;
+    width: 48px;
+    height: 48px;
+    background: #d82c82;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    border: none;
+}
+
+.review-profile-pic span {
+    padding-top: 2px;
 }
 
 .rating-date-container {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    align-items: baseline;
 }
 
 .rating-date-container p {
@@ -299,7 +330,7 @@ margin-top: 18px;
 
 .rating-breakdown-container{
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .rating-breakdown-container p{

@@ -15,17 +15,21 @@ const UserReview = ({review}) => {
         dispatch(fetchReservation(reservationId));
         dispatch(fetchUser(userId))
     }, [dispatch, review.reservationId])
+
+    const colors = ["#6c8ae4", "#d86441", "#bb6acd", "#df4e96"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
     
     return (
         <div className='rst-user-review-container'>
             <div className='rst-user-profile'>
-                <button id="profile-button">
-                    <span style={{ marginTop: '4px', marginLeft: '2px'}}>
-                    DU
+                <button class="review-profile-pic" style={{ backgroundColor: randomColor }}>
+                    <span>
+                        {user?.firstName[0]}{user?.lastName[0]}
                     </span>
                 </button>
-                <p>{user?.firstName} {user?.lastName[0]}</p>
-                <p># of reviews</p>
+                <p>{user?.firstName}</p>
+                {/* <p># of reviews</p> */}
             </div>
             <div className='rst-user-review'>
                 <div className='rating-date-container'>
