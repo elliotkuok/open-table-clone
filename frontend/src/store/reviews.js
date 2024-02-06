@@ -50,37 +50,48 @@ export const fetchReview = id => async (dispatch) => {
     }
 }
 
-export const postReview = (review, reservationId) => async dispatch => {
+
+export const patchReview = (review, reviewId) => async dispatch => {
     try {
-        const res = await csrfFetch(`/api/reservations/${reservationId}/reviews`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+        const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(review)
-        })
+        });
 
-    if (!res.ok) {
-        throw new Error('Failed to create review');
-    }
-    const newReview = await res.json();
-    dispatch(createReview(newReview));
-    return newReview;
-
+        if (res.ok) {
+            const updatedReview = await res.json();
+            dispatch(updateReview(updatedReview));
+            console.log('Review updated successfully:', updatedReview);
+        } else {
+            console.error('Error updating review:', res);
+        }
     } catch (error) {
-        console.error('Error in postReview:', error);
+        console.error('Error in patchReview:', error);
         throw error;
     }
 }
 
-export const patchReview = (review, reservationId) => async dispatch => {
-    const res = await csrfFetch(`/api/reservations/${reservationId}/reviews`, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(review)
-    });
+export const postReview = (review, reservationId) => async dispatch => {
+    try {
+        const res = await csrfFetch(`/api/reservations/${reservationId}/reviews`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(review)
+        });
 
-    if (res.ok) {
-        const updatedReview = await res.json();
-        return dispatch(updateReview(updatedReview));
+        if (res.ok) {
+            const newReview = await res.json();
+            dispatch(createReview(newReview));
+            console.log('Review created successfully:', newReview);
+            return newReview;
+        } else {
+            console.error('Error creating review:', res);
+            throw new Error('Failed to create review');
+        }
+    } catch (error) {
+        console.error('Error in postReview:', error);
+        throw error;
     }
 }
 

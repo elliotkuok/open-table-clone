@@ -8,6 +8,7 @@ import CancelForm from "../CancelFormModal";
 import { selectRestaurant, fetchRestaurant } from "../../store/restaurants";
 import moment from "moment";
 import ReviewFormModal from "../ReviewFormModal";
+import { fetchReview, selectReview } from "../../store/reviews";
 
 const ReservationPage = () => {
     const {id} = useParams();
@@ -15,6 +16,7 @@ const ReservationPage = () => {
     const currentUser = useSelector(state => state.session.user);
     const reservation = useSelector(state => state.reservations[id]);
     const restaurantId = reservation?.restaurantId;
+    const review = useSelector(selectReview(reservation?.reviewId));
     const history = useHistory();
     // const restaurant = useSelector(selectRestaurant(restaurantId?.toString()));
     const [showModal, setShowModal] = useState(false);
@@ -32,6 +34,12 @@ const ReservationPage = () => {
             dispatch(fetchRestaurant(restaurantId));
         }
     }, [restaurantId]);
+
+    useEffect(() => {
+        if (reservation?.reviewId) {
+            dispatch(fetchReview(reservation?.reviewId));
+        }
+    }, [reservation?.reviewId, dispatch]);
     
     const restaurant = useSelector(state => {
         if (restaurantId) {
@@ -175,7 +183,7 @@ const ReservationPage = () => {
                     </a>
                     {showModal && (
                         <Modal onClose={() => setShowModal(false)}>
-                            <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} onClose={() => setShowModal(false)}/>
+                            <ReviewFormModal reservation={reservation} restaurant={restaurant} currentUser={currentUser} review={review} onClose={() => setShowModal(false)}/>
                         </Modal>
                     )}
                     <a className="reservation-page-button" onClick={handleDirBtnClick}>
