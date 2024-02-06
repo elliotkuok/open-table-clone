@@ -33,7 +33,7 @@ function ProfileButton({ user }) {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch(`/api/users/${user.id}`); // Replace with your API endpoint
+      const response = await fetch(`/api/users/${user.id}`);
       const userData = await response.json();
       setFirstName(userData.user.firstName);
       setLastName(userData.user.lastName);
