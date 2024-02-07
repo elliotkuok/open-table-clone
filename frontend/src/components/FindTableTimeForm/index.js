@@ -134,7 +134,6 @@ const FindTableTime = () => {
         }
 
         dispatch(setSelectedTime(time));
-        console.log("setSelectedTime:", selectedTime)
         dispatch(setSelectedDate(selectedDate));
         dispatch(setSelectedSize(selectedSize));
         history.push(`/restaurants/${restaurant.id}/create?partySize=${selectedSize}&time=${time}&date=${selectedDate}`);

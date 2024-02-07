@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import restaurantImage from './assets/restaurant.jpg';
 import './RestaurantPage.css';
 import './StarRating.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,14 +7,12 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import FindTableTime from '../FindTableTimeForm';
 import UserReview from './UserReview';
 import { fetchReviews, selectAllReviews } from '../../store/reviews';
-import { width } from 'dom-helpers';
 
 const RestaurantPage = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
     const reviews = useSelector(selectAllReviews)
-    console.log("reviews", reviews)
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
@@ -58,7 +55,6 @@ const RestaurantPage = () => {
         const sumServiceRatings = serviceRatings.reduce((total, rating) => total + rating, 0);
         const sumAmbienceRatings = ambienceRatings.reduce((total, rating) => total + rating, 0);
         const sumValueRatings = valueRatings.reduce((total, rating) => total + rating, 0);
-        console.log("filteredReviews.length:", filteredReviews.length)
 
         avgOverallRating = sumOverallRatings / overallRatings.length;
         avgFoodRating = sumFoodRatings / foodRatings.length;
@@ -171,7 +167,7 @@ const RestaurantPage = () => {
                                         <div id='avg-review-text-container'>
                                             <div>
                                                 {Array.from({ length: 5 }).map((_, index) => (
-                                                    <span>
+                                                    <span key={index}>
                                                     ★
                                                     </span>
                                                 ))}
@@ -199,31 +195,31 @@ const RestaurantPage = () => {
                                     </div>
                                     <div id='meters-container'>
                                         <li id='meter-list'>
-                                            <label for="meter-5" className='meter-label'>5</label>
+                                            <label htmlFor="meter-5" className='meter-label'>5</label>
                                             <meter id="meter-5" className='rating-meter' value={overallRatingCount.get(5) || 0} min="0" max={filteredReviews.length}>
                                             <div className="meter-filled" style={{ width: `${filteredReviews.length > 0 ? ((overallRatingCount.get(5) || 0) / filteredReviews.length) * 100 : 0}%` }}></div>
                                             </meter>
                                         </li>
                                         <li id='meter-list'>
-                                            <label for="meter-4" className='meter-label'>4</label>
+                                            <label htmlFor="meter-4" className='meter-label'>4</label>
                                             <meter id="meter-4" className='rating-meter' value={overallRatingCount.get(4) || 0} min="0" max={filteredReviews.length}>
                                             <div className="meter-filled" style={{ width: `${filteredReviews.length > 0 ? ((overallRatingCount.get(4) || 0) / filteredReviews.length) * 100 : 0}%` }}></div>
                                             </meter>
                                         </li>
                                         <li id='meter-list'>
-                                            <label for="meter-3" className='meter-label'>3</label>
+                                            <label htmlFor="meter-3" className='meter-label'>3</label>
                                             <meter id="meter-3" className='rating-meter' value={overallRatingCount.get(3) || 0} min="0" max={filteredReviews.length}>
                                             <div className="meter-filled" style={{ width: `${filteredReviews.length > 0 ? ((overallRatingCount.get(3) || 0) / filteredReviews.length) * 100 : 0}%` }}></div>
                                             </meter>
                                         </li>
                                         <li id='meter-list'>
-                                            <label for="meter-2" className='meter-label'>2</label>
+                                            <label htmlFor="meter-2" className='meter-label'>2</label>
                                             <meter id="meter-2" className='rating-meter' value={overallRatingCount.get(2) || 0} min="0" max={filteredReviews.length}>
                                             <div className="meter-filled" style={{ width: `${filteredReviews.length > 0 ? ((overallRatingCount.get(2) || 0) / filteredReviews.length) * 100 : 0}%` }}></div>
                                             </meter>
                                         </li>
                                         <li id='meter-list'>
-                                            <label for="meter-1" className='meter-label'>1</label>
+                                            <label htmlFor="meter-1" className='meter-label'>1</label>
                                             <meter id="meter-1" className='rating-meter' value={overallRatingCount.get(1) || 0} min="0" max={filteredReviews.length}>
                                             <div className="meter-filled" style={{ width: `${filteredReviews.length > 0 ? ((overallRatingCount.get(1) || 0) / filteredReviews.length) * 100 : 0}%` }}></div>
                                             </meter>

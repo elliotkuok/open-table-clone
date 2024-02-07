@@ -62,7 +62,6 @@ export const patchReview = (review, reviewId) => async dispatch => {
         if (res.ok) {
             const updatedReview = await res.json();
             dispatch(updateReview(updatedReview));
-            console.log('Review updated successfully:', updatedReview);
         } else {
             console.error('Error updating review:', res);
         }
@@ -83,7 +82,6 @@ export const postReview = (review, reservationId) => async dispatch => {
         if (res.ok) {
             const newReview = await res.json();
             dispatch(createReview(newReview));
-            console.log('Review created successfully:', newReview);
             return newReview;
         } else {
             console.error('Error creating review:', res);

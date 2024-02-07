@@ -17,7 +17,6 @@ const ModifyReservationPage = () => {
         dispatch(fetchReservation(id));
     }, [dispatch, id]);
     const reservation = useSelector(selectReservation(id));
-    console.log("reservation", reservation)
     const restaurantId = reservation?.restaurantId;
     useEffect(() => {
         if (restaurantId) {
@@ -37,10 +36,6 @@ const ModifyReservationPage = () => {
         [openingTime, closingTime] = restaurant.hours.split(' - ');
     }
 
-    console.log("restaurant:", restaurant)
-    console.log("hours:", restaurant?.hours)
-    console.log("opening:", openingTime)
-    console.log("closing:", closingTime)
     const [selectedDate, setChosenDate] = useState(new Date());
     const [suggestedTimes, setSuggestedTimes] = useState([]);
 
@@ -247,11 +242,9 @@ const ModifyReservationPage = () => {
                         <button id="find-time-bttn" onClick={e => {
                             e.preventDefault();
                             const selectedTime = document.querySelector("#time-input select").value;
-                            {console.log("selectedTime", selectedTime)}
                             setSuggestedTimes(getSuggestedTimes(selectedTime));
                         }}>Find a new time</button>
                         <div className="times-container">
-                            {console.log("suggestedtime", suggestedTimes)}
                             {suggestedTimes.length > 0 && <h5>Select a time</h5>}
                             <div>
                                 {
