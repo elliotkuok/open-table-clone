@@ -6,7 +6,7 @@ import { fetchRestaurant, selectRestaurant } from '../../store/restaurants';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import FindTableTime from '../FindTableTimeForm';
 import UserReview from './UserReview';
-import { fetchReviews, selectAllReviews } from '../../store/reviews';
+import { fetchReviews, fetchReviewsByRestaurantId, selectAllReviews } from '../../store/reviews';
 import RatingStars from './RatingStars';
 
 const RestaurantPage = () => {
@@ -14,14 +14,15 @@ const RestaurantPage = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
     const reviews = useSelector(selectAllReviews)
+    console.log("reviews:", reviews)
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));
     }, [dispatch, id]);
 
     useEffect(() => {
-        dispatch(fetchReviews())
-    }, [dispatch])
+        dispatch(fetchReviewsByRestaurantId(id))
+    }, [dispatch, id])
 
     if (!restaurant) {
         return;

@@ -32,7 +32,11 @@ class Api::ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = current_user.reservations
+    if params[:restaurant_id]
+      @reservations = Reservation.where(restaurant_id: params[:restaurant_id])
+    else
+      @reservations = current_user.reservations
+    end
     render :index
   end
 

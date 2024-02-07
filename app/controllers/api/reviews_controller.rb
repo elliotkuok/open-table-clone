@@ -2,7 +2,12 @@ class Api::ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :update, :destroy]
 
   def index
-    @reviews = Review.all
+    if params[:ids]
+      review_ids = params[:ids].split(',')
+      @reviews = Review.where(id: review_ids)
+    else
+      @reviews = Review.all
+    end
     render :index
   end
 

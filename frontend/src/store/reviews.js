@@ -34,6 +34,43 @@ export const deleteReview = id => ({
 });
 
 // THUNK ACTION CREATORS
+export const fetchReviewsByRestaurantId = (restaurantId) => async (dispatch) => {
+    try {
+        const res = await csrfFetch(`/api/reservations?restaurant_id=${restaurantId}`);
+        console.log("res:", res)
+        if (res.ok) {
+            const reservations = await res.json();
+            console.log("reservationsRes:", reservations)
+
+            const reviewIds = [];
+
+            for (const reservationId in reservations) {
+                if (reservations.hasOwnProperty(reservationId)) {
+                    const reviewId = reservations[reservationId].reviewId;
+                    if (reviewId) {
+                        reviewIds.push(reviewId);
+                    }
+                }
+            }
+
+            const reviewsRes = await csrfFetch(`/api/reviews?ids=${reviewIds.join(',')}`);
+
+            if (reviewsRes.ok) {
+            const reviews = await reviewsRes.json();
+
+            dispatch(receiveReviews(reviews));
+            } else {
+            console.error('Failed to fetch reviews:', reviewsRes);
+            }
+        } else {
+            console.error('Failed to fetch reservations:', res);
+        }
+    } catch (error) {
+      console.error('Error in fetchReviewsByRestaurantId:', error);
+      throw error;
+    }
+}
+  
 export const fetchReviews = () => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews`);
     if (res.ok) {
@@ -109,7 +146,6 @@ export const selectAllReviews = state => state.reviews
 export const selectReview = function(id) {
     return function(state) {
         return state.reviews[id]
-    //   return Object.values(state.reviews).find(r => r.id.toString() === id)
     }
 }
 
@@ -122,7 +158,7 @@ const reviewsReducer = (state = {}, action) => {
             nextState[action.payload.review.id] = action.payload.review;
             return nextState;
         case RECEIVE_REVIEWS:
-            return Object.assign(nextState, action.payload);
+            return { ...state, ...action.payload };
         case CREATE_REVIEW:
             nextState[action.payload.id] = action.payload;
             return nextState;
