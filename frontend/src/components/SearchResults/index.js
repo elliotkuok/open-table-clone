@@ -13,6 +13,7 @@ function useQuery() {
 function SearchResults() {
   const query = useQuery();
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,8 +22,10 @@ function SearchResults() {
         try {
           const data = await searchRestaurants(keyword);
           setResults(data);
+          setLoading(false);
         } catch (error) {
           console.error('Error fetching data:', error);
+          setLoading(false);
         }
       }
     };
@@ -42,15 +45,21 @@ function SearchResults() {
         <SearchBar />
       </div>
       <div className='search-results-container'>
-        <h2>Results for "{query.get('q')}" in San Francisco Bay Area</h2>
-        <p>{results.length} restaurants match "{query.get('q')}"</p>
-        {results.map(restaurant => (
-          <SearchResult
-            key={restaurant.id}
-            restaurant={restaurant}
-            handleTileClick={handleTileClick}
-          />
-        ))}
+        {loading ? (
+          <p>Loading results...</p>
+        ) : (
+          <>
+            <h2>Results for "{query.get('q')}" in San Francisco Bay Area</h2>
+            <p>{results.length} restaurants match "{query.get('q')}"</p>
+            {results.map(restaurant => (
+              <SearchResult
+                key={restaurant.id}
+                restaurant={restaurant}
+                handleTileClick={handleTileClick}
+              />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
