@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import FindTableTime from '../FindTableTimeForm';
 import UserReview from './UserReview';
 import { fetchReviews, selectAllReviews } from '../../store/reviews';
+import RatingStars from './RatingStars';
 
 const RestaurantPage = () => {
     const {id} = useParams();
@@ -85,13 +86,7 @@ const RestaurantPage = () => {
                             <h1>{restaurant.name}</h1>
                             <div className='overview-info'>
                                 <div className='overview-info-component'>
-                                    <div>
-                                        {Array.from({ length: 5 }).map((_, index) => (
-                                            <span key={index} className={index < avgOverallRating ? 'red-star' : 'grey-star'}>
-                                            ★
-                                            </span>
-                                        ))}
-                                    </div>
+                                    <RatingStars avgOverallRating={avgOverallRating}/>
                                     <div className='info-details'>{avgOverallRating}</div>
                                 </div>
                                 <div className='overview-info-component'>
@@ -165,14 +160,8 @@ const RestaurantPage = () => {
                                     <div id='review-summary-txt-container'>
                                         <p>Reviews can only be made by diners who have eaten at this restaurant</p>
                                         <div id='avg-review-text-container'>
-                                            <div>
-                                                {Array.from({ length: 5 }).map((_, index) => (
-                                                    <span key={index}>
-                                                    ★
-                                                    </span>
-                                                ))}
-                                            </div>
-                                            <p>{filteredReviews.length !== 0 ? filteredReviews.length+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
+                                            <RatingStars avgOverallRating={avgOverallRating}/>
+                                            <p>{filteredReviews.length !== 0 ? avgOverallRating+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
                                         </div>
                                         <div id='individual-rtg-avg-container'>
                                             <div className='individual-rtg-avg'>

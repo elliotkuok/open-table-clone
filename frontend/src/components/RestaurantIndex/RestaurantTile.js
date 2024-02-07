@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { setSelectedTime } from '../../store/reservations';
 import { Modal } from '../../context/Modal';
 import LoginForm from "../LoginFormModal/LoginForm";
+import RatingStars from '../RestaurantPage/RatingStars';
 
 const RestaurantTile = ({restaurant}) => {
     const user = useSelector(state => state.session.user);
@@ -55,9 +56,7 @@ const RestaurantTile = ({restaurant}) => {
             <div className='tile-info'>
                 <h5>{restaurant.name}</h5>
                 <div className='overview-info-component'>
-                    <div>
-                        <i data-star={restaurant.rating}></i>
-                    </div>
+                    <RatingStars />
                     <p id='review-count'>10 reviews</p>
                 </div>
                 <p>{restaurant.cuisine} • {getPriceSymbol(restaurant.price)} • {restaurant.neighborhood}</p>
