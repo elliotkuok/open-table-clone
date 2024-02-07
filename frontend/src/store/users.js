@@ -35,7 +35,7 @@ const usersReducer = (state = {}, action) => {
     switch (action.type) {
         case STORE_USER:
             if (action.payload) {
-                nextState[action.payload.user.id] = action.payload.user;
+                nextState[action.payload?.user?.id] = action.payload.user;
             }
             return nextState;
         default:
