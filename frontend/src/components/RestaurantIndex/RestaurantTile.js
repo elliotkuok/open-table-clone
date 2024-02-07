@@ -5,14 +5,17 @@ import { setSelectedTime } from '../../store/reservations';
 import { Modal } from '../../context/Modal';
 import LoginForm from "../LoginFormModal/LoginForm";
 import RatingStars from '../RestaurantPage/RatingStars';
+import { fetchReviewsByRestaurantId, selectAllReviews } from '../../store/reviews';
 
 const RestaurantTile = ({restaurant}) => {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const reviews = useSelector(selectAllReviews)
     const selectedDate = useSelector(state => state.reservations.selectedDate);
     const selectedSize = useSelector(state => state.reservations.selectedSize);
     const [randomBookingCount, setRandomBookingCount] = useState(0);
     const [showModal, setShowModal] = useState(false);
+    const restaurantReviews = Object.values(reviews).filter(review => review.restaurantId === restaurant.id);
 
     let history = useHistory();
  
@@ -29,9 +32,21 @@ const RestaurantTile = ({restaurant}) => {
     };
 
     useEffect(() => {
-        const newRandomBookingCount = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+        dispatch(fetchReviewsByRestaurantId(restaurant.id))
+    }, [dispatch, restaurant.id])
+
+    useEffect(() => {
+        const newRandomBookingCount = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
         setRandomBookingCount(newRandomBookingCount);
       }, []);    
+
+    let avgOverallRating = 0;
+    
+    if (restaurantReviews.length > 0) {
+        const overallRatings = restaurantReviews.map((review) => review.overallRating);
+        const sumOverallRatings = overallRatings.reduce((total, rating) => total + rating, 0);
+        avgOverallRating = sumOverallRatings / overallRatings.length;
+    }
 
     const handleTimeSelect = (time) => {
         if (!user) {
@@ -56,8 +71,8 @@ const RestaurantTile = ({restaurant}) => {
             <div className='tile-info'>
                 <h5>{restaurant.name}</h5>
                 <div className='overview-info-component'>
-                    <RatingStars />
-                    <p id='review-count'>10 reviews</p>
+                    <RatingStars avgOverallRating={avgOverallRating}/>
+                    <p id='review-count'>{restaurantReviews.length} review{restaurantReviews.length === 1 ? "" : "s"}</p>
                 </div>
                 <p>{restaurant.cuisine} • {getPriceSymbol(restaurant.price)} • {restaurant.neighborhood}</p>
                 <div className='book-count'>

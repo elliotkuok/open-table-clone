@@ -14,7 +14,6 @@ const RestaurantPage = () => {
     const dispatch = useDispatch();
     const restaurant = useSelector(selectRestaurant(id));
     const reviews = useSelector(selectAllReviews)
-    console.log("reviews:", reviews)
 
     useEffect(() => {
         dispatch(fetchRestaurant(id));

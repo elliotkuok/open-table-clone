@@ -37,11 +37,8 @@ export const deleteReview = id => ({
 export const fetchReviewsByRestaurantId = (restaurantId) => async (dispatch) => {
     try {
         const res = await csrfFetch(`/api/reservations?restaurant_id=${restaurantId}`);
-        console.log("res:", res)
         if (res.ok) {
             const reservations = await res.json();
-            console.log("reservationsRes:", reservations)
-
             const reviewIds = [];
 
             for (const reservationId in reservations) {
