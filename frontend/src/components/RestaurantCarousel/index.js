@@ -95,7 +95,7 @@ const RestaurantCarousel = () => {
         <div className="carousels-container">
             <CuisineCarousel cuisine="Thai" />
             <CuisineCarousel cuisine="Mexican" />
-            <CuisineCarousel cuisine="Senegalese" />
+            <CuisineCarousel cuisine="Desserts" />
         </div>
     );
 };
