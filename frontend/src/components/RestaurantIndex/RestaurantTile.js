@@ -6,6 +6,7 @@ import { Modal } from '../../context/Modal';
 import LoginForm from "../LoginFormModal/LoginForm";
 import RatingStars from '../RestaurantPage/RatingStars';
 import { fetchReviewsByRestaurantId, selectAllReviews } from '../../store/reviews';
+import './RestaurantIndex.css';
 
 const RestaurantTile = ({restaurant}) => {
     const user = useSelector(state => state.session.user);

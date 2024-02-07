@@ -3,7 +3,7 @@ import Navigation from './components/Navigation';
 import RestaurantPage from './components/RestaurantPage';
 import ReservationForm from './components/ReservationForm';
 import ReservationPage from './components/ReservationPage';
-import RestaurantIndex from './components/RestaurantIndex';
+// import RestaurantIndex from './components/RestaurantIndex';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchSplash from './components/SearchSplash';
 import RestaurantCarousel from './components/RestaurantCarousel';
