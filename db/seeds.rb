@@ -162,7 +162,7 @@ ApplicationRecord.transaction do
     
     puts "Creating restaurants..."
     # Create restaurants
-    500.times do 
+    300.times do 
         Restaurant.create!({
         name: Faker::Restaurant.unique.name,
         # address: Faker::Address.unique.street_address + ", San Francisco, CA 94102",
@@ -297,7 +297,18 @@ ApplicationRecord.transaction do
         date: 'Sep 1, 2023',
         time: '8:00 PM',
         party_size: 12
-    )    
+    )   
+
+    1000.times do
+        Reservation.create!(
+            restaurant_id: rand(1..300),
+            user_id: rand(1..10),
+            date: Faker::Date.backward(days: 365),
+            time: "#{rand(12..19)}:00",  
+            party_size: rand(1..12)
+        )
+    end
+
 
     puts "Creating reviews..."
     Review.create!(
@@ -408,6 +419,19 @@ ApplicationRecord.transaction do
         ambience_rating: 2,
         value_rating: 2
     )
+
+    (14..1000).each do |reservation_id|
+        Review.create!(
+          reservation_id: reservation_id,
+          overall_rating: rand(1..5),
+          food_rating: rand(1..5),
+          service_rating: rand(1..5),
+          ambience_rating: rand(1..5),
+          value_rating: rand(1..5),
+          content: Faker::Restaurant.review
+        )
+      end
+      
     
     
 

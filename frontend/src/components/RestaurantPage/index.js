@@ -57,13 +57,21 @@ const RestaurantPage = () => {
         const sumAmbienceRatings = ambienceRatings.reduce((total, rating) => total + rating, 0);
         const sumValueRatings = valueRatings.reduce((total, rating) => total + rating, 0);
 
-        avgOverallRating = sumOverallRatings / overallRatings.length;
-        avgFoodRating = sumFoodRatings / foodRatings.length;
-        avgServiceRating = sumServiceRatings / serviceRatings.length;
-        avgAmbienceRating = sumAmbienceRatings / ambienceRatings.length;
-        avgValueRating = sumValueRatings / valueRatings.length;
+        avgOverallRating = calculateAverage(sumOverallRatings, overallRatings.length);
+        avgFoodRating = calculateAverage(sumFoodRatings, foodRatings.length);
+        avgServiceRating = calculateAverage(sumServiceRatings, serviceRatings.length);
+        avgAmbienceRating = calculateAverage(sumAmbienceRatings, ambienceRatings.length);
+        avgValueRating = calculateAverage(sumValueRatings, valueRatings.length);
+
+        function calculateAverage(sum, count) {
+            const average = sum / count;
+            if (Number.isInteger(average)) {
+                return average.toFixed(0); // Display as integer
+            } else {
+                return average.toFixed(1); // Round to 1 decimal
+            }
+        }
     }
-    
     
     return (
         <div className="page-container">
