@@ -303,7 +303,7 @@ ApplicationRecord.transaction do
         Reservation.create!(
             restaurant_id: rand(1..300),
             user_id: rand(2..10),
-            date: Faker::Date.backward(days: 365),
+            date: Faker::Date.backward(days: 365).strftime("%b %e, %Y"),
             time: "#{rand(12..19)}:00",  
             party_size: rand(1..12)
         )
