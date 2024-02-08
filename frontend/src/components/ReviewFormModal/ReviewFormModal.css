@@ -1,8 +1,9 @@
-#ratings-modal-container {
+.ratings-modal-container {
     display: flex;
+    margin: 0 36px;
 }
 
-#ratings-modal-container #x-icon {
+.ratings-modal-container #x-icon {
     align-items: right;
     padding-top: 64px;
 }

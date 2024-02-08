@@ -89,7 +89,7 @@ function ReviewFormModal({onClose, currentUser, restaurant, reservation, review}
                 <div id='ratings-modal-content'>
                     <h1>{currentUser.firstName}, how was your experience at {restaurant.name}</h1>
                     <p>Rate your dining experience (required)</p>
-                    <p>Reservation made on {reservation.date}</p>
+                    <p>Reservation dined on {reservation.date}</p>
                     <div id='ratings-container'>
                         <div className='rating'>
                             <p className='rating-title'>Overall</p>
