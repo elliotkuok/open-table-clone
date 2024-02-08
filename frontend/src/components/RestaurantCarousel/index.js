@@ -6,17 +6,11 @@ import RestaurantTile from '../RestaurantIndex/RestaurantTile';
 import './RestaurantCarousel.css';
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
-const CuisineCarousel = ({ cuisine }) => {
-    const restaurants = useSelector(selectAllRestaurants);
-    const dispatch = useDispatch();
+const CuisineCarousel = ({ cuisine, restaurants }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
     const [isLeftButtonVisible, setIsLeftButtonVisible] = useState(false);
     const [isRightButtonVisible, setIsRightButtonVisible] = useState(true);
     const carouselRef = useRef(null);
-
-    useEffect(() => {
-      dispatch(fetchRestaurants());
-    }, [dispatch]);
 
     useEffect(() => {
         const updateButtonVisibility = () => {
@@ -91,11 +85,18 @@ const CuisineCarousel = ({ cuisine }) => {
 };
 
 const RestaurantCarousel = () => {
+    const dispatch = useDispatch();
+    const restaurants = useSelector(selectAllRestaurants);
+
+    useEffect(() => {
+        dispatch(fetchRestaurants());
+    }, [dispatch]);
+
     return (
         <div className="carousels-container">
-            <CuisineCarousel cuisine="Thai" />
-            <CuisineCarousel cuisine="Mexican" />
-            <CuisineCarousel cuisine="Desserts" />
+            <CuisineCarousel cuisine="Thai" restaurants={restaurants} />
+            <CuisineCarousel cuisine="Mexican" restaurants={restaurants} />
+            <CuisineCarousel cuisine="Desserts" restaurants={restaurants} />
         </div>
     );
 };
