@@ -34,16 +34,11 @@ const UserReview = ({review}) => {
             <div className='rst-user-review'>
                 <div className='rating-date-container'>
                     <div className="review-stars-container">
-                        {Array.from({ length: 5 }).map((_, index) => (
-                            <span key={index} className={index < review?.overallRating ? 'red-star' : 'grey-star'}>
-                            ★
-                            </span>
-                        ))}
+                        <i data-star={review?.overallRating}></i>
                     </div>
                     <p>Dined on {reservationDate}</p>
                 </div>
                 <div className='rating-breakdown-container'>
-                    {/* <p>Overall <span>{review.overallRating}</span></p> */}
                     <p className="highlight-rating-title">Food <span>{review.foodRating}</span></p>
                     <p className="highlight-rating-title">Service <span>{review.serviceRating}</span></p>
                     <p className="highlight-rating-title">Ambience <span>{review.ambienceRating}</span></p>

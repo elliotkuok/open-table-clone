@@ -72,7 +72,7 @@ const RestaurantTile = ({restaurant}) => {
             <div className='tile-info'>
                 <h5>{restaurant.name}</h5>
                 <div className='overview-info-component'>
-                    <RatingStars avgOverallRating={avgOverallRating}/>
+                    <i data-star={avgOverallRating}></i>
                     <p id='review-count'>{restaurantReviews.length} review{restaurantReviews.length === 1 ? "" : "s"}</p>
                 </div>
                 <p>{restaurant.cuisine} • {getPriceSymbol(restaurant.price)} • {restaurant.neighborhood}</p>

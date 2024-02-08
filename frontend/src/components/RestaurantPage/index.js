@@ -94,7 +94,7 @@ const RestaurantPage = () => {
                             <h1>{restaurant.name}</h1>
                             <div className='overview-info'>
                                 <div className='overview-info-component'>
-                                    <RatingStars avgOverallRating={avgOverallRating}/>
+                                    <i data-star={avgOverallRating}></i>
                                     <div className='info-details'>{avgOverallRating}</div>
                                 </div>
                                 <div className='overview-info-component'>
@@ -168,7 +168,7 @@ const RestaurantPage = () => {
                                     <div id='review-summary-txt-container'>
                                         <p>Reviews can only be made by diners who have eaten at this restaurant</p>
                                         <div id='avg-review-text-container'>
-                                            <RatingStars avgOverallRating={avgOverallRating}/>
+                                            <i data-star={avgOverallRating}></i>
                                             <p>{filteredReviews.length !== 0 ? avgOverallRating+" based on recent ratings" : "Restaurant has not been reviewed yet"}</p>
                                         </div>
                                         <div id='individual-rtg-avg-container'>
