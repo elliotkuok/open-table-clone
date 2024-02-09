@@ -304,7 +304,7 @@ ApplicationRecord.transaction do
             restaurant_id: rand(1..300),
             user_id: rand(2..10),
             date: Faker::Date.backward(days: 365).strftime("%b %e, %Y"),
-            time: "#{rand(12..19)}:00",  
+            time: ["12:00 PM", "1:00 PM", "1:30 PM", "6:00 PM", "6:45 PM", "7:15 PM", "7:30 PM"].sample,  
             party_size: rand(1..12)
         )
     end
