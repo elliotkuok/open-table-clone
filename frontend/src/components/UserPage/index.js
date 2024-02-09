@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import './UserPage.css';
-import { fetchReservations, selectAllReservations } from "../../store/reservations";
+import { fetchReservations, resetReservations, selectAllReservations } from "../../store/reservations";
 import { useEffect } from "react";
 import ReservationTile from "./ReservationTile"
 import { useParams } from "react-router-dom/cjs/react-router-dom";
@@ -14,7 +14,8 @@ const UserPage = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-      dispatch(fetchReservations())
+        dispatch(resetReservations())
+        dispatch(fetchReservations())
     },[dispatch])
 
     if (!reservations) {

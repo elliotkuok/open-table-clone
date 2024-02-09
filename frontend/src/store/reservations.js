@@ -8,6 +8,7 @@ export const REMOVE_RESERVATION = "REMOVE_RESERVATION";
 export const CREATE_RESERVATION = "CREATE_RESERVATION";
 export const UPDATE_RESERVATION = "UPDATE_RESERVATION";
 export const DELETE_RESERVATION = "DELETE_RESERVATION";
+export const RESET_RESERVATIONS = "RESET_RESERVATIONS";
 export const STORE_USER = "STORE_USER";
 export const SET_SELECTED_TIME = 'SET_SELECTED_TIME';
 export const SET_SELECTED_DATE = 'reservations/SET_SELECTED_DATE';
@@ -37,6 +38,10 @@ export const updateReservation = reservation => ({
 export const deleteReservation = id => ({
     type: DELETE_RESERVATION,
     payload: id
+});
+
+export const resetReservations = () => ({
+    type: RESET_RESERVATIONS,
 });
 
 export const storeUser = user => ({
@@ -202,6 +207,8 @@ const reservationsReducer = (state = initialState, action) => {
         case DELETE_RESERVATION:
             delete nextState[action.payload];
             return nextState;
+        case RESET_RESERVATIONS:
+            return initialState;
         default:
             return state;
     }
