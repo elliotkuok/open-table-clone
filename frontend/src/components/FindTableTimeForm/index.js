@@ -79,10 +79,22 @@ const FindTableTime = () => {
     };
 
     // Generate time slots for time input drop down in 30-minute increments
-    const generateTimeSlots = () => {
+    const generateTimeSelectOptions = () => {
 
         const lastResMinutes = convertToMinutes(closingTime) - 90;
         const lastResHour = lastResMinutes < 0 ? convertTo12HourFormat(lastResMinutes + 24 * 60) : convertTo12HourFormat(lastResMinutes);
+
+        const currentDate = new Date();
+        const currentHour = currentDate.getHours();
+        const currentMinute = currentDate.getMinutes();
+        const currentAmPm = currentHour >= 12 ? 'PM' : 'AM';
+        let currentHour12 = currentHour % 12 || 12;
+        let currentMinuteAdjusted = currentMinute <= 30 && currentMinute !== 0 ? 30 : 0;
+
+        if (currentMinute > 30) {
+            currentHour12 = (currentHour12 + 1) % 12 || 12;
+        }
+        const currentTime = `${currentHour12}:${currentMinuteAdjusted.toString().padStart(2, '0')} ${currentAmPm}`;
 
         const timeSlots = [];
         const timePeriods = ['AM', 'PM'];
@@ -90,14 +102,31 @@ const FindTableTime = () => {
         timePeriods.forEach(amPm => {
             for (let hour = 1; hour <= 12; hour++) {
                 for (let minute = 0; minute < 60; minute += 30) {
+
                     const displayHour = hour === 0 ? 12 : hour;
                     const time = `${displayHour}:${minute.toString().padStart(2, '0')} ${amPm}`;
                     timeSlots.push(time);
                 }
             }
         });
+
+        const replaceTimes = (timeSlots) => {
+            for (let i = 0; i < timeSlots.length; i++) {
+                if (timeSlots[i] === '12:00 AM') {
+                    timeSlots[i] = '12:00 PM';
+                } else if (timeSlots[i] === '12:30 AM') {
+                    timeSlots[i] = '12:30 PM';
+                }
+            }
+        };
+
+        replaceTimes(timeSlots);
     
-        const startIndex = timeSlots.indexOf(openingTime);
+        let startIndex = timeSlots.indexOf(openingTime);
+        if (selectedDate === currentDate.toLocaleDateString('en-US')) {
+            startIndex = timeSlots.indexOf(currentTime);
+
+        }
         const endIndex = timeSlots.indexOf(lastResHour);
         if (endIndex < startIndex) {
             return [...timeSlots.slice(startIndex), ...timeSlots.slice(0, endIndex + 1)];
@@ -106,7 +135,7 @@ const FindTableTime = () => {
         }
     };
     
-    const timeSlots = generateTimeSlots();
+    const timeSlots = generateTimeSelectOptions();
 
     const getSuggestedTimes = (selectedTime) => {
         const times = [];
