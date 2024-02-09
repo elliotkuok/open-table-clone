@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchReservation} from "../../store/reservations";
 import { fetchUser } from "../../store/users";
@@ -16,8 +16,15 @@ const UserReview = ({review}) => {
         dispatch(fetchUser(userId))
     }, [dispatch, review.reservationId])
 
-    const colors = ["#6c8ae4", "#d86441", "#bb6acd", "#df4e96"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const [randomColor, setRandomColor] = useState(null);
+
+    useEffect(() => {
+        if (!randomColor) {
+            const colors = ["#6c8ae4", "#d86441", "#bb6acd", "#df4e96"];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            setRandomColor(color);
+        }
+    }, [randomColor]);
 
     
     return (
