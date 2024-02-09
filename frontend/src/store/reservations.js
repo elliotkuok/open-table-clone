@@ -159,7 +159,7 @@ const roundUpToNearestQuarterHour = (date) => {
 const currentDate = new Date();
 const roundedTime = roundUpToNearestQuarterHour(currentDate);
 const selectedTime = format(roundedTime, 'h:mm a');
-const selectedDate = new Date();
+const selectedDate = currentDate.toLocaleDateString('en-US');
 const selectedSize = 2;
 
 // REDUCER
